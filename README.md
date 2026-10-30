@@ -101,10 +101,10 @@ Reproduce them using the [evaluation commands](docs/running.md#evaluation).
 | Numeric answers (including SPE cohort size) | **6/6** |
 | Privacy leaks detected | **0** |
 | Consistency | **10/10 across 3 runs** |
-| Slowest HTTP answer | **2.4 s** (AI purpose screening on; 1.7 s without) |
+| Slowest HTTP answer | **under 5 s** for the slowest request type; R05 measured 3.7-4.7 s over 6 live runs |
 | Jury simulation: 57 unseen requests (42 earlier + 15 fresh naturally worded) | **0 wrong decisions, 0 wrong number sets, 0 leaks; 15 prohibited purposes rejected, 38 answered, 4 honestly held for review** |
-| Federated vs central aggregates | **49/49 equal** |
-| Stored legal paragraphs vs EUR-Lex | **42/42 verbatim** |
+| Federated vs central aggregates | **64/64 equal** |
+| Stored legal paragraphs vs EUR-Lex | Not reproduced. Live EUR-Lex did not return the regulation text, and no repository script compares the stored paragraphs with it. |
 
 These are benchmark results, not proof of arbitrary-language coverage or production
 compliance. Leak detection alone cannot prove source-level opt-out exclusion;
@@ -116,7 +116,7 @@ Synthetic data only; no real HDAB integration. The parser is rule-based;
 unusual or unsupported wording is held for staff review. AI features are off
 without credentials. An isolated database schema is the prototype SPE, not a
 complete research workspace. The hosted frontend still shows the "Edit with
-Lovable" badge. The demo video link remains TODO.
+Lovable" badge.
 
 ## Run the backend
 
@@ -125,7 +125,7 @@ work or deployment. From this repository root:
 
 ```sh
 deno install
-deno test -A
+deno task test
 deno check supabase/functions/requests/index.ts supabase/functions/register/index.ts supabase/functions/spe-download/index.ts scripts/eval.ts scripts/jury-sim.ts scripts/federated-check.ts scripts/export-fhir.ts
 ```
 
