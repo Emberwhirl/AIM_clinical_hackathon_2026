@@ -64,6 +64,7 @@ export interface PipelineResponse {
    * by the HTTP handler on a rejection, hold or downgrade; absent otherwise.
    */
   guidance?: string;
+  /**
    * LLM second opinion on the purpose wording (Art. 54(1) prohibited uses).
    * Present only when LLM_SCREEN=on and the screen ran.  When suspect is true
    * the request is held (needs_review: true, status: staff_review); decision,
