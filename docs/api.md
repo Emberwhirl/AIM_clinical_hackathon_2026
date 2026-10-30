@@ -69,6 +69,7 @@ The response is the complete pipeline result:
 | `spe_schema`         | Present only for successful SPE creation, e.g. `spe_r05`                                                 |
 | `parse_errors`       | Present for parse failure: array of `{ "definition": string, "reason": string }`                         |
 | `ai_assist`          | Present when the LLM fallback was used (Issue #15): `{ "used": true, "model": string, "rewritten": [{ "original": string, "rewritten": string }] }`. Always accompanied by `needs_review: true` and `answer: null`. Staff see exactly what the AI changed before approving. |
+| `guidance`           | Present on a rejection, hold or statistics downgrade: plain-English "What to change" sentences (one per line) so a resubmission can succeed. Absent when nothing needs to change. |
 | `ai_screen`          | Present when `LLM_SCREEN=on` and the LLM second opinion on the purpose wording ran: `{ "suspect": boolean, "point": "a"\|"b"\|"c"\|"d"\|"e"\|null, "why": string, "model": string }` (`point` is the Art. 54(1) prohibited use named). When `suspect` is true the request is held (`needs_review: true`, `status: "staff_review"`); `decision`, `articles` and `answer` are never changed by the screen. Only the purpose and question text are sent to the LLM. |
 | `explanation`        | Present when quote verification passes (see below); omitted otherwise                                   |
 | `explanation_error`  | Present when explanation could not be verified; omitted otherwise                                        |
@@ -186,6 +187,7 @@ the parser could not understand:
 | `plan_summary`    | Plain-English description of the parsed query plan (present when parsing succeeded)       |
 | `unreadable`      | Array of `{ index, definition, reason }` — definitions the parser could not consume; `index` is the 0-based position in the submitted `definitions` array |
 | `ai_assist`       | Present when the LLM fallback successfully rewrote a failing definition: `{ "used": true, "model": string, "rewritten": [...] }`. The preview is still held (`needs_review: true`, `status: "staff_review"`). |
+| `guidance`        | Present on a rejection, hold or statistics downgrade: plain-English "What to change" sentences (one per line). Absent when nothing needs to change. |
 
 ```json
 {

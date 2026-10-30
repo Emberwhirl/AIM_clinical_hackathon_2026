@@ -218,6 +218,7 @@ export const en = {
     "To request a reconsideration, choose a permitted purpose under Article 53 and submit a new request.",
   "decision.next.held":
     "Staff at the access body decide before the legal deadline{deadline}.",
+  "decision.whatToChange": "What to change",
   "decision.viewLetter": "View decision letter",
   "decision.needsReview": "Needs staff review",
   "decision.citedArticles": "Cited articles",

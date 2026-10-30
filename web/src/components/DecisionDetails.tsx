@@ -49,6 +49,16 @@ export function DecisionDetails({
       <p className="text-base">{localizeBackendText(result.reason, lang)}</p>
       {/* What happens next */}
       <p className="text-sm text-muted-foreground">{nextSteps}</p>
+      {result.guidance && (
+        <section aria-label={t("decision.whatToChange")} className="rounded border border-border bg-muted/30 p-3">
+          <h4 className="text-sm font-semibold">{t("decision.whatToChange")}</h4>
+          {result.guidance.split("\n").map((line, i) => (
+            <p key={i} className="mt-1 text-sm">
+              {localizeBackendText(line, lang)}
+            </p>
+          ))}
+        </section>
+      )}
 
       <DecisionBadge decision={result.decision} />
       <div>
