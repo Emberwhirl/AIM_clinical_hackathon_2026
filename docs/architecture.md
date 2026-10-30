@@ -84,6 +84,10 @@ Supabase Edge Functions
 4. Lovable renders the result
 ```
 
+In federated mode (`runPlanFederated`, issue #37) step 2c runs the same SQL
+once per data holder and adds up the aggregates before the small-cell rule; see
+`docs/query-plan.md`.
+
 ## Data flow for an SPE request
 
 ```

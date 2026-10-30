@@ -68,6 +68,14 @@ $env:DATABASE_URL = 'postgresql://postgres:YOUR_PASSWORD@YOUR_DB_HOST:5432/postg
 deno run --allow-read --allow-net --allow-env=DATABASE_URL,EHDS_TRACK_DIR scripts/eval.ts --local
 ```
 
+To check that querying each hospital separately and combining only aggregates
+gives the same answers as the central database (issue #37):
+
+```sh
+DATABASE_URL='postgresql://postgres:YOUR_PASSWORD@YOUR_DB_HOST:5432/postgres' \
+  deno run -A scripts/federated-check.ts
+```
+
 Set `EHDS_TRACK_DIR` to override the track repository root (relative paths use the working directory); requests and `expected.json` are read from its `requests/` directory.
 CI runs tests and type checks on every push and pull request; deployed eval runs when repository secret `EVAL_BASE_URL` is set, using `EVAL_KEY` for the publishable/anon key, and is skipped otherwise. Require the `test` and `eval` checks in branch protection to block merging on failures.
 

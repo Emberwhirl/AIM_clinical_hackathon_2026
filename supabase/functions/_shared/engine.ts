@@ -38,8 +38,21 @@ function assertPlan(plan: QueryPlan): void {
   }
 }
 
-/** All dynamic values are bound. SQL identifiers and syntax come only from code. */
-export function buildQueries(plan: QueryPlan): BuiltQueries {
+/** The hospitals of the Track 3 data; each patient and their records belong to one. */
+export const DATA_HOLDERS = [
+  "Klinikum Nord",
+  "Klinikum Süd",
+  "Klinikum West",
+] as const;
+
+/**
+ * All dynamic values are bound. SQL identifiers and syntax come only from code.
+ * With dataHolder, every query sees only that hospital's patients and records.
+ */
+export function buildQueries(
+  plan: QueryPlan,
+  dataHolder?: string,
+): BuiltQueries {
   assertPlan(plan);
   const encounter = plan.count_unit === "encounter";
   const from = "FROM public.eligible_patients AS p" +
@@ -51,10 +64,11 @@ export function buildQueries(plan: QueryPlan): BuiltQueries {
     if (d.by === "age_band") return null;
     // Group universes come from eligible patients, even if none has encounters.
     const column = d.by === "region" ? "p.region" : "p.data_holder";
+    const scope = dataHolder === undefined ? "" : " AND p.data_holder = $1";
     return {
       text:
-        `SELECT DISTINCT ${column} AS value FROM public.eligible_patients AS p WHERE ${column} IS NOT NULL ORDER BY value`,
-      params: [],
+        `SELECT DISTINCT ${column} AS value FROM public.eligible_patients AS p WHERE ${column} IS NOT NULL${scope} ORDER BY value`,
+      params: dataHolder === undefined ? [] : [dataHolder],
     };
   });
   const metrics = plan.metrics.map((metric): Query | null => {
@@ -158,12 +172,13 @@ export function buildQueries(plan: QueryPlan): BuiltQueries {
         ...metric.numerator_filters!,
       ];
     }
-    const where = [...plan.cohort_filters, ...extra].map((f) =>
-      `(${filter(f)})`
-    ).join(" AND ") || "TRUE";
-    const groupSelect = columns.map((c, i) =>
-      `${c} AS g${i}`
-    );
+    const where = [
+      ...(dataHolder === undefined
+        ? []
+        : [`p.data_holder = ${bind(dataHolder)}`]),
+      ...[...plan.cohort_filters, ...extra].map((f) => `(${filter(f)})`),
+    ].join(" AND ") || "TRUE";
+    const groupSelect = columns.map((c, i) => `${c} AS g${i}`);
     const groupBy = columns.length ? ` GROUP BY ${columns.join(", ")}` : "";
     let text: string;
     if (metric.type === "mean_observation") {
@@ -224,6 +239,18 @@ export function roundHalfUp(value: string | number): number {
   return roundedRatio(n, d);
 }
 
+/** Exact decimal sum; both denominators are powers of ten. */
+function addDecimal(a: string, b: string): string {
+  const [an, ad] = decimal(a);
+  const [bn, bd] = decimal(b);
+  const d = ad > bd ? ad : bd;
+  const n = an * (d / ad) + bn * (d / bd);
+  const scale = String(d).length - 1;
+  const digits = (n < 0n ? -n : n).toString().padStart(scale + 1, "0");
+  return (n < 0n ? "-" : "") +
+    (scale ? `${digits.slice(0, -scale)}.${digits.slice(-scale)}` : digits);
+}
+
 export type Statistic =
   | { type: "count"; n: string | number }
   | { type: "percentage"; n: string | number; denominator: string | number }
@@ -247,12 +274,20 @@ export function applySmallCell(stat: Statistic): Value {
   return roundedRatio(total, scale * n);
 }
 
-/** Execute only generated statements; no request prose enters this API. */
-export async function runPlan(
+/** Unsuppressed counts and sums; only release() turns them into an answer. */
+export interface Aggregates {
+  universes: string[][];
+  /** One map per metric, keyed by the JSON array of group keys. */
+  rows: Map<string, Row>[];
+}
+
+/** Run the generated statements, optionally inside one data holder. */
+export async function queryAggregates(
   plan: QueryPlan,
   sql: SqlClient,
-): Promise<Answer> {
-  const queries = buildQueries(plan);
+  dataHolder?: string,
+): Promise<Aggregates> {
+  const queries = buildQueries(plan, dataHolder);
   const dimensions = plan.dimensions ?? [];
   const universes: string[][] = [];
   for (let i = 0; i < dimensions.length; i++) {
@@ -270,10 +305,76 @@ export async function runPlan(
     rows.push(
       new Map(result.map((r) => [
         JSON.stringify(dimensions.map((_, i) => String(r[`g${i}`]))),
-        r,
+        { n: r.n, total: r.total },
       ])),
     );
   }
+  return { universes, rows };
+}
+
+/**
+ * Add up per-hospital aggregates. Patients, and so encounters, are disjoint
+ * across data holders, so distinct counts and sums add exactly.
+ */
+export function combineAggregates(
+  plan: QueryPlan,
+  parts: Aggregates[],
+): Aggregates {
+  const dimensions = plan.dimensions ?? [];
+  const universes = dimensions.map((d, i) =>
+    d.by === "age_band"
+      ? d.bands.map((b) => b.label)
+      : [...new Set(parts.flatMap((p) => p.universes[i]))].sort()
+  );
+  const rows = plan.metrics.map(() => new Map<string, Row>());
+  for (const part of parts) {
+    part.rows.forEach((map, m) => {
+      for (const [key, row] of map) {
+        const sum = rows[m].get(key);
+        rows[m].set(
+          key,
+          sum === undefined ? { n: row.n, total: row.total } : {
+            n: String(BigInt(String(sum.n ?? 0)) + BigInt(String(row.n ?? 0))),
+            total: sum.total == null
+              ? row.total
+              : row.total == null
+              ? sum.total
+              : addDecimal(String(sum.total), String(row.total)),
+          },
+        );
+      }
+    });
+  }
+  return { universes, rows };
+}
+
+/** Execute only generated statements; no request prose enters this API. */
+export async function runPlan(
+  plan: QueryPlan,
+  sql: SqlClient,
+): Promise<Answer> {
+  return release(plan, await queryAggregates(plan, sql));
+}
+
+/**
+ * Query each data holder on its own and combine only aggregates. The small-cell
+ * and secondary suppression rules apply once, to the combined result.
+ */
+export async function runPlanFederated(
+  plan: QueryPlan,
+  sql: SqlClient,
+  holders: readonly string[] = DATA_HOLDERS,
+): Promise<Answer> {
+  const parts: Aggregates[] = [];
+  for (const holder of holders) {
+    parts.push(await queryAggregates(plan, sql, holder));
+  }
+  return release(plan, combineAggregates(plan, parts));
+}
+
+/** The single path from aggregates to a released answer. */
+function release(plan: QueryPlan, { universes, rows }: Aggregates): Answer {
+  const dimensions = plan.dimensions ?? [];
   const leaves: Leaf[] = [];
   const collect = (keys: string[]): void => {
     if (keys.length < dimensions.length) {
