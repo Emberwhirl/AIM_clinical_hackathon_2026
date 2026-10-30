@@ -39,6 +39,8 @@ flowchart TD
   S --> E
   E --> UI
   API --> A[("History · lifecycle · staff actions · download log")]
+  API -. "request wording only, advisory" .-> L["LLM · Mistral Small 3.2 on an A5000 GPU, token-checked proxy<br/>rewrite unclear definitions · screen purposes · staff memo · free-text draft"]
+  L -. "can only hold for staff" .-> H
 ```
 
 The synchronous pipeline checks purpose **before querying patient data**:
