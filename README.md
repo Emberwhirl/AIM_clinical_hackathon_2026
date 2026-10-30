@@ -17,9 +17,10 @@ public [/register](https://health-data-access-compass.lovable.app/register).
 
 **Demo video (≤2 minutes): TODO — team to insert recording link.**
 The [recording script](docs/demo.md) covers what works and what does not.
-The [backend repository](https://github.com/ErmisCho/clinical_hachathlon) is public;
-the separate [frontend repository](https://github.com/ErmisCho/health-data-access-desk)
-was private when checked on 2026-10-30.
+This repository holds everything: the backend (`supabase/`, `scripts/`) and the
+front end (`web/`). [ErmisCho/health-data-access-desk](https://github.com/ErmisCho/health-data-access-desk)
+is only the deployment mirror that Lovable builds from; see
+[Front end](#front-end) for how changes reach it.
 
 ## How it works
 
@@ -129,7 +130,25 @@ Tests use local fixtures without a database. For loading the Track 3 data, runni
 local or HTTP evaluation, and deploying all three functions, follow
 [setup and evaluation](docs/running.md). Keep credentials and CSVs out of Git.
 Use `scripts/seed-demo.ts` to maintain curated demo data.
-The frontend runs from its separate repository.
+
+## Front end
+
+The front end lives in `web/` (React, TypeScript, Vite, Bun). From `web/`:
+
+```sh
+bun install
+bun run test
+bun run build
+```
+
+Lovable hosts the live site from the mirror repository
+[ErmisCho/health-data-access-desk](https://github.com/ErmisCho/health-data-access-desk).
+Change the front end here, merge, then push the `web/` subtree to the mirror and
+publish in Lovable:
+
+```sh
+git subtree push --prefix=web https://github.com/ErmisCho/health-data-access-desk.git main
+```
 
 ## Repository map
 
@@ -145,5 +164,6 @@ The frontend runs from its separate repository.
 | `supabase/fixtures/` | Query plans and unseen/jury requests with reference SQL |
 | `scripts/` | Loader, evaluator, jury simulation, federation and FHIR tools |
 | `scripts/create-staff-user.ts`, `scripts/seed-demo.ts` | Staff account creation and curated demo data |
-| `.github/workflows/ci.yml` | Tests, type checks and optional deployed evaluation |
+| `web/` | Front end (React, TypeScript, Vite); source of truth for the live site |
+| `.github/workflows/ci.yml` | Backend tests and type checks, front-end tests and build, optional deployed evaluation |
 | [docs/running.md](docs/running.md), [docs/api.md](docs/api.md), [docs/query-plan.md](docs/query-plan.md), [docs/fhir-mapping.md](docs/fhir-mapping.md) | Operations and implementation references |
