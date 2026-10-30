@@ -43,6 +43,8 @@ flowchart TD
   L -. "can only hold for staff" .-> H
 ```
 
+![How a request becomes yes, no or held: purpose check, checked query plan, run on opt-out-filtered data, explanation with verbatim law; prohibited purposes rejected at once, unclear requests held for staff, AI advisory only](docs/decision-flow.png)
+
 The synchronous pipeline checks purpose **before querying patient data**:
 prohibited purposes are rejected (Art. 54); statistics are approved where sufficient
 (Arts. 53/69, also 66 for a downgraded records application); justified record access
