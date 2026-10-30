@@ -43,7 +43,9 @@ flowchart TD
   L -. "can only hold for staff" .-> H
 ```
 
-![How a request becomes yes, no or held: purpose check, checked query plan, run on opt-out-filtered data, explanation with verbatim law; prohibited purposes rejected at once, unclear requests held for staff, AI advisory only](docs/decision-flow.png)
+![Five gates between a request and its answer: 1 purpose rules (deterministic regex, Art. 53/54, can reject, allow or hold); 2 LLM second opinion on the purpose (can only hold); 3 definitions parsed by a fixed grammar, unreadable wording rewritten by the LLM and held; 4 data rules (opt-outs removed, statistics or secure environment, groups under 10 hidden); 5 staff with the final say on held cases. Outcomes: no with reason and law quoted, yes statistics, yes secure environment, held for a person.](docs/decision-gates.png)
+
+The process view of the same pipeline is in [docs/decision-flow.png](docs/decision-flow.png).
 
 The synchronous pipeline checks purpose **before querying patient data**:
 prohibited purposes are rejected (Art. 54); statistics are approved where sufficient
