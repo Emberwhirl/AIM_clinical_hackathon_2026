@@ -18,8 +18,7 @@ const scenarios = [
 ] as const;
 type ScenarioKey = (typeof scenarios)[number]["key"];
 type Scenario =
-  | { key: ScenarioKey; id: string; label: string }
-  | { key: "request"; id: string; label: string };
+  { key: ScenarioKey; id: string; label: string } | { key: "request"; id: string; label: string };
 type Download = Awaited<ReturnType<typeof downloadRequest>>;
 interface Outcome {
   scenario: Scenario;
@@ -27,10 +26,7 @@ interface Outcome {
   download?: Download;
 }
 
-function pointAt(
-  { scenario, result, download }: Outcome,
-  lang: Lang,
-): string {
+function pointAt({ scenario, result, download }: Outcome, lang: Lang): string {
   const metric = (group: string, key: string) =>
     answerRows(result.answer).find((row) => row.groups.includes(group))?.metrics[key] ??
     "Not provided";
@@ -96,7 +92,10 @@ export function DemoPanel() {
   return (
     <div className="space-y-6">
       <QuickTest />
-      <section aria-label={t("demo.proof.heading")} className="rounded border border-border bg-muted p-4">
+      <section
+        aria-label={t("demo.proof.heading")}
+        className="rounded border border-border bg-muted p-4"
+      >
         <h2 className="font-display text-lg font-semibold">{t("demo.proof.heading")}</h2>
         <p className="mt-2 font-mono text-sm">{t("demo.proof.text")}</p>
         <p className="mt-2 text-xs text-muted-foreground">{t("demo.proof.disclaimer")}</p>
@@ -139,9 +138,7 @@ export function DemoPanel() {
           </label>
           <button
             disabled={running !== null}
-            onClick={() =>
-              run({ key: "request", id: sampleId, label: t("demo.run") })
-            }
+            onClick={() => run({ key: "request", id: sampleId, label: t("demo.run") })}
             className="mt-3 rounded bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-50"
           >
             {t("demo.run")}
@@ -171,15 +168,19 @@ export function DemoPanel() {
                 className="mt-4 rounded border-2 border-primary bg-muted p-4"
               >
                 <h3 className="font-semibold">{t("demo.pointAt.heading")}</h3>
-                <p className="mt-2 break-words font-mono text-sm">
-                  {pointAt(outcome, lang)}
-                </p>
+                <p className="mt-2 break-words font-mono text-sm">{pointAt(outcome, lang)}</p>
                 {outcome.scenario.key === "opt-outs" && (
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {t("demo.optouts.note")}
-                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">{t("demo.optouts.note")}</p>
                 )}
               </aside>
+              {outcome.download?.status === 403 && (
+                <ErrorState>
+                  <p className="break-words">
+                    HTTP {outcome.download.status}.{" "}
+                    {localizeBackendText(outcome.download.message, lang)}
+                  </p>
+                </ErrorState>
+              )}
               {request && (
                 <p className="mt-4 text-sm text-muted-foreground">
                   {t("demo.requested")} {request.requested_as} · {request.requested_format}
@@ -192,9 +193,7 @@ export function DemoPanel() {
               />
             </>
           )}
-          {!outcome && !running && !error && (
-            <EmptyState title={t("demo.empty")} />
-          )}
+          {!outcome && !running && !error && <EmptyState title={t("demo.empty")} />}
         </section>
       </div>
       <p className="text-xs text-muted-foreground">{t("demo.disclaimer")}</p>

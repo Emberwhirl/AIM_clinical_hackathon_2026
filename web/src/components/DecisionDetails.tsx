@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { downloadRequest, type DecisionResult } from "@/lib/ehds";
+import type { DecisionResult } from "@/lib/ehds";
 import { ResultsTable } from "./ResultsTable";
+import { SpeDownloadPanel } from "./SpeDownloadPanel";
 
 import { DecisionBadge } from "./DecisionBadge";
 import { LifecycleStepper } from "./LifecycleStepper";
 import { ExplanationPanel } from "./ExplanationPanel";
-import { ErrorState } from "./States";
 import { Button } from "./ui/button";
 import { useLang, useT } from "@/lib/i18n";
 import { localizeBackendText } from "@/lib/i18n/translations";
@@ -24,20 +23,7 @@ export function DecisionDetails({
 }) {
   const t = useT();
   const { lang } = useLang();
-  const [message, setMessage] = useState("");
-  const [busy, setBusy] = useState(false);
   const cohort = result.answer?.["cohort_size"];
-  async function download() {
-    setBusy(true);
-    try {
-      setMessage((await downloadRequest(result.request_id)).message);
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Download blocked.");
-    } finally {
-      setBusy(false);
-      onDownloadAttempt?.();
-    }
-  }
 
   const { headline, nextSteps } = plainOutcome(result, t, lang === "de" ? "de-AT" : "en-GB");
 
@@ -127,22 +113,12 @@ export function DecisionDetails({
             {t("decision.secureEnv")}
           </p>
           {result.decision === "APPROVE_SPE" ? (
-            <>
-              <p className="mt-1">
-                {result.spe_schema
-                  ? `${t("decision.speSchema")} ${result.spe_schema}`
-                  : t("decision.provisioningNotProvided")}{" "}
-                {t("decision.downloadsBlocked")}
-              </p>
-              <button
-                onClick={download}
-                disabled={busy}
-                className="mt-2 rounded border border-input px-3 py-1 text-sm hover:bg-muted disabled:opacity-50"
-              >
-                {busy ? t("decision.checking") : t("decision.download")}
-              </button>
-              {message && <ErrorState>{localizeBackendText(message, lang)}</ErrorState>}
-            </>
+            <p className="mt-1">
+              {result.spe_schema
+                ? `${t("decision.speSchema")} ${result.spe_schema}`
+                : t("decision.provisioningNotProvided")}{" "}
+              {t("decision.downloadsBlocked")}
+            </p>
           ) : (
             <p className="mt-1">
               {result.decision === "REJECT"
@@ -151,6 +127,9 @@ export function DecisionDetails({
             </p>
           )}
         </div>
+      )}
+      {(result.decision === "APPROVE_SPE" || result.decision === "APPROVE_STATISTICAL") && (
+        <SpeDownloadPanel result={result} onDownloadAttempt={onDownloadAttempt} />
       )}
     </div>
   );

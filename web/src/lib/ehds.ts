@@ -199,8 +199,13 @@ export async function reviewRequest(body: StaffReviewBody): Promise<DecisionResu
   return mapEdgeResponse(data);
 }
 
-export async function downloadRequest(id: string): Promise<{ status: number; message: string }> {
-  const { data, error } = await supabase.functions.invoke("spe-download", { body: { id } });
+export async function downloadRequest(
+  id: string,
+  kind?: "rows" | "unsuppressed" | "aggregate",
+): Promise<{ status: number; message: string }> {
+  const body: { id: string; kind?: "rows" | "unsuppressed" | "aggregate" } = { id };
+  if (kind) body.kind = kind;
+  const { data, error } = await supabase.functions.invoke("spe-download", { body });
   const failure = await functionError(error, data);
   if (failure.status === 403) return { status: 403, message: failure.message };
   // Never treat a success payload as downloadable records.
