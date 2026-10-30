@@ -69,6 +69,7 @@ The response is the complete pipeline result:
 | `spe_schema`         | Present only for successful SPE creation, e.g. `spe_r05`                                                 |
 | `parse_errors`       | Present for parse failure: array of `{ "definition": string, "reason": string }`                         |
 | `ai_assist`          | Present when the LLM fallback was used (Issue #15): `{ "used": true, "model": string, "rewritten": [{ "original": string, "rewritten": string }] }`. Always accompanied by `needs_review: true` and `answer: null`. Staff see exactly what the AI changed before approving. |
+| `ai_screen`          | Present when `LLM_SCREEN=on` and the LLM second opinion on the purpose wording ran: `{ "suspect": boolean, "point": "a"\|"b"\|"c"\|"d"\|"e"\|null, "why": string, "model": string }` (`point` is the Art. 54(1) prohibited use named). When `suspect` is true the request is held (`needs_review: true`, `status: "staff_review"`); `decision`, `articles` and `answer` are never changed by the screen. Only the purpose and question text are sent to the LLM. |
 | `explanation`        | Present when quote verification passes (see below); omitted otherwise                                   |
 | `explanation_error`  | Present when explanation could not be verified; omitted otherwise                                        |
 | `population`         | Present only after successful execution: `{ "eligible_patients": number }` — count from the `eligible_patients` view (opted-out rows already excluded) |
