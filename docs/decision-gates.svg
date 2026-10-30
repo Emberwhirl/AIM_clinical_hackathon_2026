@@ -44,20 +44,20 @@
   </g>
   <!-- Gate bodies -->
   <g font-size="15" fill="#44546a" text-anchor="middle">
-    <text x="340" y="342">regex phrases per rule,</text>
-    <text x="340" y="363">Art. 53 allowed, Art. 54</text>
-    <text x="340" y="384">prohibited, negation-aware,</text>
-    <text x="340" y="405">versioned (1.0.3)</text>
+    <text x="340" y="342">fixed word rules, the same</text>
+    <text x="340" y="363">answer every time; Art. 53</text>
+    <text x="340" y="384">allowed, Art. 54 prohibited;</text>
+    <text x="340" y="405">negation-aware, v1.0.3</text>
 
     <text x="600" y="342">Mistral reads the purpose:</text>
     <text x="600" y="363">"could this still be an</text>
     <text x="600" y="384">Art. 54 use?" · runs in</text>
     <text x="600" y="405">parallel, never decides</text>
 
-    <text x="860" y="342">fixed grammar builds a</text>
-    <text x="860" y="363">checked query plan;</text>
-    <text x="860" y="384">unreadable wording →</text>
-    <text x="860" y="405">LLM rewrite, shown</text>
+    <text x="860" y="342">definitions must match</text>
+    <text x="860" y="363">a fixed wording; only</text>
+    <text x="860" y="384">approved queries run;</text>
+    <text x="860" y="405">unreadable → AI rewrite</text>
 
     <text x="1120" y="342">opt-outs removed first;</text>
     <text x="1120" y="363">statistics or secure</text>
@@ -103,7 +103,7 @@
     <path d="M600,490 V545"/>
     <path d="M860,490 V545"/>
   </g>
-  <text x="412" y="566" font-size="14" fill="#b8860b">unclear · suspect · unreadable · AI-touched → held</text>
+  <text x="412" y="566" font-size="14" fill="#b8860b">unclear · suspect · unreadable · anything AI changed → held</text>
   <path d="M1380,490 V598" fill="none" stroke="#b8860b" stroke-width="2.5" marker-end="url(#ay)"/>
   <path d="M1490,624 H1540 V375 H1500" fill="none" stroke="#b8860b" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#ay)"/>
   <text x="1548" y="500" font-size="13" fill="#b8860b" transform="rotate(90 1548 500)">approve / override</text>
