@@ -138,6 +138,13 @@ export const de: { [K in keyof EnDict]: string } = {
   "form.uploadFile": "Datei hochladen",
   "form.importMustBeObject": "Der Import muss ein JSON-Objekt sein.",
   "form.couldNotParseJson": "JSON konnte nicht gelesen werden. Bitte gültiges JSON einfügen.",
+  "form.freeText.label": "Oder beschreiben Sie Ihren Antrag in eigenen Worten",
+  "form.freeText.placeholder":
+    "Beispiel: Wir sind ein Universitätsklinikum und möchten pro Region wissen, wie viele Patientinnen und Patienten ab 65 Jahren im Jahr 2025 eine Diabetesdiagnose (ICD-10 E11) hatten, als anonymisierte Statistik für eine Public-Health-Studie.",
+  "form.freeText.draft": "Antrag entwerfen",
+  "form.freeText.drafting": "Ihr Antrag wird entworfen…",
+  "form.freeText.done": "Entwurf unten eingetragen. Bitte prüfen und bearbeiten Sie die Felder.",
+  "form.freeText.failed": "Es konnte kein Antrag entworfen werden.",
   "form.step1": "Was Sie wissen möchten",
   "form.step2": "Definitionen",
   "form.step3": "Über Sie & einreichen",
@@ -208,6 +215,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Um eine Überprüfung zu beantragen, wählen Sie einen zulässigen Zweck gemäß Artikel 53 und reichen Sie einen neuen Antrag ein.",
   "decision.next.held":
     "Mitarbeitende der Zugangsstelle entscheiden vor der gesetzlichen Frist{deadline}.",
+  "decision.whatToChange": "Was Sie ändern sollten",
   "decision.viewLetter": "Bescheid anzeigen",
   "decision.needsReview": "Mitarbeiterprüfung erforderlich",
   "decision.citedArticles": "Zitierte Artikel",

@@ -69,6 +69,7 @@ The response is the complete pipeline result:
 | `spe_schema`         | Present only for successful SPE creation, e.g. `spe_r05`                                                 |
 | `parse_errors`       | Present for parse failure: array of `{ "definition": string, "reason": string }`                         |
 | `ai_assist`          | Present when the LLM fallback was used (Issue #15): `{ "used": true, "model": string, "rewritten": [{ "original": string, "rewritten": string }] }`. Always accompanied by `needs_review: true` and `answer: null`. Staff see exactly what the AI changed before approving. |
+| `guidance`           | Present on a rejection, hold or statistics downgrade: plain-English "What to change" sentences (one per line) so a resubmission can succeed. Absent when nothing needs to change. |
 | `ai_screen`          | Present when `LLM_SCREEN=on` and the LLM second opinion on the purpose wording ran: `{ "suspect": boolean, "point": "a"\|"b"\|"c"\|"d"\|"e"\|null, "why": string, "model": string }` (`point` is the Art. 54(1) prohibited use named). When `suspect` is true the request is held (`needs_review: true`, `status: "staff_review"`); `decision`, `articles` and `answer` are never changed by the screen. Only the purpose and question text are sent to the LLM. |
 | `explanation`        | Present when quote verification passes (see below); omitted otherwise                                   |
 | `explanation_error`  | Present when explanation could not be verified; omitted otherwise                                        |
@@ -186,6 +187,7 @@ the parser could not understand:
 | `plan_summary`    | Plain-English description of the parsed query plan (present when parsing succeeded)       |
 | `unreadable`      | Array of `{ index, definition, reason }` — definitions the parser could not consume; `index` is the 0-based position in the submitted `definitions` array |
 | `ai_assist`       | Present when the LLM fallback successfully rewrote a failing definition: `{ "used": true, "model": string, "rewritten": [...] }`. The preview is still held (`needs_review: true`, `status: "staff_review"`). |
+| `guidance`        | Present on a rejection, hold or statistics downgrade: plain-English "What to change" sentences (one per line). Absent when nothing needs to change. |
 
 ```json
 {
@@ -405,6 +407,40 @@ The response explicitly projects these six fields. It never includes personal or
 organisation names, original request ids, purpose/question text, definitions,
 answers, cohort sizes, SPE schema names, staff details or patient data. It reads
 only `public.request_log`; it never queries patient tables.
+
+## `POST /draft`
+
+Free-text intake, with JWT verification disabled. The applicant describes the
+request in their own words; the model turns it into the five structured fields;
+the person reviews the filled form and the normal rules then decide. POST only;
+OPTIONS returns 204, other methods 405.
+
+Body: `{ "text": "<up to 4000 characters>" }`. Only this text is sent to the
+model, together with the supported definition wording. Nothing is stored, no SQL
+runs and no patient data is read. The answer never carries `id`, `applicant` or
+`submitted`.
+
+```json
+{
+  "purpose": "Public-health monitoring of diabetes care.",
+  "question": "How many patients aged 65+ had a diabetes diagnosis per region in 2025?",
+  "requested_as": "health data request",
+  "requested_format": "anonymised statistics",
+  "definitions": ["Diabetes = any condition with an ICD-10 code starting with E11"]
+}
+```
+
+`requested_as` is `health data request` or `health data access application`;
+`requested_format` is `anonymised statistics` or `pseudonymised records`;
+`definitions` holds 1 to 12 non-empty strings. The model's reply is accepted only
+when all five keys pass these checks.
+
+| Status | Body | When |
+| --- | --- | --- |
+| 400 | `{ "error": "invalid JSON body" }` or `{ "error": "text must be a non-empty string of at most 4000 characters" }` | bad input |
+| 422 | `{ "error": "Could not draft a request from this text" }` | the model's reply is unparseable or fails validation |
+| 502 | `{ "error": "AI drafting failed" }` | the model call fails or times out (15 s) |
+| 503 | `{ "error": "AI drafting is not enabled" }` | `OPENROUTER_API_KEY` is not set |
 
 ## `GET /spe-download?id=R05` or `POST /spe-download`
 

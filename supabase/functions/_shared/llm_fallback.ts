@@ -104,7 +104,7 @@ export async function chatComplete(
  * Supported definition patterns extracted from parser.ts grammar.
  * These are shown to the LLM so it can rewrite non-standard phrasings.
  */
-const SUPPORTED_PATTERNS = `
+export const SUPPORTED_PATTERNS = `
 Supported definition patterns (copy the phrasing exactly; angle brackets = fill-in):
 1. <ConceptName> = aged <N> or older on 31 December 2025
 2. <ConceptName> = any condition with an ICD-10 code starting with <PREFIX> [or <PREFIX>]
