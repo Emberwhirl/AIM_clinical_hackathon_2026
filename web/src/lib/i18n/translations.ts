@@ -143,6 +143,23 @@ const BACKEND_DE: Record<string, string> = {
 
   "weapons or illicit drugs":
     "Waffen oder illegale Drogen",
+
+  // ── Applicant guidance (result.guidance, one sentence per line) ──────────
+  // Lines with variable parts (definition number, quoted wording, rule label) stay English.
+  "Your request was rejected because it names a prohibited use under Article 54(1).":
+    "Ihr Antrag wurde abgelehnt, weil er einen verbotenen Zweck gemäß Artikel 54(1) nennt.",
+
+  "If your actual purpose is a permitted one under Article 53 (for example scientific research, public health or prevention), state it clearly and remove the prohibited use.":
+    "Wenn Ihr tatsächlicher Zweck ein zulässiger Zweck gemäß Artikel 53 ist (zum Beispiel wissenschaftliche Forschung, öffentliche Gesundheit oder Prävention), benennen Sie ihn klar und entfernen Sie den verbotenen Zweck.",
+
+  "Name a permitted purpose under Article 53 in your purpose statement, for example scientific research, public health, prevention or quality improvement, training or validating an AI model.":
+    "Nennen Sie in Ihrer Zweckbeschreibung einen zulässigen Zweck gemäß Artikel 53, zum Beispiel wissenschaftliche Forschung, öffentliche Gesundheit, Prävention oder Qualitätsverbesserung, Training oder Validierung eines KI-Modells.",
+
+  "Use the supported wording, for example: \"Adult = aged 18 or older on 31 December 2025.\", \"Type 2 diabetes = any condition with an ICD-10 code starting with E11.\" and \"Report per region: adults, adults with type 2 diabetes and the prevalence.\"":
+    "Verwenden Sie die unterstützte Formulierung, zum Beispiel: \"Adult = aged 18 or older on 31 December 2025.\", \"Type 2 diabetes = any condition with an ICD-10 code starting with E11.\" und \"Report per region: adults, adults with type 2 diabetes and the prevalence.\"",
+
+  "You asked for patient-level records but did not explain why anonymised statistics are not enough. If you need records, say why (for example: training a model needs individual-level histories; aggregates are not enough).":
+    "Sie haben Daten auf Patientenebene beantragt, aber nicht erklärt, warum anonymisierte Statistiken nicht ausreichen. Wenn Sie Einzeldatensätze benötigen, begründen Sie dies (zum Beispiel: das Training eines Modells braucht Verläufe auf Einzelebene; Aggregate reichen nicht aus).",
 };
 
 function normalizeBackendText(text: string): string {

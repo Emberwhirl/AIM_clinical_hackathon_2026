@@ -147,6 +147,16 @@ function WeUnderstoodPanel({ preview }: { preview: PreviewResult }) {
       <DecisionBadge decision={preview.decision} />
       <p className="text-sm">{localizeBackendText(preview.reason, lang)}</p>
       {preview.rule && <p className="text-sm">{localizeBackendText(preview.rule, lang)}</p>}
+      {preview.guidance && (
+        <section aria-label={t("decision.whatToChange")} className="rounded border border-border bg-card p-3">
+          <h4 className="text-sm font-semibold">{t("decision.whatToChange")}</h4>
+          {preview.guidance.split("\n").map((line, i) => (
+            <p key={i} className="mt-1 text-sm">
+              {localizeBackendText(line, lang)}
+            </p>
+          ))}
+        </section>
+      )}
       {preview.plan_summary && (
         <p className="text-sm text-muted-foreground">
           <span className="font-medium text-foreground">{t("form.weUnderstood.plan")}</span>

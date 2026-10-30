@@ -300,4 +300,16 @@ describe("Plain decision headlines", () => {
       /decide before the legal deadline/,
     );
   });
+
+  it("DecisionDetails shows 'What to change' only when the result carries guidance", () => {
+    const guidance =
+      "Your request was rejected because it names a prohibited use under Article 54(1): advertising or marketing.\nIf your actual purpose is a permitted one under Article 53 (for example scientific research, public health or prevention), state it clearly and remove the prohibited use.";
+    render(<DecisionDetails result={{ ...base, guidance }} />);
+    const block = screen.getByRole("region", { name: "What to change" });
+    expect(within(block).getByText(/Article 54\(1\): advertising or marketing/)).toBeInTheDocument();
+    expect(within(block).getByText(/permitted one under Article 53/)).toBeInTheDocument();
+    cleanup();
+    render(<DecisionDetails result={statistics} />);
+    expect(screen.queryByRole("region", { name: "What to change" })).not.toBeInTheDocument();
+  });
 });

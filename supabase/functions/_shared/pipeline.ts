@@ -58,6 +58,11 @@ export interface PipelineResponse {
    * The plan was AI-assisted; needs_review is always true in this case.
    */
   ai_assist?: AiAssist;
+  /**
+   * Applicant guidance ("What to change"), one sentence per line.  Attached
+   * by the HTTP handler on a rejection, hold or downgrade; absent otherwise.
+   */
+  guidance?: string;
   /** Explanation of the decision (omitted when verifyQuotes fails). */
   explanation?: {
     rule: string;
