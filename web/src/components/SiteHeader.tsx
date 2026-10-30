@@ -68,6 +68,24 @@ function PreferenceFields() {
           </a>
         </p>
       )}
+      {selected?.extra_rules &&
+        (selected.extra_rules.length ? (
+          <div className="text-sm">
+            <p className="font-medium">{t("nav.extraRules")}</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5">
+              {selected.extra_rules.map((rule) => (
+                <li key={rule.id}>
+                  {rule.label}{" "}
+                  <span className="text-muted-foreground">
+                    ({rule.id}, {t("nav.article")} {rule.article_ref})
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p className="text-sm text-muted-foreground">{t("nav.extraRulesNone")}</p>
+        ))}
       <label className="block text-sm font-medium">
         {t("desk.roleLabel")}
         <select

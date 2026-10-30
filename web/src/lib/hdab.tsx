@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { listHdabs, type PublicHdabConfig } from "./ehds";
 import { saveHdab, selectedHdab } from "./hdab-selection";
-import { useLang } from "./i18n";
 
 interface HdabContextValue {
   configs: PublicHdabConfig[];
@@ -19,7 +18,6 @@ export function HdabProvider({ children }: { children: ReactNode }) {
   const [configs, setConfigs] = useState<PublicHdabConfig[]>([]);
   const [code, setCode] = useState(selectedHdab);
   const [error, setError] = useState(false);
-  const { setDefaultLang } = useLang();
   const selected = configs.find((c) => c.code === code);
   useEffect(() => {
     let cancelled = false;
@@ -43,7 +41,6 @@ export function HdabProvider({ children }: { children: ReactNode }) {
   }, []);
   useEffect(() => {
     if (!selected) return;
-    setDefaultLang(selected.display_language);
     const style = document.documentElement.style;
     const properties = {
       "--accent": selected.branding.accent,
@@ -58,7 +55,7 @@ export function HdabProvider({ children }: { children: ReactNode }) {
         value ? style.setProperty(key, value) : style.removeProperty(key),
       );
     };
-  }, [selected, setDefaultLang]);
+  }, [selected]);
   function select(next: string) {
     if (!configs.some((config) => config.code === next)) return;
     saveHdab(next);
