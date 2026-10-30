@@ -8,10 +8,13 @@
  *   1. disabled without env vars: no fetch call, returns null
  *   2. fabricated quote → memo dropped, memo_status "rejected_unverified_quote"
  *   3. verified memo returned: memo_status "ok", quotes annotated
- *   4. decision and articles unchanged in pipeline response
+ *   4. held request: memo attached, decision/articles unchanged; decided request: no memo
  *   5. payload sent to the LLM contains no answer/patient data
  *   6. cache: second call for same key makes no additional fetch call
  */
+
+// The memo has its own switch on top of the key; tests exercise it switched on.
+Deno.env.set("LLM_MEMO", "on");
 
 import {
   _resetMemoCache,
@@ -186,10 +189,67 @@ Deno.test("memo: verified memo is returned with annotated quotes", async () => {
 });
 
 // ---------------------------------------------------------------------------
-// 4. decision and articles are unchanged in the pipeline response
+// 4. held request: memo attached, decision and articles unchanged;
+//    decided request: no memo, no LLM call
 // ---------------------------------------------------------------------------
 
-Deno.test("memo: decision and articles unchanged in pipeline response", async () => {
+// Minimal SQL stand-in for the decided path; the held path never touches it.
+const fakeSql = {
+  unsafe: (text: string, _params: unknown[]) => {
+    if (text.includes("eligible_patients")) return Promise.resolve([{ n: 100 }]);
+    return Promise.resolve([]);
+  },
+  begin: <T>(fn: (tx: unknown) => Promise<T>) => fn(fakeSql),
+};
+
+Deno.test("memo: held request gets a verified memo; decision and articles unchanged", async () => {
+  const originalKey = Deno.env.get("OPENROUTER_API_KEY");
+  _resetMemoCache();
+
+  try {
+    const { answerRequest } = await import("./pipeline.ts");
+    const { _resetMemCache } = await import("./llm_fallback.ts");
+    _resetMemCache();
+
+    // R01 with a vague purpose: matches no allowed rule, so it is held for staff.
+    const { REQUESTS } = await import("./decision_fixtures.ts");
+    const req = { ...REQUESTS["R01"], purpose: "General interest." };
+    const sql = fakeSql as Parameters<typeof answerRequest>[1];
+
+    // Baseline without the LLM
+    Deno.env.delete("OPENROUTER_API_KEY");
+    const baseline = await answerRequest(req, sql);
+    assert(baseline.needs_review === true, "baseline must be held");
+    assert(baseline.memo === undefined, "no memo without the LLM");
+
+    Deno.env.set("OPENROUTER_API_KEY", "test-key");
+    const verifiedMemo =
+      `The request is held because it is unclear whether it falls within "${REAL_QUOTE_53}".`;
+    const result = await withFakeFetch(
+      () => fakeGeneration(verifiedMemo),
+      () => answerRequest(req, sql),
+    );
+
+    assert(result.needs_review === true, "held request must have needs_review true");
+    assert(result.status === "staff_review", `status must be staff_review, got ${result.status}`);
+    assert(result.decision === baseline.decision, `decision changed: ${result.decision}`);
+    assert(
+      JSON.stringify(result.articles) === JSON.stringify(baseline.articles),
+      `articles changed: ${result.articles}`,
+    );
+    assert(result.memo !== undefined, "memo must be attached to the held request");
+    assert(result.memo!.text === verifiedMemo, "memo text must be the drafted text");
+    assert(result.memo!.quotes.length === 1, "memo must have one verified quote");
+    assert(result.memo!.quotes[0].text === REAL_QUOTE_53, "quote must be verified verbatim");
+    assert(result.memo!.quotes[0].ref.startsWith("Art. 53"), `quote ref must cite Art. 53, got ${result.memo!.quotes[0].ref}`);
+  } finally {
+    if (originalKey !== undefined) Deno.env.set("OPENROUTER_API_KEY", originalKey);
+    else Deno.env.delete("OPENROUTER_API_KEY");
+    _resetMemoCache();
+  }
+});
+
+Deno.test("memo: decided request has no memo and makes no LLM call", async () => {
   const originalKey = Deno.env.get("OPENROUTER_API_KEY");
 
   Deno.env.set("OPENROUTER_API_KEY", "test-key");
@@ -200,45 +260,31 @@ Deno.test("memo: decision and articles unchanged in pipeline response", async ()
     const { _resetMemCache } = await import("./llm_fallback.ts");
     _resetMemCache();
 
-    // R01 from decision_fixtures: APPROVE_STATISTICAL, articles [53, 69]
+    // R01 from decision_fixtures (APPROVE_STATISTICAL) with parseable definitions,
+    // so it is decided rather than held for unreadable definitions.
     const { REQUESTS } = await import("./decision_fixtures.ts");
-    const req = REQUESTS["R01"];
-
-    const verifiedMemo =
-      `The request is approved because it falls within "${REAL_QUOTE_53}".`;
-
-    const fakeSql = {
-      unsafe: (text: string, _params: unknown[]) => {
-        // Return minimal results to satisfy the engine without real data
-        if (text.includes("eligible_patients")) {
-          return Promise.resolve([{ n: 100 }]);
-        }
-        // For any plan query: return empty rows
-        return Promise.resolve([]);
-      },
-      begin: <T>(fn: (tx: unknown) => Promise<T>) => fn(fakeSql),
+    const req = {
+      ...REQUESTS["R01"],
+      definitions: [
+        "Adult = aged 18 or older on 31 December 2025.",
+        "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+        "Prevalence = adults with type 2 diabetes / all adults in the region × 100, one decimal.",
+        "Report per region: adults, adults with type 2 diabetes and the prevalence.",
+      ],
     };
-
+    let fetchCalls = 0;
     const result = await withFakeFetch(
-      (url) => {
-        return fakeGeneration(verifiedMemo);
+      () => {
+        fetchCalls++;
+        return fakeGeneration(`Approved under "${REAL_QUOTE_53}".`);
       },
       () => answerRequest(req, fakeSql as Parameters<typeof answerRequest>[1]),
     );
 
-    // Decision and articles must be unchanged regardless of memo
+    assert(result.status === "decided", `status must be decided, got ${result.status}`);
     assert(result.decision === "APPROVE_STATISTICAL", `decision must be APPROVE_STATISTICAL, got ${result.decision}`);
-    assert(result.articles.includes("53"), "articles must include 53");
-    assert(result.articles.includes("69"), "articles must include 69");
-
-    // The memo must be present and verified (or absent because memo is drafted post-execution)
-    // The pipeline adds memo after execution — it must not alter decision/articles
-    const r = result as unknown as Record<string, unknown>;
-    if (r["memo"] !== undefined) {
-      const memo = r["memo"] as Record<string, unknown>;
-      assert(memo["memo_status"] !== "rejected_unverified_quote" || memo["text"] === undefined,
-        "a rejected memo must not have text");
-    }
+    assert(result.memo === undefined, "decided request must not carry a memo");
+    assert(fetchCalls === 0, `decided path must not call the LLM (calls: ${fetchCalls})`);
   } finally {
     if (originalKey !== undefined) Deno.env.set("OPENROUTER_API_KEY", originalKey);
     else Deno.env.delete("OPENROUTER_API_KEY");

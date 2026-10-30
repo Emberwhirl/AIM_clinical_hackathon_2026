@@ -423,3 +423,6 @@ verify_jwt = false
 
 [functions.spe-download]
 verify_jwt = false
+
+[functions.draft]
+verify_jwt = false

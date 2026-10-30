@@ -14,6 +14,9 @@ export const de: { [K in keyof EnDict]: string } = {
   "nav.settings": "Sprache und Zugangsstelle",
   "nav.language": "Sprache",
   "nav.accessBody": "Zugangsstelle",
+  "nav.extraRules": "Nationale Regeln zusätzlich zum EHDS-Standard",
+  "nav.extraRulesNone": "Keine nationalen Regeln über den EHDS-Standard hinaus.",
+  "nav.article": "Art.",
   "nav.country.at": "Österreich",
   "nav.country.de": "Deutschland",
   "nav.loading": "Wird geladen…",
@@ -82,7 +85,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Gemessen am 30. Oktober 2026 mit dem Live-Backend, mit einheitlichen Ergebnissen über drei Durchläufe. Dies sind Testanträge, keine Aussage über die Leistung bei realen Anträgen oder Garantie für zukünftige Ergebnisse.",
   "landing.aiDisclosure.title": "Regeln entscheiden.\nMenschen bleiben verantwortlich.",
   "landing.aiDisclosure.p1":
-    "Deterministische Regeln bestimmen das Ergebnis, ein festes Programm berechnet die Statistiken. Heute wird keine KI eingesetzt. Falls später aktiviert, kann KI Ergebnisse nur strenger machen. Patientendaten gelangen nie zur KI.",
+    "Deterministische Regeln bestimmen das Ergebnis, ein festes Programm berechnet die Statistiken. KI hilft nur beratend, auf vier Arten: Sie formuliert unklare Definitionen um, gibt eine Zweitmeinung zu zweifelhaften Zwecken, entwirft eine Notiz für Mitarbeitende zu zurückgehaltenen Anträgen und macht aus Freitext einen strukturierten Antrag. Alles, was die KI berührt, wird von einer Person geprüft; KI kann Ergebnisse also nur strenger machen. Patientendaten gelangen nie zur KI.",
   "landing.aiDisclosure.callout":
     "Dies ist Entscheidungsunterstützung für Mitarbeitende der Zugangsstelle für Gesundheitsdaten (HDAB). Die endgültige Entscheidung liegt bei der HDAB.",
   "landing.faq.title": "Bevor Sie beginnen",
@@ -135,6 +138,13 @@ export const de: { [K in keyof EnDict]: string } = {
   "form.uploadFile": "Datei hochladen",
   "form.importMustBeObject": "Der Import muss ein JSON-Objekt sein.",
   "form.couldNotParseJson": "JSON konnte nicht gelesen werden. Bitte gültiges JSON einfügen.",
+  "form.freeText.label": "Oder beschreiben Sie Ihren Antrag in eigenen Worten",
+  "form.freeText.placeholder":
+    "Beispiel: Wir sind ein Universitätsklinikum und möchten pro Region wissen, wie viele Patientinnen und Patienten ab 65 Jahren im Jahr 2025 eine Diabetesdiagnose (ICD-10 E11) hatten, als anonymisierte Statistik für eine Public-Health-Studie.",
+  "form.freeText.draft": "Antrag entwerfen",
+  "form.freeText.drafting": "Ihr Antrag wird entworfen…",
+  "form.freeText.done": "Entwurf unten eingetragen. Bitte prüfen und bearbeiten Sie die Felder.",
+  "form.freeText.failed": "Es konnte kein Antrag entworfen werden.",
   "form.step1": "Was Sie wissen möchten",
   "form.step2": "Definitionen",
   "form.step3": "Über Sie & einreichen",
@@ -205,6 +215,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Um eine Überprüfung zu beantragen, wählen Sie einen zulässigen Zweck gemäß Artikel 53 und reichen Sie einen neuen Antrag ein.",
   "decision.next.held":
     "Mitarbeitende der Zugangsstelle entscheiden vor der gesetzlichen Frist{deadline}.",
+  "decision.whatToChange": "Was Sie ändern sollten",
   "decision.viewLetter": "Bescheid anzeigen",
   "decision.needsReview": "Mitarbeiterprüfung erforderlich",
   "decision.citedArticles": "Zitierte Artikel",
@@ -398,7 +409,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Verneinte Formulierungen wie \u201EWir werden dies nicht für Werbung verwenden\u201C lösen keine Regel aus. Unklare Zwecke oder unleserliche Definitionen werden zur Mitarbeiterprüfung zurückgehalten. Das Personal genehmigt oder überschreibt mit einem schriftlichen Grund, der im Prüfungsprotokoll festgehalten wird. Dieselben Schutzmaßnahmen gelten weiterhin.",
   "hwd.rules.title": "Versionierte Regeln und Rechtstexte",
   "hwd.rules.text":
-    "Die Regeln sind in decision_rules.json, Version 1.0.1, mit 14 Regeln enthalten. Jede Entscheidung erfasst die Regel-ID und die Regelversion.",
+    "Die Regeln sind in decision_rules.json, Version 1.0.3, mit 15 Regeln enthalten. Jede Entscheidung erfasst die Regel-ID und die Regelversion.",
   "hwd.rules.quotes":
     "Rechtszitate sind Originaltext aus der Verordnung (EU) 2025/327. Alle 42 gespeicherten Absätze wurden Wort für Wort mit dem offiziellen Text abgeglichen.",
   "hwd.statistics.title": "Statistiken und die Unterdrückungsregel",
@@ -422,7 +433,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Dies sind Testanträge mit synthetischen Daten, keine realen Anträge. Die Messungen beschreiben diese Tests und garantieren keine Ergebnisse für zukünftige Anträge.",
   "hwd.ai.title": "Die Rolle von KI",
   "hwd.ai.text":
-    "Heute entscheidet keine KI. Ein optionaler KI-Schritt darf Ergebnisse nur strenger machen und sieht keine Patientendaten.",
+    "Keine KI entscheidet. Die KI formuliert unklare Definitionen um, markiert zweifelhafte Zwecke, entwirft eine Notiz für Mitarbeitende zu zurückgehaltenen Anträgen und macht aus Freitext einen strukturierten Antrag; alles, was sie berührt, wird von Mitarbeitenden geprüft, sie kann Ergebnisse also nur strenger machen, und die KI sieht keine Patientendaten.",
   "hwd.explore": "Die 10 Beispielanträge erkunden",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────

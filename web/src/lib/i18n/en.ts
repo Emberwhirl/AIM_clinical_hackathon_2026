@@ -25,6 +25,9 @@ export const en = {
   "nav.settings": "Language and access body",
   "nav.language": "Language",
   "nav.accessBody": "Access body",
+  "nav.extraRules": "National rules added to the EHDS baseline",
+  "nav.extraRulesNone": "No national rules beyond the EHDS baseline.",
+  "nav.article": "Art.",
   "nav.country.at": "Austria",
   "nav.country.de": "Germany",
   "nav.loading": "Loading…",
@@ -93,7 +96,7 @@ export const en = {
     "Measured on 30 October 2026 against the live backend, with consistent results over three runs. These are test requests, not evidence of performance on all real-world requests or a guarantee of future results.",
   "landing.aiDisclosure.title": "Rules decide.\nPeople remain responsible.",
   "landing.aiDisclosure.p1":
-    "Deterministic rules decide the outcome, and a fixed program calculates the statistics. No AI is used today. If enabled later, AI can only make outcomes stricter. Patient data never goes to AI.",
+    "Deterministic rules decide the outcome, and a fixed program calculates the statistics. AI helps in four advisory ways only: it rewords unclear definitions, gives a second opinion on doubtful purposes, drafts a note for staff on held requests and turns free text into a structured request. Anything AI touched is held for a person, so AI can only make outcomes stricter. Patient data never goes to AI.",
   "landing.aiDisclosure.callout":
     "This is decision support for Health Data Access Body staff. Final decisions rest with the HDAB.",
   "landing.faq.title": "Before you begin",
@@ -146,6 +149,13 @@ export const en = {
   "form.uploadFile": "Upload file",
   "form.importMustBeObject": "Import must be a JSON object.",
   "form.couldNotParseJson": "Could not parse JSON. Please paste valid JSON.",
+  "form.freeText.label": "Or describe your request in your own words",
+  "form.freeText.placeholder":
+    "Example: We are a university hospital and want to know, per region, how many patients aged 65 or older had a diabetes diagnosis (ICD-10 E11) in 2025, as anonymised statistics for a public-health study.",
+  "form.freeText.draft": "Draft my request",
+  "form.freeText.drafting": "Drafting your request…",
+  "form.freeText.done": "Draft filled in below. Please review and edit the fields.",
+  "form.freeText.failed": "Could not draft a request.",
   "form.step1": "What you want to know",
   "form.step2": "Definitions",
   "form.step3": "About you & submit",
@@ -215,6 +225,7 @@ export const en = {
     "To request a reconsideration, choose a permitted purpose under Article 53 and submit a new request.",
   "decision.next.held":
     "Staff at the access body decide before the legal deadline{deadline}.",
+  "decision.whatToChange": "What to change",
   "decision.viewLetter": "View decision letter",
   "decision.needsReview": "Needs staff review",
   "decision.citedArticles": "Cited articles",
@@ -385,7 +396,7 @@ export const en = {
     'Negated phrases, such as "we will not use this for marketing", do not trigger a rule. Unclear purposes or unreadable definitions are held for staff review. Staff approve or override with a written reason recorded in an audit log. The same safeguards still apply.',
   "hwd.rules.title": "Versioned rules and legal text",
   "hwd.rules.text":
-    "The rules live in decision_rules.json, version 1.0.1, with 14 rules. Every decision records the rule id and rules version.",
+    "The rules live in decision_rules.json, version 1.0.3, with 15 rules. Every decision records the rule id and rules version.",
   "hwd.rules.quotes":
     "Legal quotes are verbatim from Regulation (EU) 2025/327. All 42 stored paragraphs were checked word for word against the official text.",
   "hwd.statistics.title": "Statistics and the small-cell rule",
@@ -409,7 +420,7 @@ export const en = {
     "These are test requests on synthetic data, not real applications. The measurements describe these tests and do not guarantee outcomes for future requests.",
   "hwd.ai.title": "The role of AI",
   "hwd.ai.text":
-    "No AI decides today. An optional AI step may only make outcomes stricter and never sees patient data.",
+    "No AI decides. AI rewords unclear definitions, flags doubtful purposes, drafts a staff note on held requests and turns free text into a structured request; everything it touches is held for staff, so it can only make outcomes stricter, and the AI never sees patient data.",
   "hwd.explore": "Explore the 10 sample requests",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────

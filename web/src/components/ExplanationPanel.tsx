@@ -121,7 +121,7 @@ export function ExplanationPanel({
   );
 }
 
-function MemoBlock({ memo }: { memo: AiMemo }) {
+export function MemoBlock({ memo }: { memo: AiMemo }) {
   const t = useT();
   return (
     <section

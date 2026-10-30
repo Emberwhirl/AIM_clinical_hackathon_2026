@@ -16,6 +16,7 @@ import {
 import { DecisionDetails } from "@/components/DecisionDetails";
 import { DecisionBadge } from "@/components/DecisionBadge";
 import { ErrorState, EmptyState } from "@/components/States";
+import { FreeTextIntake, type DraftFields } from "@/components/FreeTextIntake";
 import { useLang, useT } from "@/lib/i18n";
 import { localizeBackendText } from "@/lib/i18n/translations";
 
@@ -147,6 +148,16 @@ function WeUnderstoodPanel({ preview }: { preview: PreviewResult }) {
       <DecisionBadge decision={preview.decision} />
       <p className="text-sm">{localizeBackendText(preview.reason, lang)}</p>
       {preview.rule && <p className="text-sm">{localizeBackendText(preview.rule, lang)}</p>}
+      {preview.guidance && (
+        <section aria-label={t("decision.whatToChange")} className="rounded border border-border bg-card p-3">
+          <h4 className="text-sm font-semibold">{t("decision.whatToChange")}</h4>
+          {preview.guidance.split("\n").map((line, i) => (
+            <p key={i} className="mt-1 text-sm">
+              {localizeBackendText(line, lang)}
+            </p>
+          ))}
+        </section>
+      )}
       {preview.plan_summary && (
         <p className="text-sm text-muted-foreground">
           <span className="font-medium text-foreground">{t("form.weUnderstood.plan")}</span>
@@ -232,6 +243,15 @@ export function GuidedForm({
     };
     setForm(next);
     setPreview(null);
+    setSubmitError("");
+    triggerPreview(next);
+  }
+
+  // ── Free-text draft: merge the five fields, keep id/submitted/applicant ────
+  function applyDraft(fields: DraftFields) {
+    invalidateResult();
+    const next = { ...form, ...fields };
+    setForm(next);
     setSubmitError("");
     triggerPreview(next);
   }
@@ -498,6 +518,7 @@ export function GuidedForm({
           {step === 1 && (
             <fieldset className="space-y-4">
               <legend className="text-base font-semibold">{t("form.step1")}</legend>
+              <FreeTextIntake onDraft={applyDraft} />
               <Field id="g-question" label={t("form.question.label")}>
                 <textarea
                   id="g-question"
