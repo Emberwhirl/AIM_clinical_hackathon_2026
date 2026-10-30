@@ -6,6 +6,26 @@ mirror that Lovable builds the live site from; do not open pull requests there.
 
 Live: https://health-data-access-compass.lovable.app
 
+## How front-end and backend connect
+
+This React/TypeScript (Vite) app in `web/` is the UI for the EHDS Access Desk. All decisions come from the backend in this repository: Supabase Edge Functions (Deno) under `supabase/` (see the [root README](../README.md)). Live app: https://health-data-access-compass.lovable.app
+
+The app calls the functions with `supabase.functions.invoke` (`web/src/lib/ehds.ts`):
+
+- `requests`: submit a request, list past requests (GET), fetch one (`?id=`), plus `requests/preview`, `requests/review`, `requests/hdab`
+- `spe-download`: body `{ id }`; returns the 403 "download blocked" JSON shown in the staff view
+- `register`: GET, the public anonymised register
+
+Env vars (`web/.env`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` (the publishable key is client-safe). Server-side code also reads `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. Never commit `SUPABASE_SERVICE_ROLE_KEY`.
+
+Run it from `web/` here. [ErmisCho/health-data-access-desk](https://github.com/ErmisCho/health-data-access-desk) is the Lovable deployment mirror, not a second source tree:
+
+```sh
+bun install   # or: npm i
+bun run dev
+bun run test  # vitest
+```
+
 ## Development
 
 ```sh
