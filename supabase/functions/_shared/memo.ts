@@ -5,6 +5,8 @@
  *
  * Calls the configured LLM (temperature 0) to draft a short (~150 word) reasoned decision
  * memo that quotes verbatim paragraphs of Regulation (EU) 2025/327 Chapter IV.
+ * The pipeline drafts it for HELD requests only (the ones staff must review);
+ * decided requests never wait for a memo.
  *
  * Safety contract:
  *   - Only purpose, question, decision, article refs and their STORED texts are
@@ -211,7 +213,7 @@ export async function draftMemo(
   articles: string[],
   articleRefs: Record<string, string> = {},
 ): Promise<DraftMemoOutcome | null> {
-  // The memo costs one extra LLM call per decided request; it needs its own switch.
+  // The memo costs one extra LLM call per held request; it needs its own switch.
   if (!isEnabled() || Deno.env.get("LLM_MEMO") !== "on") return null;
 
   // Build regulation text map — only cited articles, from stored JSON
@@ -238,7 +240,7 @@ export async function draftMemo(
   let memoText: string;
   try {
     const prompt = buildMemoPrompt(purpose, question, decision, articleTexts, refs);
-    memoText = await chatComplete(prompt, 300, 12000);
+    memoText = await chatComplete(prompt, 220, 10000);
   } catch {
     // Any network/timeout error → feature is silent
     return null;
