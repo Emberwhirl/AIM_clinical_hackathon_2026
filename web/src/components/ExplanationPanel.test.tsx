@@ -11,7 +11,7 @@ afterEach(cleanup);
 const article: LegalArticle = {
   number: "54",
   title: "Prohibited secondary uses",
-  ref: "Art. 54(1)(b)",
+  ref: "Art. 54(b)",
   point: "(b)",
   summary: "Health data cannot be used for employment decisions.",
   quote: "Prohibited uses include taking decisions in relation to job offers, including hiring.",

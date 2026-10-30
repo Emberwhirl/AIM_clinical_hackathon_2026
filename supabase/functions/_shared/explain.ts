@@ -275,7 +275,7 @@ interface ProhibitedMapping {
 
 const PROHIBITED_MAPPINGS: ProhibitedMapping[] = [
   {
-    // insurance premiums / insurance decisions (Art. 54(1)(b)) → Art. 54(1)(b)
+    // insurance premiums / insurance decisions (Art. 54(b)) → Art. 54(b)
     patterns: [
       /insurance\s+premium/i,
       /align.*premium/i,
@@ -290,7 +290,7 @@ const PROHIBITED_MAPPINGS: ProhibitedMapping[] = [
       "taking decisions in relation to a natural person or a group of natural persons in relation to job offers, offering less favourable terms in the provision of goods or services, including exclusion of such persons or groups from the benefit of an insurance or credit contract, the modification of their contributions and insurance premiums or conditions of loans, or taking any other decisions in relation to a natural person or a group of natural persons which result in discriminating against them on the basis of the health data obtained",
   },
   {
-    // advertising or marketing → Art. 54(1)(c)
+    // advertising or marketing → Art. 54(c)
     patterns: [
       /\badvertis/i,
       /\bmarketing\b/i,
@@ -304,7 +304,7 @@ const PROHIBITED_MAPPINGS: ProhibitedMapping[] = [
     applies: "carrying out advertising or marketing activities",
   },
   {
-    // detrimental decisions about employees / job offers → Art. 54(1)(b)
+    // detrimental decisions about employees / job offers → Art. 54(b)
     patterns: [
       /\bemployee\b/i,
       /match.*employee/i,
@@ -319,7 +319,7 @@ const PROHIBITED_MAPPINGS: ProhibitedMapping[] = [
       "taking decisions in relation to a natural person or a group of natural persons in relation to job offers, offering less favourable terms in the provision of goods or services, including exclusion of such persons or groups from the benefit of an insurance or credit contract, the modification of their contributions and insurance premiums or conditions of loans, or taking any other decisions in relation to a natural person or a group of natural persons which result in discriminating against them on the basis of the health data obtained",
   },
   {
-    // tobacco / nicotine / illicit products → Art. 54(1)(d)
+    // tobacco / nicotine / illicit products → Art. 54(d)
     patterns: [
       /\bnicotine\b/i,
       /\btobacco\b/i,
@@ -332,7 +332,7 @@ const PROHIBITED_MAPPINGS: ProhibitedMapping[] = [
       "developing products or services that may harm individuals, public health or society at large, such as illicit drugs, alcoholic beverages, tobacco and nicotine products, weaponry or products or services which are designed or modified in such a way that they create addiction, contravene public order or cause a risk for human health",
   },
   {
-    // development of alcoholic products → Art. 54(1)(d)
+    // development of alcoholic products → Art. 54(d)
     patterns: [
       /\b(?:develop|optimise|optimize|tailor)\w*\b.*\balcohol(?:ic)?\s+(?:products?|beverages?|drinks?)\b/i,
     ],
@@ -352,7 +352,7 @@ const PROHIBITED_MAPPINGS: ProhibitedMapping[] = [
       "carrying out activities in conflict with ethical provisions laid down in national law.",
   },
   {
-    // weapons or illicit drugs → Art. 54(1)(d)
+    // weapons or illicit drugs → Art. 54(d)
     patterns: [/\bweapon/i, /\billicit\s+drug/i],
     point: "(d)",
     applies:
@@ -391,8 +391,13 @@ function prohibitedPurposePoint(requestText: string, ruleId?: string): {
   for (const m of PROHIBITED_MAPPINGS) {
     for (const p of m.patterns) {
       if (p.test(norm)) {
-        // Build ref: Art. 54(1) with optional sub-point
-        const ref = m.point ? `Art. 54(1)${m.point}` : "Art. 54(1)";
+        // Points (b), (c) and (d) are cited as Art. 54(b/c/d).
+        // Point (e) keeps the paragraph: Art. 54(1)(e).
+        const ref = m.point === "(e)"
+          ? `Art. 54(1)${m.point}`
+          : m.point
+          ? `Art. 54${m.point}`
+          : "Art. 54(1)";
         return { point: m.point, applies: m.applies, ref };
       }
     }

@@ -36,7 +36,7 @@ Deno.test("guidance: REJECT names the prohibited use and the Art. 54 point", () 
   assert(text !== null);
   const [first, second] = text.split("\n");
   assert(first.includes("Article 54(1)"), first);
-  assert(first.includes("insurance premiums / insurance decisions (Art. 54(1)(b))"), first);
+  assert(first.includes("insurance premiums / insurance decisions (Art. 54(b))"), first);
   assert(second === ART53_HINT);
 });
 

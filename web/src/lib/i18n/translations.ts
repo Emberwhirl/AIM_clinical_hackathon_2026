@@ -108,17 +108,17 @@ const BACKEND_DE: Record<string, string> = {
   "clinical / epidemiological / treatment-gap":
     "klinisch / epidemiologisch / Versorgungslücke",
 
-  "job offers / discriminatory decisions (Art. 54(1)(b))":
-    "Stellenangebote / diskriminierende Entscheidungen (Art. 54(1)(b))",
+  "job offers / discriminatory decisions (Art. 54(b))":
+    "Stellenangebote / diskriminierende Entscheidungen (Art. 54(b))",
 
-  "credit scoring / loan eligibility and conditions (Art. 54(1)(b))":
-    "Kreditwürdigkeitsprüfung / Kreditvergabe und -konditionen (Art. 54 Abs. 1 Buchst. b)",
+  "credit scoring / loan eligibility and conditions (Art. 54(b))":
+    "Kreditwürdigkeitsprüfung / Kreditvergabe und -konditionen (Art. 54 Buchst. b)",
 
   "development of alcoholic products":
     "Entwicklung von Alkoholprodukten",
 
-  "insurance premiums / insurance decisions (Art. 54(1)(b))":
-    "Versicherungsprämien / Versicherungsentscheidungen (Art. 54(1)(b))",
+  "insurance premiums / insurance decisions (Art. 54(b))":
+    "Versicherungsprämien / Versicherungsentscheidungen (Art. 54(b))",
 
   "passing data to third parties not in permit":
     "Weitergabe von Daten an Dritte, die nicht in der Genehmigung aufgeführt sind",

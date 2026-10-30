@@ -321,7 +321,7 @@ Deno.test("memo: payload to the LLM contains no answer/patient data", async () =
           "Which patients can we target with our new drug advertisement?",
           "REJECT",
           ["54"],
-          { "54": "Art. 54(1)(c)" },
+          { "54": "Art. 54(c)" },
         ),
     );
 

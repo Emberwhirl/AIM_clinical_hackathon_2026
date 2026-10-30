@@ -291,19 +291,18 @@ Deno.test("R01–R10: every article has non-empty applies that is a substring of
 });
 
 // ---------------------------------------------------------------------------
-// 11. R02 Art. 54 ref includes paragraph and point; applies is a verbatim
+// 11. R02 Art. 54 ref is Art. 54(b); applies is a verbatim
 //     substring of the quote
 // ---------------------------------------------------------------------------
-Deno.test("R02: Art. 54 ref names a paragraph and point (Art. 54(1)(b))", () => {
+Deno.test("R02: Art. 54 ref names point (b) as Art. 54(b)", () => {
   const req = REQUESTS["R02"];
   const dr = decide(req);
   const exp = explain(req, dr);
   const art54 = exp.articles.find((a) => a.number === "54");
   assert(art54 !== undefined, "R02: must include Art. 54");
-  // Should include "(1)" (paragraph) and "(b)" (point for insurance premiums)
   assert(
-    art54.ref.includes("(1)"),
-    `R02: Art. 54 ref must include "(1)" paragraph, got: "${art54.ref}"`,
+    art54.ref === "Art. 54(b)",
+    `R02: Art. 54 ref must be "Art. 54(b)", got: "${art54.ref}"`,
   );
   assert(
     art54.ref.includes("(b)"),
@@ -408,15 +407,15 @@ Deno.test("verifyQuotes: rejects an applies field not in the quote", () => {
 Deno.test("R01–R10: exact Art. 53/54 ref matches expected point", () => {
   const EXPECTED_REFS: Record<string, string> = {
     R01: "Art. 53(1)(a)",
-    R02: "Art. 54(1)(b)",
+    R02: "Art. 54(b)",
     R03: "Art. 53(1)(b)",
-    R04: "Art. 54(1)(c)",
+    R04: "Art. 54(c)",
     R05: "Art. 53(1)(e)(ii)",
-    R06: "Art. 54(1)(b)",
+    R06: "Art. 54(b)",
     R07: "Art. 53(1)(c)",
     R08: "Art. 53(1)(e)",
     R09: "Art. 53(1)(d)",
-    R10: "Art. 54(1)(d)",
+    R10: "Art. 54(d)",
   };
   for (const [id, expectedRef] of Object.entries(EXPECTED_REFS)) {
     const req = REQUESTS[id];
