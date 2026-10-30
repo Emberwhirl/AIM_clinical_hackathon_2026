@@ -373,6 +373,39 @@ Residual risk, accepted for the prototype:
 - A family too large to model (more than 65,536 atoms or 16 record
   categories) is hidden completely when it contains any small cell.
 
+### Federated queries (per data holder)
+
+`runPlanFederated()` in `engine.ts` answers a plan the way an EHDS network of
+data holders would: it runs the generated statements once per hospital
+(`Klinikum Nord`, `Klinikum Süd`, `Klinikum West`), each scoped with
+`p.data_holder = $n`, so a hospital's query sees only its own patients and
+their records. Each hospital returns only aggregate rows: the group keys, `n`
+and, for means, the sum of the latest values. The coordinator adds these up
+(`combineAggregates()`, exact integer and decimal sums) and then applies the
+small-cell rule and secondary suppression once, to the combined result. A
+group of 6 patients at one hospital and 5 at another is released as 11.
+
+Sums are exact because every patient, with all their conditions, medications,
+observations and encounters, belongs to exactly one data holder, so distinct
+counts never overlap across hospitals. Group universes are the union of the
+hospitals' universes; age bands come from the plan as before.
+
+`scripts/federated-check.ts` runs R01–R10 and every parseable jury request
+both centrally and federated against the database and fails unless the
+answers are identical (49/49 on the Track 3 data). It also fails if an
+eligible patient has a data holder outside the known three.
+
+Limits, accepted for the prototype:
+
+- The coordinator sees unsuppressed per-hospital aggregates, including small
+  ones; only the applicant's answer is suppressed. Secure aggregation would
+  hide them from the coordinator too.
+- The hospitals are scoped views of one database, not separate databases.
+- Patients treated at more than one hospital would be double-counted; the
+  Track 3 data has none, and real networks would need record linkage.
+- The live API still answers centrally; SPE requests copy data and are not
+  federated.
+
 ---
 
 ## Unknown-field rejection
