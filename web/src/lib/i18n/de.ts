@@ -82,7 +82,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Gemessen am 30. Oktober 2026 mit dem Live-Backend, mit einheitlichen Ergebnissen über drei Durchläufe. Dies sind Testanträge, keine Aussage über die Leistung bei realen Anträgen oder Garantie für zukünftige Ergebnisse.",
   "landing.aiDisclosure.title": "Regeln entscheiden.\nMenschen bleiben verantwortlich.",
   "landing.aiDisclosure.p1":
-    "Deterministische Regeln bestimmen das Ergebnis, ein festes Programm berechnet die Statistiken. Heute wird keine KI eingesetzt. Falls später aktiviert, kann KI Ergebnisse nur strenger machen. Patientendaten gelangen nie zur KI.",
+    "Deterministische Regeln bestimmen das Ergebnis, ein festes Programm berechnet die Statistiken. Ein optionaler KI-Schritt formuliert nur unklare Definitionen um; solche Anträge werden immer von einer Person geprüft, und KI kann Ergebnisse nur strenger machen. Patientendaten gelangen nie zur KI.",
   "landing.aiDisclosure.callout":
     "Dies ist Entscheidungsunterstützung für Mitarbeitende der Zugangsstelle für Gesundheitsdaten (HDAB). Die endgültige Entscheidung liegt bei der HDAB.",
   "landing.faq.title": "Bevor Sie beginnen",
@@ -422,7 +422,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Dies sind Testanträge mit synthetischen Daten, keine realen Anträge. Die Messungen beschreiben diese Tests und garantieren keine Ergebnisse für zukünftige Anträge.",
   "hwd.ai.title": "Die Rolle von KI",
   "hwd.ai.text":
-    "Heute entscheidet keine KI. Ein optionaler KI-Schritt darf Ergebnisse nur strenger machen und sieht keine Patientendaten.",
+    "Keine KI entscheidet. Ein optionaler KI-Schritt formuliert nur unklare Definitionen um; solche Anträge werden immer von Mitarbeitenden geprüft, und die KI sieht keine Patientendaten.",
   "hwd.explore": "Die 10 Beispielanträge erkunden",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────

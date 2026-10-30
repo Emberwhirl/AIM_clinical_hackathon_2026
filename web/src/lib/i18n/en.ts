@@ -93,7 +93,7 @@ export const en = {
     "Measured on 30 October 2026 against the live backend, with consistent results over three runs. These are test requests, not evidence of performance on all real-world requests or a guarantee of future results.",
   "landing.aiDisclosure.title": "Rules decide.\nPeople remain responsible.",
   "landing.aiDisclosure.p1":
-    "Deterministic rules decide the outcome, and a fixed program calculates the statistics. No AI is used today. If enabled later, AI can only make outcomes stricter. Patient data never goes to AI.",
+    "Deterministic rules decide the outcome, and a fixed program calculates the statistics. An optional AI step only rewords unclear definitions; such requests are always held for a person, and AI can only make outcomes stricter. Patient data never goes to AI.",
   "landing.aiDisclosure.callout":
     "This is decision support for Health Data Access Body staff. Final decisions rest with the HDAB.",
   "landing.faq.title": "Before you begin",
@@ -409,7 +409,7 @@ export const en = {
     "These are test requests on synthetic data, not real applications. The measurements describe these tests and do not guarantee outcomes for future requests.",
   "hwd.ai.title": "The role of AI",
   "hwd.ai.text":
-    "No AI decides today. An optional AI step may only make outcomes stricter and never sees patient data.",
+    "No AI decides. An optional AI step only rewords unclear definitions; such requests are always held for staff, and the AI never sees patient data.",
   "hwd.explore": "Explore the 10 sample requests",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────
