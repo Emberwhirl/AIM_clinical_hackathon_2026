@@ -98,10 +98,10 @@ Reproduce them using the [evaluation commands](docs/running.md#evaluation).
 | Numeric answers (including SPE cohort size) | **6/6** |
 | Privacy leaks detected | **0** |
 | Consistency | **10/10 across 3 runs** |
-| Slowest HTTP answer | **1.7 s** |
+| Slowest HTTP answer | **3.771 s (R05)** |
 | Jury simulation: 57 unseen requests (42 earlier + 15 fresh naturally worded) | **0 wrong decisions, 0 wrong number sets, 0 leaks; 15 prohibited purposes rejected, 38 answered, 4 honestly held for review** |
-| Federated vs central aggregates | **49/49 equal** |
-| Stored legal paragraphs vs EUR-Lex | **42/42 verbatim** |
+| Federated vs central aggregates | **64/64 equal** |
+| Stored legal paragraphs vs EUR-Lex | Not reproduced. Live EUR-Lex did not return the regulation text, and no repository script compares the stored paragraphs with it. |
 
 These are benchmark results, not proof of arbitrary-language coverage or production
 compliance. Leak detection alone cannot prove source-level opt-out exclusion;
@@ -122,7 +122,7 @@ work or deployment. From this repository root:
 
 ```sh
 deno install
-deno test -A
+deno task test
 deno check supabase/functions/requests/index.ts supabase/functions/register/index.ts supabase/functions/spe-download/index.ts scripts/eval.ts scripts/jury-sim.ts scripts/federated-check.ts scripts/export-fhir.ts
 ```
 
