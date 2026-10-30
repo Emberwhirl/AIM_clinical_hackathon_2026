@@ -405,6 +405,40 @@ organisation names, original request ids, purpose/question text, definitions,
 answers, cohort sizes, SPE schema names, staff details or patient data. It reads
 only `public.request_log`; it never queries patient tables.
 
+## `POST /draft`
+
+Free-text intake, with JWT verification disabled. The applicant describes the
+request in their own words; the model turns it into the five structured fields;
+the person reviews the filled form and the normal rules then decide. POST only;
+OPTIONS returns 204, other methods 405.
+
+Body: `{ "text": "<up to 4000 characters>" }`. Only this text is sent to the
+model, together with the supported definition wording. Nothing is stored, no SQL
+runs and no patient data is read. The answer never carries `id`, `applicant` or
+`submitted`.
+
+```json
+{
+  "purpose": "Public-health monitoring of diabetes care.",
+  "question": "How many patients aged 65+ had a diabetes diagnosis per region in 2025?",
+  "requested_as": "health data request",
+  "requested_format": "anonymised statistics",
+  "definitions": ["Diabetes = any condition with an ICD-10 code starting with E11"]
+}
+```
+
+`requested_as` is `health data request` or `health data access application`;
+`requested_format` is `anonymised statistics` or `pseudonymised records`;
+`definitions` holds 1 to 12 non-empty strings. The model's reply is accepted only
+when all five keys pass these checks.
+
+| Status | Body | When |
+| --- | --- | --- |
+| 400 | `{ "error": "invalid JSON body" }` or `{ "error": "text must be a non-empty string of at most 4000 characters" }` | bad input |
+| 422 | `{ "error": "Could not draft a request from this text" }` | the model's reply is unparseable or fails validation |
+| 502 | `{ "error": "AI drafting failed" }` | the model call fails or times out (15 s) |
+| 503 | `{ "error": "AI drafting is not enabled" }` | `OPENROUTER_API_KEY` is not set |
+
 ## `GET /spe-download?id=R05` or `POST /spe-download`
 
 The deployed download function is named `spe-download`; there is no

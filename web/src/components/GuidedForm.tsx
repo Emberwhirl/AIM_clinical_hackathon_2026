@@ -16,6 +16,7 @@ import {
 import { DecisionDetails } from "@/components/DecisionDetails";
 import { DecisionBadge } from "@/components/DecisionBadge";
 import { ErrorState, EmptyState } from "@/components/States";
+import { FreeTextIntake, type DraftFields } from "@/components/FreeTextIntake";
 import { useLang, useT } from "@/lib/i18n";
 import { localizeBackendText } from "@/lib/i18n/translations";
 
@@ -232,6 +233,15 @@ export function GuidedForm({
     };
     setForm(next);
     setPreview(null);
+    setSubmitError("");
+    triggerPreview(next);
+  }
+
+  // ── Free-text draft: merge the five fields, keep id/submitted/applicant ────
+  function applyDraft(fields: DraftFields) {
+    invalidateResult();
+    const next = { ...form, ...fields };
+    setForm(next);
     setSubmitError("");
     triggerPreview(next);
   }
@@ -498,6 +508,7 @@ export function GuidedForm({
           {step === 1 && (
             <fieldset className="space-y-4">
               <legend className="text-base font-semibold">{t("form.step1")}</legend>
+              <FreeTextIntake onDraft={applyDraft} />
               <Field id="g-question" label={t("form.question.label")}>
                 <textarea
                   id="g-question"

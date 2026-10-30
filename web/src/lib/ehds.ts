@@ -1,5 +1,6 @@
 import { hdabHeaders } from "./hdab-selection";
 import { supabase } from "@/integrations/supabase/client";
+import type { AccessRequest } from "./requests";
 export { SAMPLE_ENTRIES, type AccessRequest } from "./requests";
 
 export type Decision = "REJECT" | "APPROVE_STATISTICAL" | "APPROVE_SPE";
@@ -242,4 +243,13 @@ export async function listHdabs(): Promise<PublicHdabConfig[]> {
   if (!Array.isArray(data.configs) || !data.configs.length)
     throw new Error("No access bodies available.");
   return data.configs;
+}
+
+/** Free-text intake: the model drafts the five request fields; the person reviews them. */
+export async function draftRequest(
+  text: string,
+): Promise<
+  Pick<AccessRequest, "purpose" | "question" | "requested_as" | "requested_format" | "definitions">
+> {
+  return requireData(await supabase.functions.invoke("draft", { body: { text } }));
 }
