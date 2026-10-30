@@ -12,32 +12,32 @@ const EN_STRINGS: Partial<Record<TranslationKey, string>> = {
   "letter.verdict.REJECT": "Request rejected",
   "letter.verdict.APPROVE_STATISTICAL": "Approved for statistical results",
   "letter.verdict.APPROVE_SPE": "Approved for access in a secure processing environment",
-  "letter.verdict.held": "Awaiting staff review — decision held",
+  "letter.verdict.held": "Awaiting staff review, decision held",
   "letter.legalFallback.noQuotes":
     "Verbatim legal quotes were not provided with this decision.",
   "letter.legalFallback.none": "Legal basis was not provided with this decision.",
   "letter.plan.noData": "No data counted or released.",
   "letter.plan.notProvided": "The counting plan was not provided with this decision.",
   "letter.results.noData": "No data released.",
-  "letter.results.cohort": "Cohort size:",
+  "letter.results.cohort": "Cohort size",
   "letter.results.noStats": "No statistical results available.",
   "letter.conditions.awaiting":
     "Awaiting staff review. No access or data release is authorised until review is complete.",
   "letter.conditions.reject":
     "No data released. The prohibited-use restriction applies under Art. 54.",
   "letter.conditions.spe":
-    "Access only inside the secure processing environment; no download of patient-level data. Art. 73 applies.",
+    "Access only inside the secure processing environment with no download of patient-level data. Art. 73 applies.",
   "letter.conditions.stats":
     "Use only for the stated purpose. Small cells are suppressed to protect privacy.",
   "letter.issuer": "Health Data Access Body (HDAB)",
-  "decision.headline.APPROVE_STATISTICAL": "Yes — approved for anonymised statistics",
-  "decision.headline.APPROVE_SPE": "Yes — approved for work in a secure processing environment",
-  "decision.headline.REJECT": "No — this request cannot be approved",
+  "decision.headline.APPROVE_STATISTICAL": "Approved for anonymised statistics",
+  "decision.headline.APPROVE_SPE": "Approved for work in a secure processing environment",
+  "decision.headline.REJECT": "This request cannot be approved",
   "decision.headline.held": "A person will review this request",
   "decision.next.APPROVE_STATISTICAL":
-    "The anonymised results are shown below; groups smaller than 10 are hidden to protect privacy.",
+    "The anonymised results appear below. Groups smaller than 10 are hidden to protect privacy.",
   "decision.next.APPROVE_SPE":
-    "You work with the data inside the secure environment; downloads are blocked and logged.",
+    "You work with the data inside the secure environment and downloads are blocked and logged.",
   "decision.next.REJECT":
     "To request a reconsideration, choose a permitted purpose under Article 53 and submit a new request.",
   "decision.next.held":
@@ -150,7 +150,7 @@ export function createDecisionLetter(
             ...columns.map((column) => metricLabel(column, locale.startsWith("de") ? "de" : "en")),
           ],
           rows: rows.map((row) => [
-            ...Array.from({ length: depth }, (_, i) => row.groups[i] ?? "—"),
+            ...Array.from({ length: depth }, (_, i) => row.groups[i] ?? "-"),
             ...columns.map((column) =>
               formatValue(
                 row.metrics[column],

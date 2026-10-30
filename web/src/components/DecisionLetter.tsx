@@ -111,7 +111,7 @@ export function DecisionLetter({ letter }: { letter: Letter }) {
               <ul className="space-y-1 text-sm">
                 {letter.memo.quotes.map((q, i) => (
                   <li key={i}>
-                    <span className="font-mono text-muted-foreground">{q.ref}</span>:{" "}
+                    <span className="font-mono text-muted-foreground">{q.ref}</span>{" "}
                     <q>{q.text}</q>
                   </li>
                 ))}

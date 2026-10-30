@@ -4,7 +4,7 @@ import { LandingPage } from "@/components/LandingPage";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "EHDS Access Desk — Can this health-data request be approved?" },
+      { title: "EHDS Access Desk, Can this health-data request be approved?" },
       {
         name: "description",
         content:

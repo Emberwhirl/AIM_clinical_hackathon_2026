@@ -40,9 +40,9 @@ describe("Landing page", () => {
 
   it("shows 57 jury test requests with the honest limits", async () => {
     await renderLanding();
-    const tile = screen.getByText("jury test requests: 0 wrong decisions, 0 leaks").parentElement!;
+    const tile = screen.getByText("jury test requests with 0 wrong decisions and 0 leaks").parentElement!;
     expect(tile).toHaveTextContent("57");
-    expect(screen.getByText(/a guarantee of future results/i)).toBeInTheDocument();
+    expect(screen.getByText(/synthetic test cases only/i)).toBeInTheDocument();
   });
   it("links the hero actions to the desk and transparency pages", async () => {
     await renderLanding();

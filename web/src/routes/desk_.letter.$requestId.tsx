@@ -11,18 +11,19 @@ const DecisionLetter = lazy(() =>
 
 export const Route = createFileRoute("/desk_/letter/$requestId")({
   loader: async ({ params }) => getRequest(params.requestId),
-  head: () => ({ meta: [{ title: "Decision letter — EHDS Access Desk" }] }),
+  head: () => ({ meta: [{ title: "Decision letter, EHDS Access Desk" }] }),
   pendingComponent: () => <EmptyState title="Loading decision letter…" />,
   errorComponent: ({ reset }) => (
     <div className="mx-auto max-w-4xl p-6">
       <ErrorState>The decision letter could not be loaded.</ErrorState>
-      <button onClick={reset} className="underline">
-        Try again
-      </button>{" "}
-      ·{" "}
-      <a href="/desk" className="underline">
-        Back to desk
-      </a>
+      <div className="mt-4 flex items-center gap-4">
+        <button onClick={reset} className="underline">
+          Try again
+        </button>
+        <a href="/desk" className="underline">
+          Back to desk
+        </a>
+      </div>
     </div>
   ),
   component: LetterPage,

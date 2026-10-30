@@ -26,7 +26,7 @@ function PurposeHighlight({ text, phrases }: { text: string; phrases: string[] }
   for (const { start, end } of merged) {
     content.push(text.slice(offset, start));
     content.push(
-      <mark key={start} className="rounded-sm bg-accent font-semibold text-accent-foreground">
+      <mark key={start} className="rounded-sm bg-accent px-1 font-semibold text-accent-foreground">
         {text.slice(start, end)}
       </mark>,
     );
@@ -57,33 +57,43 @@ export function ExplanationPanel({
   return (
     <section
       aria-label={t("explanation.heading")}
-      className="min-w-0 space-y-4 break-words rounded-lg border border-border p-4"
+      className="min-w-0 space-y-4 break-words rounded-md border border-border p-5"
     >
-      <h3 className="font-semibold">{t("explanation.heading")}</h3>
-      <div>
-        <h4 className="text-sm font-medium">{t("explanation.rule")}</h4>
-        <p className="mt-1">{localRule}</p>
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        {t("explanation.heading")}
+      </h3>
+      <div className="space-y-3 text-sm">
+        <div>
+          <h4 className="text-xs font-medium text-muted-foreground">{t("explanation.rule")}</h4>
+          <p className="mt-0.5 font-medium">{localRule}</p>
+        </div>
         {purpose && (
-          <div className="mt-3">
-            <h4 className="text-sm font-medium">{t("explanation.requestPurpose")}</h4>
-            <p className="mt-1 whitespace-pre-wrap">
+          <div>
+            <h4 className="text-xs font-medium text-muted-foreground">
+              {t("explanation.requestPurpose")}
+            </h4>
+            <p className="mt-0.5 whitespace-pre-wrap leading-relaxed">
               <PurposeHighlight text={purpose} phrases={explanation.trigger_phrases} />
             </p>
           </div>
         )}
         {question && (
-          <div className="mt-3">
-            <h4 className="text-sm font-medium">{t("explanation.requestQuestion")}</h4>
-            <p className="mt-1 whitespace-pre-wrap">
+          <div>
+            <h4 className="text-xs font-medium text-muted-foreground">
+              {t("explanation.requestQuestion")}
+            </h4>
+            <p className="mt-0.5 whitespace-pre-wrap leading-relaxed">
               <PurposeHighlight text={question} phrases={explanation.trigger_phrases} />
             </p>
           </div>
         )}
         {!purpose && !question && !!explanation.trigger_context?.length && (
-          <div className="mt-3">
-            <h4 className="text-sm font-medium">{t("explanation.matchedContext")}</h4>
+          <div>
+            <h4 className="text-xs font-medium text-muted-foreground">
+              {t("explanation.matchedContext")}
+            </h4>
             {explanation.trigger_context.map((context, i) => (
-              <p key={i} className="mt-1 whitespace-pre-wrap">
+              <p key={i} className="mt-0.5 whitespace-pre-wrap leading-relaxed">
                 <PurposeHighlight text={context} phrases={explanation.trigger_phrases} />
               </p>
             ))}
@@ -91,11 +101,13 @@ export function ExplanationPanel({
         )}
       </div>
       {!!explanation.trigger_phrases.length && (
-        <div>
-          <h4 className="text-sm font-medium">{t("explanation.triggerPhrases")}</h4>
-          <ul className="mt-2 space-y-2">
+        <div className="text-sm">
+          <h4 className="text-xs font-medium text-muted-foreground">
+            {t("explanation.triggerPhrases")}
+          </h4>
+          <ul className="mt-1.5 flex flex-wrap gap-2">
             {explanation.trigger_phrases.map((phrase, i) => (
-              <li key={i}>
+              <li key={i} className="rounded border border-border bg-muted/50 px-2 py-0.5 text-xs">
                 <q>{phrase}</q>
               </li>
             ))}
@@ -103,9 +115,11 @@ export function ExplanationPanel({
         </div>
       )}
       {approved && explanation.plan_summary && (
-        <div>
-          <h4 className="text-sm font-medium">{t("explanation.whatWeUnderstood")}</h4>
-          <p className="mt-1">
+        <div className="text-sm">
+          <h4 className="text-xs font-medium text-muted-foreground">
+            {t("explanation.whatWeUnderstood")}
+          </h4>
+          <p className="mt-0.5">
             {explanation.plan_summary}
             {lang === "de" && (
               <span className="text-muted-foreground">{t("explanation.planSuffixEn")}</span>
@@ -126,15 +140,13 @@ export function MemoBlock({ memo }: { memo: AiMemo }) {
   return (
     <section
       aria-label={t("memo.heading")}
-      className="mt-4 space-y-2 rounded-md border border-border bg-muted/40 p-3 text-sm"
+      className="mt-4 space-y-2 rounded-md border border-border bg-muted/40 p-3.5 text-sm"
     >
       <h4 className="font-semibold">
         {t("memo.heading")}{" "}
-        <span className="text-xs font-normal text-muted-foreground">
-          ({t("memo.label")})
-        </span>
+        <span className="text-xs font-normal text-muted-foreground">({t("memo.label")})</span>
       </h4>
-      <p className="whitespace-pre-wrap">{memo.text}</p>
+      <p className="whitespace-pre-wrap leading-relaxed">{memo.text}</p>
       {memo.quotes.length > 0 && (
         <details>
           <summary className="cursor-pointer text-xs text-muted-foreground">
@@ -143,8 +155,7 @@ export function MemoBlock({ memo }: { memo: AiMemo }) {
           <ul className="mt-2 space-y-1">
             {memo.quotes.map((q, i) => (
               <li key={i} className="text-xs">
-                <span className="font-mono text-muted-foreground">{q.ref}</span>:{" "}
-                <q>{q.text}</q>
+                <span className="font-mono text-muted-foreground">{q.ref}</span> <q>{q.text}</q>
               </li>
             ))}
           </ul>

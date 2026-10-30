@@ -77,7 +77,7 @@ const cases = [
     label: "Opted-out patients excluded",
     id: "R01",
     result: base,
-    facts: ["Eligible patients: 19161", "3247"],
+    facts: ["Eligible patients 19161", "3247"],
   },
   {
     label: "Small-cell suppression",
@@ -92,7 +92,7 @@ const cases = [
     },
     facts: ["Burgenland", "<10", "suppressed", "Niederösterreich", "15", "27.2"],
   },
-  { label: "Secure environment", id: "R05", result: spe, facts: ["Cohort size: 1152", "spe_r05"] },
+  { label: "Secure environment", id: "R05", result: spe, facts: ["Cohort size 1152", "spe_r05"] },
   { label: "Blocked download", id: "R05", result: spe, facts: ["HTTP 403", blockedMessage] },
   {
     label: "Records downgraded to statistics",
@@ -118,13 +118,13 @@ it("offers the seven scenarios in presentation order without fetching on mount",
   render(<DemoPanel />);
   expect(
     screen.getAllByRole("button", { name: /^\d\./ }).map((button) => button.textContent),
-  ).toEqual(cases.map((scenario, index) => `${index + 1}. ${scenario.label} · ${scenario.id}`));
+  ).toEqual(cases.map((scenario, index) => `${index + 1}. ${scenario.label}(${scenario.id})`));
   expect(invoke).not.toHaveBeenCalled();
   const proof = screen.getByRole("region", { name: "Proof" });
   expect(proof).toHaveTextContent(
-    "Measured 30 Oct 2026 against the live backend: 10/10 sample decisions · 6/6 numbers · 0 leaks · consistent over 3 runs · 57 jury requests, 0 wrong decisions, 0 leaks, 15 rejected, no prohibited purpose approved",
+    "Measured 30 Oct 2026 against the live backend with 10/10 sample decisions, 6/6 numbers, 0 leaks, consistent over 3 runs, and 57 jury requests with 0 wrong decisions, 0 leaks, 15 rejected, and no prohibited purpose approved.",
   );
-  expect(proof).toHaveTextContent("Test requests, not real applications.");
+  expect(proof).toHaveTextContent("Evaluated on synthetic test cases.");
 });
 
 it.each(cases)(

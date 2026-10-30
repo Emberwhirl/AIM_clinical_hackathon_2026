@@ -12,8 +12,8 @@ const EN_PDF_STRINGS: Partial<Record<TranslationKey, string>> = {
   "pdf.heading.whatWeCounted": "What we counted",
   "pdf.heading.results": "Results",
   "pdf.heading.conditions": "Conditions and next steps",
-  "pdf.label.reference": "Reference: ",
-  "pdf.label.date": "Date: ",
+  "pdf.label.reference": "Reference ",
+  "pdf.label.date": "Date ",
 };
 
 function makeDefaultT(): TFn {
@@ -105,7 +105,7 @@ export function buildDecisionLetterPdf(
   heading(t("pdf.heading.legalBasis"));
   if (!letter.articles.length) paragraph(letter.legalFallback);
   for (const article of letter.articles) {
-    paragraph(`${article.ref} · ${localizeBackendText(article.title, lang)}`, true);
+    paragraph(`${article.ref}, ${localizeBackendText(article.title, lang)}`, true);
     paragraph(article.quote, false, article.applies);
     if (article.summary) paragraph(localizeBackendText(article.summary, lang));
   }

@@ -78,17 +78,17 @@ function StepNav({
 }) {
   const t = useT();
   return (
-    <nav aria-label={t("form.steps.aria")} className="mb-6 flex flex-wrap gap-2">
+    <nav aria-label={t("form.steps.aria")} className="mb-6 grid grid-cols-3 gap-2 border-b border-border pb-3">
       {STEPS.map((s) => (
         <button
           key={s}
           type="button"
           aria-current={s === current ? "step" : undefined}
           onClick={() => onChange(s)}
-          className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+          className={`rounded px-3 py-2 text-left text-xs font-medium transition-colors ${
             s === current
               ? "bg-primary text-primary-foreground"
-              : "bg-muted text-muted-foreground hover:bg-muted/80"
+              : "bg-muted/60 text-muted-foreground hover:bg-muted"
           }`}
         >
           {s}. {stepLabels[s]}
@@ -700,15 +700,15 @@ export function GuidedForm({
               <dl className="rounded border border-border bg-card p-4 text-sm space-y-1">
                 <div className="flex gap-2">
                   <dt className="font-medium w-32 shrink-0">{t("form.review.applicant")}</dt>
-                  <dd>{form.applicant.name || "—"}</dd>
+                  <dd>{form.applicant.name || "-"}</dd>
                 </div>
                 <div className="flex gap-2">
                   <dt className="font-medium w-32 shrink-0">{t("form.review.organisation")}</dt>
-                  <dd>{form.applicant.organisation || "—"}</dd>
+                  <dd>{form.applicant.organisation || "-"}</dd>
                 </div>
                 <div className="flex gap-2">
                   <dt className="font-medium w-32 shrink-0">{t("form.review.country")}</dt>
-                  <dd>{form.applicant.country || "—"}</dd>
+                  <dd>{form.applicant.country || "-"}</dd>
                 </div>
                 <div className="flex gap-2">
                    <dt className="font-medium w-32 shrink-0">{t("form.review.requestedAs")}</dt>
@@ -724,11 +724,11 @@ export function GuidedForm({
                  </div>
                 <div className="flex gap-2">
                   <dt className="font-medium w-32 shrink-0">{t("form.review.purpose")}</dt>
-                  <dd className="line-clamp-3">{form.purpose || "—"}</dd>
+                  <dd className="line-clamp-3">{form.purpose || "-"}</dd>
                 </div>
                 <div className="flex gap-2">
                   <dt className="font-medium w-32 shrink-0">{t("form.review.question")}</dt>
-                  <dd className="line-clamp-3">{form.question || "—"}</dd>
+                  <dd className="line-clamp-3">{form.question || "-"}</dd>
                 </div>
                 <div className="flex gap-2">
                   <dt className="font-medium w-32 shrink-0">{t("form.review.definitions")}</dt>

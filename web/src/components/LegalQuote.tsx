@@ -7,13 +7,15 @@ export function LegalQuote({ article }: { article: LegalArticle }) {
   const { lang } = useLang();
   const start = article.applies ? article.quote.indexOf(article.applies) : -1;
   return (
-    <figure className="min-w-0 break-words rounded-lg border-l-4 border-accent bg-muted p-4">
-      <figcaption className="font-medium">
+    <figure className="min-w-0 break-words rounded-md border-l-2 border-primary bg-muted/40 p-4">
+      <figcaption className="text-sm font-semibold">
         <span className="font-mono">
           {article.ref ||
             (article.number.startsWith("Art.") ? article.number : `Art. ${article.number}`)}
-        </span>{" "}
-        · {localizeBackendText(article.title, lang)}
+        </span>
+        <span className="ml-2 font-normal text-foreground">
+          {localizeBackendText(article.title, lang)}
+        </span>
         {lang === "de" && (
           <span className="ml-2 text-xs font-normal text-muted-foreground">
             {t("legal.officialLabel")}
@@ -21,7 +23,7 @@ export function LegalQuote({ article }: { article: LegalArticle }) {
         )}
       </figcaption>
       {article.quote && (
-        <blockquote className="mt-3 whitespace-pre-wrap text-sm">
+        <blockquote className="mt-2.5 whitespace-pre-wrap text-sm leading-relaxed">
           {start >= 0 && article.applies ? (
             <>
               {article.quote.slice(0, start)}
@@ -33,7 +35,11 @@ export function LegalQuote({ article }: { article: LegalArticle }) {
           )}
         </blockquote>
       )}
-      {article.summary && <p className="mt-3 text-sm text-muted-foreground">{localizeBackendText(article.summary, lang)}</p>}
+      {article.summary && (
+        <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">
+          {localizeBackendText(article.summary, lang)}
+        </p>
+      )}
     </figure>
   );
 }

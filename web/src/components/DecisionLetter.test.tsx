@@ -88,7 +88,7 @@ describe("Decision letter", () => {
         expect(within(table).getByText("8.1 %")).toBeInTheDocument();
       } else expect(screen.queryByRole("table")).not.toBeInTheDocument();
       if (result.decision === "APPROVE_SPE") {
-        expect(screen.getByText("Cohort size: 42")).toBeInTheDocument();
+        expect(screen.getByText("Cohort size 42")).toBeInTheDocument();
         expect(screen.getByText(/Access only inside.*Art. 73/)).toBeInTheDocument();
         expect(screen.queryByText(/PRIVATE_/)).not.toBeInTheDocument();
       }
@@ -112,7 +112,7 @@ describe("Decision letter", () => {
     "marks held decisions as awaiting review",
     (held) => {
       render(<DecisionLetter letter={createDecisionLetter({ ...spe, ...held }, date)} />);
-      expect(screen.getByText("Awaiting staff review — decision held")).toBeInTheDocument();
+      expect(screen.getByText("Awaiting staff review, decision held")).toBeInTheDocument();
       expect(screen.getByText(/No access or data release is authorised/)).toBeInTheDocument();
     },
   );
@@ -238,17 +238,17 @@ describe("Plain decision headlines", () => {
   it.each([
     {
       result: base,
-      expectedHeadline: "No — this request cannot be approved",
+      expectedHeadline: "This request cannot be approved",
       expectedNext: /choose a permitted purpose under Article 53/,
     },
     {
       result: statistics,
-      expectedHeadline: "Yes — approved for anonymised statistics",
-      expectedNext: /groups smaller than 10 are hidden/,
+      expectedHeadline: "Approved for anonymised statistics",
+      expectedNext: /Groups smaller than 10 are hidden/,
     },
     {
       result: spe,
-      expectedHeadline: "Yes — approved for work in a secure processing environment",
+      expectedHeadline: "Approved for work in a secure processing environment",
       expectedNext: /downloads are blocked and logged/,
     },
     {
@@ -266,9 +266,9 @@ describe("Plain decision headlines", () => {
   );
 
   it.each([
-    { result: base, expectedHeadline: "No — this request cannot be approved" },
-    { result: statistics, expectedHeadline: "Yes — approved for anonymised statistics" },
-    { result: spe, expectedHeadline: "Yes — approved for work in a secure processing environment" },
+    { result: base, expectedHeadline: "This request cannot be approved" },
+    { result: statistics, expectedHeadline: "Approved for anonymised statistics" },
+    { result: spe, expectedHeadline: "Approved for work in a secure processing environment" },
     {
       result: { ...spe, needs_review: true },
       expectedHeadline: "A person will review this request",
@@ -283,12 +283,12 @@ describe("Plain decision headlines", () => {
   );
 
   it("createDecisionLetter exposes headline and nextSteps fields", () => {
-    expect(createDecisionLetter(base, date).headline).toBe("No — this request cannot be approved");
+    expect(createDecisionLetter(base, date).headline).toBe("This request cannot be approved");
     expect(createDecisionLetter(statistics, date).headline).toBe(
-      "Yes — approved for anonymised statistics",
+      "Approved for anonymised statistics",
     );
     expect(createDecisionLetter(spe, date).headline).toBe(
-      "Yes — approved for work in a secure processing environment",
+      "Approved for work in a secure processing environment",
     );
     expect(createDecisionLetter({ ...spe, needs_review: true }, date).headline).toBe(
       "A person will review this request",

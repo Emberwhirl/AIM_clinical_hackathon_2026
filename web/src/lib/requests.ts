@@ -227,6 +227,6 @@ const labels = [
 ];
 export const SAMPLE_ENTRIES = REQUESTS.map((request, i) => ({
   id: request.id,
-  label: `${request.id} — ${labels[i]}`,
+  label: `${request.id} ${labels[i]}`,
   request,
 }));

@@ -186,16 +186,16 @@ export function QuickTest() {
                       {field(row.request, "id") || row.source}
                     </th>
                     <td className="px-3 py-2" title={question}>
-                      {question.length > 80 ? `${question.slice(0, 79)}…` : question || "—"}
+                      {question.length > 80 ? `${question.slice(0, 79)}…` : question || "-"}
                     </td>
                     <td className="px-3 py-2">
                       {row.error
-                        ? `${t("demo.quick.error")}: ${row.error}`
+                        ? `${t("demo.quick.error")} (${row.error})`
                         : decision || t(row.running ? "demo.quick.running" : "demo.quick.pending")}
                     </td>
-                    <td className="px-3 py-2">{result?.articles.join(", ") || "—"}</td>
+                    <td className="px-3 py-2">{result?.articles.join(", ") || "-"}</td>
                     <td className="px-3 py-2">
-                      {row.seconds === undefined ? "—" : row.seconds.toFixed(2)}
+                      {row.seconds === undefined ? "-" : row.seconds.toFixed(2)}
                     </td>
                     <td className="px-3 py-2">
                       {result && (

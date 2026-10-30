@@ -75,7 +75,7 @@ it("shows an invalid file error while a request from another file succeeds", asy
   await screen.findByText("Approved – statistics");
   expect(screen.getAllByRole("row")).toHaveLength(3);
   const badRow = screen.getByRole("rowheader", { name: "broken.json" }).closest("tr")!;
-  expect(badRow).toHaveTextContent("Error: Invalid JSON.");
+  expect(badRow).toHaveTextContent("Error (Invalid JSON.)");
   expect(submit).toHaveBeenCalledExactlyOnceWith(request("GOOD"));
 });
 
@@ -91,6 +91,6 @@ it("continues after a backend rejection and accepts dropped arrays", async () =>
   });
   fireEvent.click(screen.getByRole("button", { name: "Run all" }));
   await screen.findByText("Approved – secure environment");
-  expect(screen.getByText("Error: Invalid request shape")).toBeInTheDocument();
+  expect(screen.getByText("Error (Invalid request shape)")).toBeInTheDocument();
   expect(submit).toHaveBeenCalledTimes(2);
 });

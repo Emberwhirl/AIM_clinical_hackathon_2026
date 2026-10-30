@@ -11,16 +11,16 @@ export const en = {
   "chart.tableFallback":
     "Exact values and all metrics are available in the table below. Focus a bar or region for details.",
   "chart.schematic":
-    "Schematic boundaries. V: Vorarlberg; T: Tirol; S: Salzburg; OÖ: Oberösterreich; NÖ: Niederösterreich; W: Wien; B: Burgenland; St: Steiermark; K: Kärnten.",
-  "chart.legend": "Colour scale: low to high",
+    "Schematic boundaries. V Vorarlberg, T Tirol, S Salzburg, OÖ Oberösterreich, NÖ Niederösterreich, W Wien, B Burgenland, St Steiermark, K Kärnten.",
+  "chart.legend": "Colour scale from low to high",
   "chart.suppressed":
-    "Hatched grey: withheld (<10 / suppressed); no value plotted. Solid grey: unavailable.",
+    "Outlined light grey marks withheld groups (<10 or suppressed) with no value plotted. Solid grey marks unavailable data.",
   "chart.noValues": "No disclosed numeric values for this metric.",
   "table.scroll": "table, scroll horizontally if needed",
   "table.suppressed":
     "Value withheld to protect privacy. Small counts (<10) and suppressed statistics are not disclosed.",
   // ── Site header ─────────────────────────────────────────────────────────────
-  "nav.demoService": "Demonstration service · Health Data Access Body",
+  "nav.demoService": "Demonstration service for the Health Data Access Body",
   "nav.changeRole": "Change view role",
   "nav.settings": "Language and access body",
   "nav.language": "Language",
@@ -31,7 +31,7 @@ export const en = {
   "nav.country.at": "Austria",
   "nav.country.de": "Germany",
   "nav.loading": "Loading…",
-  "nav.bodyError": "Access bodies could not be loaded. Please reload to try again.",
+  "nav.bodyError": "Access bodies could not be loaded. Reload to try again.",
   "nav.menu": "Navigation menu",
   "setup.title": "Choose your access desk",
   "setup.description": "Choose an access body and your view. You can change these preferences in the header at any time. Staff actions require sign-in.",
@@ -51,7 +51,7 @@ export const en = {
   "nav.mainNav": "Main navigation",
 
   // ── Landing page ─────────────────────────────────────────────────────────────
-  "landing.eyebrow": "EHDS Chapter IV · Secondary use",
+  "landing.eyebrow": "EHDS Chapter IV Secondary use",
   "landing.hero": "Can this health-data request be approved?",
   "landing.heroSub":
     "Turn a request into a clear, consistent outcome with cited legal reasons and privacy safeguards.",
@@ -82,7 +82,7 @@ export const en = {
   "landing.step3.title": "Receive a reasoned outcome",
   "landing.step3.text":
     "Get a decision letter and, where approved, anonymised statistics or a route to a secure processing environment.",
-  "landing.proof.eyebrow": "Measured, with limits",
+  "landing.proof.eyebrow": "Measured on test requests",
   "landing.proof.title": "Tested before the next request",
   "landing.proof.stat1.value": "10/10",
   "landing.proof.stat1.label": "sample decisions correct",
@@ -91,31 +91,31 @@ export const en = {
   "landing.proof.stat3.value": "0",
   "landing.proof.stat3.label": "leaks in sample tests",
   "landing.proof.stat4.value": "57",
-  "landing.proof.stat4.label": "jury test requests: 0 wrong decisions, 0 leaks",
+  "landing.proof.stat4.label": "jury test requests with 0 wrong decisions and 0 leaks",
   "landing.proof.disclaimer":
-    "Measured on 30 October 2026 against the live backend, with consistent results over three runs. These are test requests, not evidence of performance on all real-world requests or a guarantee of future results.",
+    "Measured on 30 October 2026 against the live backend across three consistent runs. Results cover synthetic test cases only.",
   "landing.aiDisclosure.title": "Rules decide.\nPeople remain responsible.",
   "landing.aiDisclosure.p1":
-    "Deterministic rules decide the outcome, and a fixed program calculates the statistics. AI helps in four advisory ways only: it rewords unclear definitions, gives a second opinion on doubtful purposes, drafts a note for staff on held requests and turns free text into a structured request. Anything AI touched is held for a person, so AI can only make outcomes stricter. Patient data never goes to AI.",
+    "Deterministic rules decide the outcome, and a fixed program calculates the statistics. AI helps in four advisory ways only. It rewords unclear definitions, gives a second opinion on doubtful purposes, drafts a note for staff on held requests and turns free text into a structured request. Anything AI touched is held for a person, so AI can only make outcomes stricter. Patient data never goes to AI.",
   "landing.aiDisclosure.callout":
     "This is decision support for Health Data Access Body staff. Final decisions rest with the HDAB.",
   "landing.faq.title": "Before you begin",
   "landing.faq.privacy.title": "What happens to data and privacy?",
   "landing.faq.privacy.text":
-    'Patient records stay within the protected processing environment. Patient data never goes to AI. Opted-out patients are excluded. Statistics use small-cell suppression: counts below 10 are shown as "<10". Approved access to pseudonymised records takes place in a secure processing environment, without exporting patient records.',
+    'Patient records stay within the protected processing environment. Patient data never goes to AI. Opted-out patients are excluded. Statistics use small-cell suppression where counts below 10 are shown as "<10". Approved access to pseudonymised records takes place in a secure processing environment, without exporting patient records.',
   "landing.faq.legal.title": "What is the legal basis?",
   "landing.faq.legal.text":
-    "The desk checks secondary-use requests under Regulation (EU) 2025/327, Chapter IV. Article 54 covers prohibited purposes. Articles 53 and 69 support the statistics route; Articles 53, 66, 68 and 73 govern the secure processing route. Each outcome cites the relevant articles so staff can review the reasoning.",
+    "The desk checks secondary-use requests under Regulation (EU) 2025/327, Chapter IV. Article 54 covers prohibited purposes. Articles 53 and 69 support the statistics route. Articles 53, 66, 68 and 73 govern the secure processing route. Each outcome cites the relevant articles so staff can review the reasoning.",
   "landing.faq.decisions.title": "How are decisions made?",
   "landing.faq.decisions.text":
-    "Deterministic rules assess the request. Prohibited purposes are rejected; eligible requests can receive anonymised statistics or be directed to a secure processing environment. A fixed program computes the statistics. Unclear cases are held for staff review. The same request under the same rules and data produces the same answer. The HDAB makes the final decision.",
-  "landing.footer.credit": "EHDS Access Desk · Health Data Access Body",
+    "Deterministic rules assess the request. Prohibited purposes are rejected, and eligible requests can receive anonymised statistics or be directed to a secure processing environment. A fixed program computes the statistics. Unclear cases are held for staff review. The same request under the same rules and data produces the same answer. The HDAB makes the final decision.",
+  "landing.footer.credit": "EHDS Access Desk, Health Data Access Body",
   "landing.footer.openDesk": "Open the desk",
   "landing.footer.privacy": "Privacy and legal basis",
   "landing.footer.aiDisclosure": "AI disclosure",
 
   // ── Desk page ────────────────────────────────────────────────────────────────
-  "desk.eyebrow": "Health Data Access Body · EHDS",
+  "desk.eyebrow": "Health Data Access Body, EHDS",
   "desk.heading": "EHDS Access Desk",
   "desk.role.applicant": "applicant",
   "desk.role.staff": "staff",
@@ -135,26 +135,26 @@ export const en = {
 
   // ── GuidedForm ───────────────────────────────────────────────────────────────
   "form.loadSample": "Load a sample",
-  "form.chooseSample": "— choose a sample —",
-  "form.advanced": "Advanced: JSON import and export",
-  "form.applicant.chooseCountry": "— choose a country —",
-  "form.likely.APPROVE_STATISTICAL": "Likely: approved for anonymised statistics",
-  "form.likely.APPROVE_SPE": "Likely: approved for a secure processing environment",
-  "form.likely.REJECT": "Likely: rejected",
-  "form.likely.held": "Likely: a person will review this",
+  "form.chooseSample": "Choose a sample",
+  "form.advanced": "JSON import and export",
+  "form.applicant.chooseCountry": "Choose a country",
+  "form.likely.APPROVE_STATISTICAL": "Likely approved for anonymised statistics",
+  "form.likely.APPROVE_SPE": "Likely approved for a secure processing environment",
+  "form.likely.REJECT": "Likely rejected",
+  "form.likely.held": "Likely held for staff review",
   "form.importJson": "Import JSON",
   "form.exportJson": "Export JSON",
   "form.pasteOrUpload": "Paste JSON or upload a file",
   "form.apply": "Apply",
   "form.uploadFile": "Upload file",
   "form.importMustBeObject": "Import must be a JSON object.",
-  "form.couldNotParseJson": "Could not parse JSON. Please paste valid JSON.",
+  "form.couldNotParseJson": "Could not parse JSON. Paste valid JSON.",
   "form.freeText.label": "Or describe your request in your own words",
   "form.freeText.placeholder":
-    "Example: We are a university hospital and want to know, per region, how many patients aged 65 or older had a diabetes diagnosis (ICD-10 E11) in 2025, as anonymised statistics for a public-health study.",
+    "We are a university hospital and want to know, per region, how many patients aged 65 or older had a diabetes diagnosis (ICD-10 E11) in 2025, as anonymised statistics for a public-health study.",
   "form.freeText.draft": "Draft my request",
   "form.freeText.drafting": "Drafting your request…",
-  "form.freeText.done": "Draft filled in below. Please review and edit the fields.",
+  "form.freeText.done": "Draft filled in below. Review and edit the fields.",
   "form.freeText.failed": "Could not draft a request.",
   "form.step1": "What you want to know",
   "form.step2": "Definitions",
@@ -201,26 +201,26 @@ export const en = {
   "form.submit": "Submit request",
   "form.livePreview": "Likely outcome",
   "form.weUnderstood": "We understood",
-  "form.weUnderstood.plan": "Plan: ",
+  "form.weUnderstood.plan": "Plan ",
   "form.weUnderstood.staffReview": "This request would be held for staff review.",
   "form.emptyPreview":
     "Fill in purpose, question and definitions to see how the system understands your request.",
-  "form.requestFailed": "Request failed. Please try again.",
+  "form.requestFailed": "Request failed. Try again.",
   "form.evaluating": "Evaluating…",
   "form.sampleRequest": "Sample request",
   "form.runSample": "Run sample request",
 
   // ── DecisionDetails ──────────────────────────────────────────────────────────
   // Plain headlines (decision + needs_review matrix)
-  "decision.headline.APPROVE_STATISTICAL": "Yes — approved for anonymised statistics",
-  "decision.headline.APPROVE_SPE": "Yes — approved for work in a secure processing environment",
-  "decision.headline.REJECT": "No — this request cannot be approved",
+  "decision.headline.APPROVE_STATISTICAL": "Approved for anonymised statistics",
+  "decision.headline.APPROVE_SPE": "Approved for work in a secure processing environment",
+  "decision.headline.REJECT": "This request cannot be approved",
   "decision.headline.held": "A person will review this request",
   // Short "what happens next" lines
   "decision.next.APPROVE_STATISTICAL":
-    "The anonymised results are shown below; groups smaller than 10 are hidden to protect privacy.",
+    "The anonymised results appear below. Groups smaller than 10 are hidden to protect privacy.",
   "decision.next.APPROVE_SPE":
-    "You work with the data inside the secure environment; downloads are blocked and logged.",
+    "You work with the data inside the secure environment and downloads are blocked and logged.",
   "decision.next.REJECT":
     "To request a reconsideration, choose a permitted purpose under Article 53 and submit a new request.",
   "decision.next.held":
@@ -230,13 +230,13 @@ export const en = {
   "decision.needsReview": "Needs staff review",
   "decision.citedArticles": "Cited articles",
   "decision.reason": "Reason",
-  "decision.eligiblePatients": "Eligible patients:",
+  "decision.eligiblePatients": "Eligible patients",
   "decision.definitionsNeedReview": "Definitions needing review",
-  "decision.cohortSize": "Cohort size:",
+  "decision.cohortSize": "Cohort size",
   "decision.notProvided": "Not provided",
   "decision.secureEnv": "Secure environment",
-  "decision.speSchema": "Schema:",
-  "decision.downloadsBlocked": "· downloads blocked",
+  "decision.speSchema": "Schema",
+  "decision.downloadsBlocked": "downloads blocked",
   "decision.provisioningNotProvided": "Provisioning status not provided",
   "decision.notApplicable": "Not applicable",
   "decision.notRequired": "Not required",
@@ -259,14 +259,14 @@ export const en = {
   "lifecycle.status.pending": "Pending",
   "lifecycle.aria": "Request lifecycle",
   "lifecycle.deadline.due": "Decision due by {date} ({ref})",
-  "lifecycle.deadline.daysLeft": "{n} days left · due {date} ({ref})",
+  "lifecycle.deadline.daysLeft": "{n} days left, due {date} ({ref})",
   "lifecycle.deadline.overdue": "Deadline passed {date} ({ref})",
   "lifecycle.deadline.decidedOnTime": "Decided on {date}, within the deadline",
   "lifecycle.deadline.decidedLate": "Decided on {date}",
 
   // ── ExplanationPanel ─────────────────────────────────────────────────────────
   "explanation.heading": "Decision explanation",
-  "explanation.rule": "Rule:",
+  "explanation.rule": "Rule",
   "explanation.requestPurpose": "Request purpose",
   "explanation.requestQuestion": "Request question",
   "explanation.matchedContext": "Matched request context",
@@ -286,9 +286,9 @@ export const en = {
   "letter.back": "Back to desk",
   "letter.downloadPdf": "Download PDF",
   "letter.preparingPdf": "Preparing PDF…",
-  "letter.pdfError": "The PDF could not be generated. Please try again.",
-  "letter.reference": "Reference: ",
-  "letter.date": "Date: ",
+  "letter.pdfError": "The PDF could not be generated. Try again.",
+  "letter.reference": "Reference ",
+  "letter.date": "Date ",
   "letter.title": "Decision letter",
   "letter.verdict.title": "Verdict",
   "letter.why.title": "Why",
@@ -305,21 +305,21 @@ export const en = {
   "letter.verdict.APPROVE_STATISTICAL": "Approved for statistical results",
   "letter.verdict.APPROVE_SPE":
     "Approved for access in a secure processing environment",
-  "letter.verdict.held": "Awaiting staff review — decision held",
+  "letter.verdict.held": "Awaiting staff review, decision held",
   "letter.legalFallback.noQuotes":
     "Verbatim legal quotes were not provided with this decision.",
   "letter.legalFallback.none": "Legal basis was not provided with this decision.",
   "letter.plan.noData": "No data counted or released.",
   "letter.plan.notProvided": "The counting plan was not provided with this decision.",
   "letter.results.noData": "No data released.",
-  "letter.results.cohort": "Cohort size:",
+  "letter.results.cohort": "Cohort size",
   "letter.results.noStats": "No statistical results available.",
   "letter.conditions.awaiting":
     "Awaiting staff review. No access or data release is authorised until review is complete.",
   "letter.conditions.reject":
     "No data released. The prohibited-use restriction applies under Art. 54.",
   "letter.conditions.spe":
-    "Access only inside the secure processing environment; no download of patient-level data. Art. 73 applies.",
+    "Access only inside the secure processing environment with no download of patient-level data. Art. 73 applies.",
   "letter.conditions.stats":
     "Use only for the stated purpose. Small cells are suppressed to protect privacy.",
   "letter.issuer": "Health Data Access Body (HDAB)",
@@ -357,12 +357,12 @@ export const en = {
   "results.noStats": "No statistical results available.",
 
   // ── Page titles (document.title) ─────────────────────────────────────────────
-  "page.title.home": "EHDS Access Desk \u2014 Can this health-data request be approved?",
-  "page.title.desk": "EHDS Access Desk \u2014 Health Data Access Body",
-  "page.title.letter": "Decision letter \u2014 EHDS Access Desk",
-  "page.title.howWeDecide": "How we decide \u00B7 EHDS Access Desk",
-  "page.title.examples": "Example requests \u00B7 EHDS Access Desk",
-  "page.title.register": "Transparency register \u00B7 EHDS Access Desk",
+  "page.title.home": "EHDS Access Desk, Can this health-data request be approved?",
+  "page.title.desk": "EHDS Access Desk, Health Data Access Body",
+  "page.title.letter": "Decision letter, EHDS Access Desk",
+  "page.title.howWeDecide": "How we decide, EHDS Access Desk",
+  "page.title.examples": "Example requests, EHDS Access Desk",
+  "page.title.register": "Transparency register, EHDS Access Desk",
 
   // ── PDF headings ─────────────────────────────────────────────────────────────
   "pdf.heading.verdict": "Verdict",
@@ -371,24 +371,24 @@ export const en = {
   "pdf.heading.whatWeCounted": "What we counted",
   "pdf.heading.results": "Results",
   "pdf.heading.conditions": "Conditions and next steps",
-  "pdf.label.reference": "Reference: ",
-  "pdf.label.date": "Date: ",
+  "pdf.label.reference": "Reference ",
+  "pdf.label.date": "Date ",
 
   // ── HowWeDecide ──────────────────────────────────────────────────────────────
-  "hwd.eyebrow": "Methodology · 30 October 2026",
+  "hwd.eyebrow": "Methodology, 30 October 2026",
   "hwd.title": "How we decide",
   "hwd.intro":
     "A purpose check comes first, followed by the least detailed data needed to answer the request. These rules support Health Data Access Body staff, who remain responsible for the final decision.",
   "hwd.order.title": "Decision order",
   "hwd.order.item1.title": "Reject prohibited purposes first",
   "hwd.order.item1.text":
-    "Article 54 takes priority. Insurance premiums and job decisions are prohibited under Art. 54(1)(b); advertising and marketing under Art. 54(1)(c); harmful products such as tobacco and nicotine under Art. 54(1)(d). The outcome is REJECT.",
+    "Article 54 takes priority. Insurance premiums and job decisions are prohibited under Art. 54(1)(b), advertising and marketing under Art. 54(1)(c), and harmful products such as tobacco and nicotine under Art. 54(1)(d). The outcome is REJECT.",
   "hwd.order.item2.title": "A health data request receives anonymised statistics",
   "hwd.order.item2.text":
     "For a permitted purpose, a health data request follows the statistics route under Art. 53 and 69.",
   "hwd.order.item3.title": "Justified access applications use a secure environment",
   "hwd.order.item3.text":
-    "A data access application must explain why anonymised data is not enough. With that justification, it receives pseudonymised records in a secure processing environment under Art. 53, 66, 68 and 73.",
+    "A data access application must explain why anonymised data is insufficient. With that justification, it receives pseudonymised records in a secure processing environment under Art. 53, 66, 68 and 73.",
   "hwd.order.item4.title": "Other access applications receive anonymised statistics",
   "hwd.order.item4.text":
     "Without a justification for individual records, an access application is downgraded to anonymised statistics under Art. 53, 66(2) and 69, even if records were requested.",
@@ -408,19 +408,19 @@ export const en = {
   "hwd.secure.title": "Secure processing and blocked downloads",
   "hwd.secure.text":
     "Only the cohort\u2019s pseudonymised records named in the request are copied into the secure processing environment. Downloads are blocked with HTTP 403 and logged under Art. 73.",
-  "hwd.testing.title": "Testing: evaluation and jury simulation",
+  "hwd.testing.title": "Evaluation and jury simulation",
   "hwd.testing.measured": "Measured on 30 October 2026.",
   "hwd.testing.sample.dt": "10 sample requests",
   "hwd.testing.sample.dd":
-    "10/10 decisions correct; 6/6 numeric answers correct; 0 leaks; the same answer on 3 runs.",
+    "10/10 decisions correct, 6/6 numeric answers correct, 0 leaks, and the same answer on 3 runs.",
   "hwd.testing.jury.dt": "57 jury test requests",
   "hwd.testing.jury.dd":
-    "0 wrong decisions; 0 leaks; 15 rejected, no prohibited purpose approved.",
+    "0 wrong decisions, 0 leaks, and 15 rejected with no prohibited purpose approved.",
   "hwd.testing.disclaimer":
-    "These are test requests on synthetic data, not real applications. The measurements describe these tests and do not guarantee outcomes for future requests.",
+    "Evaluated on synthetic test cases.",
   "hwd.ai.title": "The role of AI",
   "hwd.ai.text":
-    "No AI decides. AI rewords unclear definitions, flags doubtful purposes, drafts a staff note on held requests and turns free text into a structured request; everything it touches is held for staff, so it can only make outcomes stricter, and the AI never sees patient data.",
+    "No AI decides. AI rewords unclear definitions, flags doubtful purposes, drafts a staff note on held requests and turns free text into a structured request. Everything it touches is held for staff, so it can only make outcomes stricter, and the AI never sees patient data.",
   "hwd.explore": "Explore the 10 sample requests",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────
@@ -430,31 +430,31 @@ export const en = {
   "examples.howWeDecide": "How we decide",
   "examples.ariaList": "Sample requests",
   "examples.open": "Open",
-  "examples.applicantType": "Applicant type:",
+  "examples.applicantType": "Applicant type",
   "examples.expectedDecision": "Expected decision",
   "examples.openFull": "Open full live result",
   "examples.result.title": "Full live result",
   "examples.result.loading": "Loading",
-  "examples.result.liveResult": "· Live result",
+  "examples.result.liveResult": "Live result",
   "examples.result.from": "from the live backend…",
   "examples.result.choose":
     "Choose a sample request to inspect the decision, cited articles and available answer.",
   "examples.result.tryAgain": "Try again",
-  "examples.result.purpose": "Purpose:",
+  "examples.result.purpose": "Purpose",
 
   // ── TransparencyRegister ─────────────────────────────────────────────────────
   "register.title": "Transparency register",
   "register.intro":
     "This public register lists up to 100 of the latest decided requests, newest first. We publish a reference, submission date, organisation type, purpose category, decision and relevant EHDS articles. Requests awaiting review are excluded.",
   "register.privacy":
-    "We deliberately omit personal and organisation names, original request identifiers, free-text purposes and questions, and all patient data, answers and cohort sizes. References identify register entries only; categories use standard labels.",
+    "We deliberately omit personal and organisation names, original request identifiers, free-text purposes and questions, and all patient data, answers and cohort sizes. References identify register entries only and categories use standard labels.",
   "register.filterLabel": "Filter by decision",
   "register.all": "All decisions",
   "register.rejected": "Rejected",
   "register.approvedStats": "Approved for statistics",
   "register.approvedSpe": "Approved for secure processing",
   "register.loading": "Loading decisions…",
-  "register.loadError": "The register could not be loaded. Please try again.",
+  "register.loadError": "The register could not be loaded. Try again.",
   "register.tryAgain": "Try again",
   "register.count.singular": "decision shown",
   "register.count.plural": "decisions shown",
@@ -475,8 +475,8 @@ export const en = {
   "staff.signIn.password": "Password",
   "staff.signIn.submit": "Sign in",
   "staff.signIn.submitting": "Signing in…",
-  "staff.signIn.error.default": "Sign-in failed. Please check your credentials.",
-  "staff.signIn.error.forbidden": "Access denied: your account does not have the staff role.",
+  "staff.signIn.error.default": "Sign-in failed. Check your credentials.",
+  "staff.signIn.error.forbidden": "Access denied because your account lacks the staff role.",
   "staff.signedIn.badge": "Signed in as",
   "staff.signedIn.signOut": "Sign out",
 
@@ -484,18 +484,18 @@ export const en = {
   "staff.pastRequests": "Past requests",
   "staff.refreshHistory": "Refresh history",
   "staff.loading": "Loading history…",
-  "staff.loadError": "Could not load history:",
+  "staff.loadError": "Could not load history.",
   "staff.queue.heading": "Waiting for you",
   "staff.queue.due": "Due",
   "staff.template.label": "Reason templates",
-  "staff.template.approve.label": "Approve: permitted purpose",
+  "staff.template.approve.label": "Approve permitted purpose",
   "staff.template.approve": "Purpose is permitted under Article 53 and the data requested is proportionate.",
-  "staff.template.reject.label": "Reject: prohibited use",
+  "staff.template.reject.label": "Reject prohibited use",
   "staff.template.reject": "Purpose falls under a prohibited use in Article 54.",
   "staff.template.statistics.label": "Statistics are enough",
   "staff.template.statistics": "Anonymised statistics are sufficient for the stated purpose (data minimisation, Article 66).",
   "staff.template.spe.label": "Secure environment needed",
-  "staff.template.spe": "Individual-level analysis is necessary; access only inside the secure processing environment (Article 73).",
+  "staff.template.spe": "Individual-level analysis is necessary, with access only inside the secure processing environment (Article 73).",
   "staff.queue.awaiting": "awaiting review",
   "staff.queue.empty": "No requests awaiting review.",
   "staff.queue.awaitingBadge": "Awaiting staff review",
@@ -519,13 +519,13 @@ export const en = {
   "staff.row.awaitingReview": "Awaiting staff review",
   "staff.row.reviewedBy": "Reviewed by",
   "staff.row.noReview": "No review needed",
-  "staff.row.speInfo": "· downloads blocked",
+  "staff.row.speInfo": "downloads blocked",
   "staff.row.noSpe": "No secure environment recorded",
   "staff.row.viewResult": "View latest result for",
-  "staff.detail.title": "Latest saved result —",
+  "staff.detail.title": "Latest saved result for",
   "staff.detail.note": "For repeated request IDs, this shows the most recent saved response.",
   "staff.detail.loading": "Loading saved result…",
-  "staff.detail.loadError": "Could not load saved result:",
+  "staff.detail.loadError": "Could not load saved result.",
   "staff.audit.heading": "Audit log",
   "staff.audit.caption": "Staff audit log",
   "staff.audit.col.who": "Who",
@@ -575,8 +575,8 @@ export const en = {
 
   "demo.proof.heading": "Proof",
   "demo.proof.text":
-    "Measured 30 Oct 2026 against the live backend: 10/10 sample decisions · 6/6 numbers · 0 leaks · consistent over 3 runs · 57 jury requests, 0 wrong decisions, 0 leaks, 15 rejected, no prohibited purpose approved",
-  "demo.proof.disclaimer": "Test requests, not real applications.",
+    "Measured 30 Oct 2026 against the live backend with 10/10 sample decisions, 6/6 numbers, 0 leaks, consistent over 3 runs, and 57 jury requests with 0 wrong decisions, 0 leaks, 15 rejected, and no prohibited purpose approved.",
+  "demo.proof.disclaimer": "Evaluated on synthetic test cases.",
   "demo.heading": "Two-minute demo",
   "demo.intro":
     "Run in presentation order. Every click submits the original request to the live backend.",
@@ -586,12 +586,12 @@ export const en = {
   "demo.onBackend": "on the backend…",
   "demo.result.heading": "Live result",
   "demo.pointAt.heading": "What to point at",
-  "demo.requested": "Requested:",
+  "demo.requested": "Requested",
   "demo.optouts.note":
-    "Art. 71: eligible patients is the backend population count. Source-level exclusion relies on queries starting from eligible_patients before cohort filters and aggregation; this count alone is not an opt-out audit. The cited decision articles remain below.",
+    "Under Art. 71, eligible patients is the backend population count. Queries start from eligible_patients before cohort filters and aggregation. The cited decision articles appear below.",
   "demo.empty": "Choose a scenario to see its live decision and proof.",
   "demo.disclaimer":
-    "Synthetic-data prototype · rules-based parser with limited language support · staff switch lacks production authentication.",
+    "Synthetic-data prototype with a rules-based parser and demo staff access.",
   "demo.scenario.purpose": "Art. 54 rejection",
   "demo.scenario.statistics": "Statistics with numbers",
   "demo.scenario.optOuts": "Opted-out patients excluded",

@@ -21,7 +21,7 @@ export const Route = createFileRoute("/desk")({
   }),
   head: () => ({
     meta: [
-      { title: "EHDS Access Desk — Health Data Access Body" },
+      { title: "EHDS Access Desk, Health Data Access Body" },
       {
         name: "description",
         content:

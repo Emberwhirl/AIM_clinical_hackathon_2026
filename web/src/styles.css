@@ -221,7 +221,8 @@
 
 /* Privacy markings use a neutral token and never colour alone. */
 .suppressed-cell {
-  background: repeating-linear-gradient(135deg, var(--muted) 0 3px, var(--card) 3px 8px);
+  background-color: var(--muted);
+  border-left: 1px solid var(--border);
 }
 
 @media print {

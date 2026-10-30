@@ -262,7 +262,7 @@ it("shows history errors and permits retry", async () => {
   invoke.mockRejectedValueOnce(new Error("Offline"));
   await renderAndSignIn();
   expect(await screen.findByRole("alert")).toHaveTextContent(
-    "Could not load history: Offline",
+    "Could not load history. Offline",
   );
   invoke.mockResolvedValueOnce({
     data: { requests: [], downloads: [], staff_actions: [] },
@@ -285,7 +285,7 @@ it("shows saved-response failures while retaining overview and download log", as
   invoke.mockRejectedValueOnce(new Error("request not found"));
   await renderAndSignIn();
   expect(await screen.findByRole("alert")).toHaveTextContent(
-    "Could not load saved result: request not found",
+    "Could not load saved result. request not found",
   );
   expect(
     screen.getByRole("table", { name: "Submission history" }),
@@ -493,7 +493,7 @@ it("a reason template sets the override and fills an editable reason", async () 
   });
   invoke.mockResolvedValue({ data: saved, error: null });
   await renderAndSignIn();
-  fireEvent.click(await screen.findByRole("button", { name: "Reject: prohibited use" }));
+  fireEvent.click(await screen.findByRole("button", { name: "Reject prohibited use" }));
   expect(screen.getByRole("radio", { name: /Override/i })).toBeChecked();
   const textarea = screen.getByPlaceholderText(/Explain the basis/i) as HTMLTextAreaElement;
   expect(textarea.value).toMatch(/prohibited use in Article 54/);

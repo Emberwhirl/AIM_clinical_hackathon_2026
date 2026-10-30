@@ -9,7 +9,7 @@ import type { EnDict } from "./en";
 /** All keys from EnDict, values are German strings. */
 export const de: { [K in keyof EnDict]: string } = {
   // ── Site header ─────────────────────────────────────────────────────────────
-  "nav.demoService": "Demonstrationsdienst · Gesundheitsdaten-Zugangsstelle",
+  "nav.demoService": "Demonstrationsdienst der Gesundheitsdaten-Zugangsstelle",
   "nav.changeRole": "Ansicht wechseln",
   "nav.settings": "Sprache und Zugangsstelle",
   "nav.language": "Sprache",
@@ -20,7 +20,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "nav.country.at": "Österreich",
   "nav.country.de": "Deutschland",
   "nav.loading": "Wird geladen…",
-  "nav.bodyError": "Zugangsstellen konnten nicht geladen werden. Bitte laden Sie die Seite erneut.",
+  "nav.bodyError": "Zugangsstellen konnten nicht geladen werden. Laden Sie die Seite erneut.",
   "nav.menu": "Navigationsmenü",
   "setup.title": "Zugangsdesk auswählen",
   "setup.description": "Wählen Sie eine Zugangsstelle und Ihre Ansicht. Sie können diese Einstellungen jederzeit in der Kopfzeile ändern. Aktionen für Mitarbeitende erfordern eine Anmeldung.",
@@ -40,7 +40,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "nav.mainNav": "Hauptnavigation",
 
   // ── Landing page ─────────────────────────────────────────────────────────────
-  "landing.eyebrow": "EHDS Kapitel IV · Sekundärnutzung",
+  "landing.eyebrow": "EHDS Kapitel IV Sekundärnutzung",
   "landing.hero": "Kann dieser Gesundheitsdatenantrag genehmigt werden?",
   "landing.heroSub":
     "Wandeln Sie einen Antrag in ein klares, einheitliches Ergebnis mit zitierten Rechtsgrundlagen und Datenschutzgarantien um.",
@@ -71,7 +71,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "landing.step3.title": "Begründetes Ergebnis erhalten",
   "landing.step3.text":
     "Erhalten Sie einen Bescheid und – soweit genehmigt – anonymisierte Statistiken oder einen Weg in eine sichere Verarbeitungsumgebung.",
-  "landing.proof.eyebrow": "Gemessen, mit Einschränkungen",
+  "landing.proof.eyebrow": "Gemessen an Testanträgen",
   "landing.proof.title": "Geprüft vor dem nächsten Antrag",
   "landing.proof.stat1.value": "10/10",
   "landing.proof.stat1.label": "Beispielentscheidungen korrekt",
@@ -80,25 +80,25 @@ export const de: { [K in keyof EnDict]: string } = {
   "landing.proof.stat3.value": "0",
   "landing.proof.stat3.label": "Datenlecks in Stichprobentests",
   "landing.proof.stat4.value": "57",
-  "landing.proof.stat4.label": "Jury-Testanträge: 0 falsche Entscheidungen, 0 Datenlecks",
+  "landing.proof.stat4.label": "Jury-Testanträge mit 0 falschen Entscheidungen und 0 Datenlecks",
   "landing.proof.disclaimer":
-    "Gemessen am 30. Oktober 2026 mit dem Live-Backend, mit einheitlichen Ergebnissen über drei Durchläufe. Dies sind Testanträge, keine Aussage über die Leistung bei realen Anträgen oder Garantie für zukünftige Ergebnisse.",
+    "Gemessen am 30. Oktober 2026 mit dem Live-Backend über drei einheitliche Durchläufe. Die Ergebnisse beziehen sich auf synthetische Testfälle.",
   "landing.aiDisclosure.title": "Regeln entscheiden.\nMenschen bleiben verantwortlich.",
   "landing.aiDisclosure.p1":
-    "Deterministische Regeln bestimmen das Ergebnis, ein festes Programm berechnet die Statistiken. KI hilft nur beratend, auf vier Arten: Sie formuliert unklare Definitionen um, gibt eine Zweitmeinung zu zweifelhaften Zwecken, entwirft eine Notiz für Mitarbeitende zu zurückgehaltenen Anträgen und macht aus Freitext einen strukturierten Antrag. Alles, was die KI berührt, wird von einer Person geprüft; KI kann Ergebnisse also nur strenger machen. Patientendaten gelangen nie zur KI.",
+    "Deterministische Regeln bestimmen das Ergebnis, ein festes Programm berechnet die Statistiken. KI hilft nur beratend auf vier Arten. Sie formuliert unklare Definitionen um, gibt eine Zweitmeinung zu zweifelhaften Zwecken, entwirft eine Notiz für Mitarbeitende zu zurückgehaltenen Anträgen und macht aus Freitext einen strukturierten Antrag. Alles, was die KI berührt, wird von einer Person geprüft, sodass KI Ergebnisse nur strenger machen kann. Patientendaten gelangen nie zur KI.",
   "landing.aiDisclosure.callout":
     "Dies ist Entscheidungsunterstützung für Mitarbeitende der Zugangsstelle für Gesundheitsdaten (HDAB). Die endgültige Entscheidung liegt bei der HDAB.",
   "landing.faq.title": "Bevor Sie beginnen",
   "landing.faq.privacy.title": "Was passiert mit Daten und Datenschutz?",
   "landing.faq.privacy.text":
-    "Patientenakten verbleiben in der geschützten Verarbeitungsumgebung. Patientendaten gelangen nie zur KI. Patienten mit Widerspruch werden ausgeschlossen. Statistiken verwenden Unterdrückung kleiner Zellen: Werte unter 10 werden als \u201E<10\u201C angezeigt. Genehmigter Zugang zu pseudonymisierten Daten erfolgt in einer sicheren Verarbeitungsumgebung, ohne Export von Patientenakten.",
+    "Patientenakten verbleiben in der geschützten Verarbeitungsumgebung. Patientendaten gelangen nie zur KI. Patienten mit Widerspruch werden ausgeschlossen. Statistiken verwenden Unterdrückung kleiner Zellen, wobei Werte unter 10 als \u201E<10\u201C angezeigt werden. Genehmigter Zugang zu pseudonymisierten Daten erfolgt in einer sicheren Verarbeitungsumgebung, ohne Export von Patientenakten.",
   "landing.faq.legal.title": "Was ist die Rechtsgrundlage?",
   "landing.faq.legal.text":
-    "Der Desk prüft Anträge auf Sekundärnutzung gemäß Verordnung (EU) 2025/327, Kapitel IV. Artikel 54 regelt verbotene Zwecke. Die Artikel 53 und 69 stützen den Statistikweg; die Artikel 53, 66, 68 und 73 regeln den Weg der sicheren Verarbeitungsumgebung. Jedes Ergebnis zitiert die relevanten Artikel, damit das Personal die Begründung nachvollziehen kann.",
+    "Der Desk prüft Anträge auf Sekundärnutzung gemäß Verordnung (EU) 2025/327, Kapitel IV. Artikel 54 regelt verbotene Zwecke. Die Artikel 53 und 69 stützen den Statistikweg. Die Artikel 53, 66, 68 und 73 regeln den Weg der sicheren Verarbeitungsumgebung. Jedes Ergebnis zitiert die relevanten Artikel, damit das Personal die Begründung nachvollziehen kann.",
   "landing.faq.decisions.title": "Wie werden Entscheidungen getroffen?",
   "landing.faq.decisions.text":
-    "Deterministische Regeln bewerten den Antrag. Verbotene Zwecke werden abgelehnt; zulässige Anträge können anonymisierte Statistiken erhalten oder in eine sichere Verarbeitungsumgebung geleitet werden. Ein festes Programm berechnet die Statistiken. Unklare Fälle werden zur Mitarbeiterprüfung zurückgehalten. Derselbe Antrag unter denselben Regeln und Daten liefert immer dieselbe Antwort. Die HDAB trifft die endgültige Entscheidung.",
-  "landing.footer.credit": "EHDS Access Desk · Zugangsstelle für Gesundheitsdaten (HDAB)",
+    "Deterministische Regeln bewerten den Antrag. Verbotene Zwecke werden abgelehnt, und zulässige Anträge können anonymisierte Statistiken erhalten oder in eine sichere Verarbeitungsumgebung geleitet werden. Ein festes Programm berechnet die Statistiken. Unklare Fälle werden zur Mitarbeiterprüfung zurückgehalten. Derselbe Antrag unter denselben Regeln und Daten liefert immer dieselbe Antwort. Die HDAB trifft die endgültige Entscheidung.",
+  "landing.footer.credit": "EHDS Access Desk, Zugangsstelle für Gesundheitsdaten (HDAB)",
   "landing.footer.openDesk": "Zum Desk",
   "landing.footer.privacy": "Datenschutz und Rechtsgrundlage",
   "landing.footer.aiDisclosure": "KI-Offenlegung",
@@ -110,9 +110,9 @@ export const de: { [K in keyof EnDict]: string } = {
   "enum.requestedFormat.pseudonymisedRecords": "pseudonymisierte Daten",
 
   // ── Desk page ────────────────────────────────────────────────────────────────
-  "desk.eyebrow": "Zugangsstelle für Gesundheitsdaten (HDAB) · EHDS",
+  "desk.eyebrow": "Zugangsstelle für Gesundheitsdaten (HDAB), EHDS",
   "desk.heading": "EHDS Access Desk",
-  "desk.role.applicant": "Antragsteller:in",
+  "desk.role.applicant": "Antragstellende",
   "desk.role.staff": "Personal",
   "desk.role.demo": "Demo",
   "desk.roleLabel": "Ansicht",
@@ -124,32 +124,32 @@ export const de: { [K in keyof EnDict]: string } = {
 
   // ── GuidedForm ───────────────────────────────────────────────────────────────
   "form.loadSample": "Beispiel laden",
-  "form.chooseSample": "— Beispiel auswählen —",
-  "form.advanced": "Erweitert: JSON-Import und -Export",
-  "form.applicant.chooseCountry": "— Land wählen —",
-  "form.likely.APPROVE_STATISTICAL": "Voraussichtlich: genehmigt für anonymisierte Statistiken",
-  "form.likely.APPROVE_SPE": "Voraussichtlich: genehmigt für eine sichere Verarbeitungsumgebung",
-  "form.likely.REJECT": "Voraussichtlich: abgelehnt",
-  "form.likely.held": "Voraussichtlich: eine Person prüft diesen Antrag",
+  "form.chooseSample": "Beispiel auswählen",
+  "form.advanced": "JSON-Import und -Export",
+  "form.applicant.chooseCountry": "Land wählen",
+  "form.likely.APPROVE_STATISTICAL": "Voraussichtlich genehmigt für anonymisierte Statistiken",
+  "form.likely.APPROVE_SPE": "Voraussichtlich genehmigt für eine sichere Verarbeitungsumgebung",
+  "form.likely.REJECT": "Voraussichtlich abgelehnt",
+  "form.likely.held": "Voraussichtlich zur Mitarbeiterprüfung zurückgehalten",
   "form.importJson": "JSON importieren",
   "form.exportJson": "JSON exportieren",
   "form.pasteOrUpload": "JSON einfügen oder Datei hochladen",
   "form.apply": "Übernehmen",
   "form.uploadFile": "Datei hochladen",
   "form.importMustBeObject": "Der Import muss ein JSON-Objekt sein.",
-  "form.couldNotParseJson": "JSON konnte nicht gelesen werden. Bitte gültiges JSON einfügen.",
+  "form.couldNotParseJson": "JSON konnte nicht gelesen werden. Fügen Sie gültiges JSON ein.",
   "form.freeText.label": "Oder beschreiben Sie Ihren Antrag in eigenen Worten",
   "form.freeText.placeholder":
-    "Beispiel: Wir sind ein Universitätsklinikum und möchten pro Region wissen, wie viele Patientinnen und Patienten ab 65 Jahren im Jahr 2025 eine Diabetesdiagnose (ICD-10 E11) hatten, als anonymisierte Statistik für eine Public-Health-Studie.",
+    "Wir sind ein Universitätsklinikum und möchten pro Region wissen, wie viele Patientinnen und Patienten ab 65 Jahren im Jahr 2025 eine Diabetesdiagnose (ICD-10 E11) hatten, als anonymisierte Statistik für eine Public-Health-Studie.",
   "form.freeText.draft": "Antrag entwerfen",
   "form.freeText.drafting": "Ihr Antrag wird entworfen…",
-  "form.freeText.done": "Entwurf unten eingetragen. Bitte prüfen und bearbeiten Sie die Felder.",
+  "form.freeText.done": "Entwurf unten eingetragen. Prüfen und bearbeiten Sie die Felder.",
   "form.freeText.failed": "Es konnte kein Antrag entworfen werden.",
   "form.step1": "Was Sie wissen möchten",
   "form.step2": "Definitionen",
   "form.step3": "Über Sie & einreichen",
   "form.steps.aria": "Formularschritte",
-  "form.applicant.legend": "Antragsteller:in",
+  "form.applicant.legend": "Antragstellende",
   "form.applicant.name": "Name",
   "form.applicant.org": "Organisation",
   "form.applicant.country": "Land",
@@ -177,7 +177,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "form.definitions.add": "+ Definition hinzufügen",
   "form.definitions.remove": "Definition entfernen",
   "form.review.legend": "Prüfen & einreichen",
-  "form.review.applicant": "Antragsteller:in",
+  "form.review.applicant": "Antragstellende",
   "form.review.organisation": "Organisation",
   "form.review.country": "Land",
   "form.review.requestedAs": "Eingereicht als",
@@ -191,26 +191,26 @@ export const de: { [K in keyof EnDict]: string } = {
   "form.submit": "Antrag einreichen",
   "form.livePreview": "Voraussichtliches Ergebnis",
   "form.weUnderstood": "So verstehen wir den Antrag",
-  "form.weUnderstood.plan": "Plan: ",
+  "form.weUnderstood.plan": "Plan ",
   "form.weUnderstood.staffReview": "Dieser Antrag würde zur Mitarbeiterprüfung zurückgehalten.",
   "form.emptyPreview":
     "Füllen Sie Zweck, Frage und Definitionen aus, um zu sehen, wie das System Ihren Antrag versteht.",
-  "form.requestFailed": "Anfrage fehlgeschlagen. Bitte versuchen Sie es erneut.",
+  "form.requestFailed": "Anfrage fehlgeschlagen. Versuchen Sie es erneut.",
   "form.evaluating": "Wird ausgewertet …",
   "form.sampleRequest": "Beispielantrag",
   "form.runSample": "Beispielantrag ausführen",
 
   // ── DecisionDetails ──────────────────────────────────────────────────────────
   // Plain headlines (decision + needs_review matrix)
-  "decision.headline.APPROVE_STATISTICAL": "Ja — genehmigt für anonymisierte Statistiken",
-  "decision.headline.APPROVE_SPE": "Ja — genehmigt für die Arbeit in einer sicheren Verarbeitungsumgebung",
-  "decision.headline.REJECT": "Nein — dieser Antrag kann nicht genehmigt werden",
+  "decision.headline.APPROVE_STATISTICAL": "Genehmigt für anonymisierte Statistiken",
+  "decision.headline.APPROVE_SPE": "Genehmigt für die Arbeit in einer sicheren Verarbeitungsumgebung",
+  "decision.headline.REJECT": "Dieser Antrag kann nicht genehmigt werden",
   "decision.headline.held": "Eine Person wird diesen Antrag prüfen",
   // Short "what happens next" lines
   "decision.next.APPROVE_STATISTICAL":
-    "Die anonymisierten Ergebnisse sind unten dargestellt; Gruppen mit weniger als 10 Einträgen werden zum Schutz der Privatsphäre ausgeblendet.",
+    "Die anonymisierten Ergebnisse sind unten dargestellt. Gruppen mit weniger als 10 Einträgen werden zum Schutz der Privatsphäre ausgeblendet.",
   "decision.next.APPROVE_SPE":
-    "Sie arbeiten mit den Daten innerhalb der sicheren Verarbeitungsumgebung; Downloads sind gesperrt und werden protokolliert.",
+    "Sie arbeiten mit den Daten innerhalb der sicheren Verarbeitungsumgebung, wobei Downloads gesperrt und protokolliert werden.",
   "decision.next.REJECT":
     "Um eine Überprüfung zu beantragen, wählen Sie einen zulässigen Zweck gemäß Artikel 53 und reichen Sie einen neuen Antrag ein.",
   "decision.next.held":
@@ -220,13 +220,13 @@ export const de: { [K in keyof EnDict]: string } = {
   "decision.needsReview": "Mitarbeiterprüfung erforderlich",
   "decision.citedArticles": "Zitierte Artikel",
   "decision.reason": "Begründung",
-  "decision.eligiblePatients": "Berechtigte Patienten:",
+  "decision.eligiblePatients": "Berechtigte Patienten",
   "decision.definitionsNeedReview": "Überprüfungsbedürftige Definitionen",
-  "decision.cohortSize": "Kohortengröße:",
+  "decision.cohortSize": "Kohortengröße",
   "decision.notProvided": "Nicht angegeben",
   "decision.secureEnv": "Sichere Verarbeitungsumgebung",
-  "decision.speSchema": "Schema:",
-  "decision.downloadsBlocked": "· Downloads gesperrt",
+  "decision.speSchema": "Schema",
+  "decision.downloadsBlocked": "Downloads gesperrt",
   "decision.provisioningNotProvided": "Bereitstellungsstatus nicht angegeben",
   "decision.notApplicable": "Nicht anwendbar",
   "decision.notRequired": "Nicht erforderlich",
@@ -249,14 +249,14 @@ export const de: { [K in keyof EnDict]: string } = {
   "lifecycle.status.pending": "Ausstehend",
   "lifecycle.aria": "Antragsverlauf",
   "lifecycle.deadline.due": "Entscheidung fällig bis {date} ({ref})",
-  "lifecycle.deadline.daysLeft": "{n} Tage verbleibend · fällig {date} ({ref})",
+  "lifecycle.deadline.daysLeft": "{n} Tage verbleibend, fällig {date} ({ref})",
   "lifecycle.deadline.overdue": "Frist abgelaufen {date} ({ref})",
   "lifecycle.deadline.decidedOnTime": "Entschieden am {date}, innerhalb der Frist",
   "lifecycle.deadline.decidedLate": "Entschieden am {date}",
 
   // ── ExplanationPanel ─────────────────────────────────────────────────────────
   "explanation.heading": "Entscheidungsbegründung",
-  "explanation.rule": "Regel:",
+  "explanation.rule": "Regel",
   "explanation.requestPurpose": "Antragszweck",
   "explanation.requestQuestion": "Antragsfrage",
   "explanation.matchedContext": "Übereinstimmender Antragskontext",
@@ -278,9 +278,9 @@ export const de: { [K in keyof EnDict]: string } = {
   "letter.downloadPdf": "PDF herunterladen",
   "letter.preparingPdf": "PDF wird erstellt …",
   "letter.pdfError":
-    "Das PDF konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
-  "letter.reference": "Aktenzeichen: ",
-  "letter.date": "Datum: ",
+    "Das PDF konnte nicht erstellt werden. Versuchen Sie es erneut.",
+  "letter.reference": "Aktenzeichen ",
+  "letter.date": "Datum ",
   "letter.title": "Bescheid",
   "letter.verdict.title": "Ergebnis",
   "letter.why.title": "Begründung",
@@ -297,7 +297,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "letter.verdict.APPROVE_STATISTICAL": "Genehmigt für statistische Ergebnisse",
   "letter.verdict.APPROVE_SPE":
     "Genehmigt für den Zugang in einer sicheren Verarbeitungsumgebung",
-  "letter.verdict.held": "Wartet auf Mitarbeiterprüfung — Entscheidung zurückgehalten",
+  "letter.verdict.held": "Wartet auf Mitarbeiterprüfung, Entscheidung zurückgehalten",
   "letter.legalFallback.noQuotes":
     "Verbatim-Rechtszitate wurden mit dieser Entscheidung nicht bereitgestellt.",
   "letter.legalFallback.none":
@@ -306,14 +306,14 @@ export const de: { [K in keyof EnDict]: string } = {
   "letter.plan.notProvided":
     "Der Zählplan wurde mit dieser Entscheidung nicht bereitgestellt.",
   "letter.results.noData": "Keine Daten freigegeben.",
-  "letter.results.cohort": "Kohortengröße:",
+  "letter.results.cohort": "Kohortengröße",
   "letter.results.noStats": "Keine statistischen Ergebnisse verfügbar.",
   "letter.conditions.awaiting":
     "Wartet auf Mitarbeiterprüfung. Kein Zugang und keine Datenfreigabe bis zum Abschluss der Prüfung.",
   "letter.conditions.reject":
     "Keine Daten freigegeben. Die Beschränkung für verbotene Nutzung gilt gemäß Art. 54.",
   "letter.conditions.spe":
-    "Zugang nur innerhalb der sicheren Verarbeitungsumgebung; kein Download von Patientendaten auf Einzelebene. Art. 73 gilt.",
+    "Zugang nur innerhalb der sicheren Verarbeitungsumgebung ohne Download von Patientendaten auf Einzelebene. Art. 73 gilt.",
   "letter.conditions.stats":
     "Nur für den angegebenen Zweck verwenden. Kleine Zellen werden zum Schutz der Privatsphäre unterdrückt.",
   "letter.issuer": "Zugangsstelle für Gesundheitsdaten (HDAB)",
@@ -357,22 +357,22 @@ export const de: { [K in keyof EnDict]: string } = {
   "chart.tableFallback":
     "Die genauen Werte und alle Kennzahlen stehen in der Tabelle darunter. Fokussieren Sie einen Balken oder ein Bundesland für Details.",
   "chart.schematic":
-    "Schematische Grenzen. V: Vorarlberg; T: Tirol; S: Salzburg; OÖ: Oberösterreich; NÖ: Niederösterreich; W: Wien; B: Burgenland; St: Steiermark; K: Kärnten.",
-  "chart.legend": "Farbskala: niedrig bis hoch",
+    "Schematische Grenzen. V Vorarlberg, T Tirol, S Salzburg, OÖ Oberösterreich, NÖ Niederösterreich, W Wien, B Burgenland, St Steiermark, K Kärnten.",
+  "chart.legend": "Farbskala von niedrig bis hoch",
   "chart.suppressed":
-    "Grau schraffiert: zurückgehalten (<10 / suppressed); kein Wert dargestellt. Einfarbig grau: nicht verfügbar.",
+    "Hellgrau mit Rahmen kennzeichnet zurückgehaltene Gruppen (<10 oder unterdrückt) ohne dargestellten Wert. Einfarbig grau kennzeichnet fehlende Daten.",
   "chart.noValues": "Keine offengelegten numerischen Werte für diese Kennzahl.",
   "table.scroll": "Tabelle, bei Bedarf horizontal scrollen",
   "table.suppressed":
     "Wert zum Schutz der Privatsphäre zurückgehalten. Kleine Fallzahlen (<10) und unterdrückte Statistiken werden nicht offengelegt.",
 
   // ── Page titles (document.title) ─────────────────────────────────────────────
-  "page.title.home": "EHDS Access Desk \u2014 Kann dieser Gesundheitsdatenantrag genehmigt werden?",
-  "page.title.desk": "EHDS Access Desk \u2014 Zugangsstelle f\u00FCr Gesundheitsdaten (HDAB)",
-  "page.title.letter": "Bescheid \u2014 EHDS Access Desk",
-  "page.title.howWeDecide": "Wie wir entscheiden \u00B7 EHDS Access Desk",
-  "page.title.examples": "Beispielantr\u00E4ge \u00B7 EHDS Access Desk",
-  "page.title.register": "Transparenzregister \u00B7 EHDS Access Desk",
+  "page.title.home": "EHDS Access Desk, Kann dieser Gesundheitsdatenantrag genehmigt werden?",
+  "page.title.desk": "EHDS Access Desk, Zugangsstelle f\u00FCr Gesundheitsdaten (HDAB)",
+  "page.title.letter": "Bescheid, EHDS Access Desk",
+  "page.title.howWeDecide": "Wie wir entscheiden, EHDS Access Desk",
+  "page.title.examples": "Beispielantr\u00E4ge, EHDS Access Desk",
+  "page.title.register": "Transparenzregister, EHDS Access Desk",
 
   // ── PDF headings ─────────────────────────────────────────────────────────────
   "pdf.heading.verdict": "Ergebnis",
@@ -381,18 +381,18 @@ export const de: { [K in keyof EnDict]: string } = {
   "pdf.heading.whatWeCounted": "Was wir gezählt haben",
   "pdf.heading.results": "Ergebnisse",
   "pdf.heading.conditions": "Auflagen und nächste Schritte",
-  "pdf.label.reference": "Aktenzeichen: ",
-  "pdf.label.date": "Datum: ",
+  "pdf.label.reference": "Aktenzeichen ",
+  "pdf.label.date": "Datum ",
 
   // ── HowWeDecide ──────────────────────────────────────────────────────────────
-  "hwd.eyebrow": "Methodik · 30. Oktober 2026",
+  "hwd.eyebrow": "Methodik, 30. Oktober 2026",
   "hwd.title": "Wie wir entscheiden",
   "hwd.intro":
     "Zunächst wird der Zweck geprüft, dann die am wenigsten detaillierten Daten ermittelt, die zur Beantwortung des Antrags notwendig sind. Diese Regeln unterstützen die Mitarbeitenden der Zugangsstelle für Gesundheitsdaten (HDAB), die für die endgültige Entscheidung verantwortlich bleiben.",
   "hwd.order.title": "Entscheidungsreihenfolge",
   "hwd.order.item1.title": "Verbotene Zwecke zuerst ablehnen",
   "hwd.order.item1.text":
-    "Artikel 54 hat Vorrang. Versicherungsprämien und Beschäftigungsentscheidungen sind nach Art. 54 Abs. 1 Buchst. b verboten; Werbung und Marketing nach Art. 54 Abs. 1 Buchst. c; schädliche Produkte wie Tabak und Nikotin nach Art. 54 Abs. 1 Buchst. d. Das Ergebnis ist ABGELEHNT.",
+    "Artikel 54 hat Vorrang. Versicherungsprämien und Beschäftigungsentscheidungen sind nach Art. 54 Abs. 1 Buchst. b verboten, Werbung und Marketing nach Art. 54 Abs. 1 Buchst. c sowie schädliche Produkte wie Tabak und Nikotin nach Art. 54 Abs. 1 Buchst. d. Das Ergebnis ist ABGELEHNT.",
   "hwd.order.item2.title":
     "Ein Datenantrag erhält anonymisierte Statistiken",
   "hwd.order.item2.text":
@@ -400,7 +400,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "hwd.order.item3.title":
     "Begründete Datenzugangsanträge nutzen eine sichere Verarbeitungsumgebung",
   "hwd.order.item3.text":
-    "Ein Datenzugangsantrag muss begründen, warum anonymisierte Daten nicht ausreichen. Mit dieser Begründung erhält er pseudonymisierte Daten in einer sicheren Verarbeitungsumgebung gemäß Art. 53, 66, 68 und 73.",
+    "Ein Datenzugangsantrag muss begründen, warum anonymisierte Daten unzureichend sind. Mit dieser Begründung erhält er pseudonymisierte Daten in einer sicheren Verarbeitungsumgebung gemäß Art. 53, 66, 68 und 73.",
   "hwd.order.item4.title":
     "Andere Datenzugangsanträge erhalten anonymisierte Statistiken",
   "hwd.order.item4.text":
@@ -421,19 +421,19 @@ export const de: { [K in keyof EnDict]: string } = {
   "hwd.secure.title": "Sichere Verarbeitung und gesperrte Downloads",
   "hwd.secure.text":
     "Nur die pseudonymisierten Datensätze der im Antrag genannten Kohorte werden in die sichere Verarbeitungsumgebung kopiert. Downloads werden mit HTTP 403 gesperrt und gemäß Art. 73 protokolliert.",
-  "hwd.testing.title": "Tests: Auswertung und Jury-Simulation",
+  "hwd.testing.title": "Auswertung und Jury-Simulation",
   "hwd.testing.measured": "Gemessen am 30. Oktober 2026.",
   "hwd.testing.sample.dt": "10 Beispielanträge",
   "hwd.testing.sample.dd":
-    "10/10 Entscheidungen korrekt; 6/6 Zahlenwerte korrekt; 0 Datenlecks; dieselbe Antwort in 3 Durchläufen.",
+    "10/10 Entscheidungen korrekt, 6/6 Zahlenwerte korrekt, 0 Datenlecks und dieselbe Antwort in 3 Durchläufen.",
   "hwd.testing.jury.dt": "57 Jury-Testanträge",
   "hwd.testing.jury.dd":
-    "0 falsche Entscheidungen; 0 Datenlecks; 15 abgelehnt, kein verbotener Zweck genehmigt.",
+    "0 falsche Entscheidungen, 0 Datenlecks und 15 abgelehnt ohne genehmigten verbotenen Zweck.",
   "hwd.testing.disclaimer":
-    "Dies sind Testanträge mit synthetischen Daten, keine realen Anträge. Die Messungen beschreiben diese Tests und garantieren keine Ergebnisse für zukünftige Anträge.",
+    "Ausgewertet anhand synthetischer Testfälle.",
   "hwd.ai.title": "Die Rolle von KI",
   "hwd.ai.text":
-    "Keine KI entscheidet. Die KI formuliert unklare Definitionen um, markiert zweifelhafte Zwecke, entwirft eine Notiz für Mitarbeitende zu zurückgehaltenen Anträgen und macht aus Freitext einen strukturierten Antrag; alles, was sie berührt, wird von Mitarbeitenden geprüft, sie kann Ergebnisse also nur strenger machen, und die KI sieht keine Patientendaten.",
+    "Keine KI entscheidet. Die KI formuliert unklare Definitionen um, markiert zweifelhafte Zwecke, entwirft eine Notiz für Mitarbeitende zu zurückgehaltenen Anträgen und macht aus Freitext einen strukturierten Antrag. Alles, was sie berührt, wird von Mitarbeitenden geprüft, sodass sie Ergebnisse nur strenger machen kann, und die KI sieht keine Patientendaten.",
   "hwd.explore": "Die 10 Beispielanträge erkunden",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────
@@ -443,24 +443,24 @@ export const de: { [K in keyof EnDict]: string } = {
   "examples.howWeDecide": "Wie wir entscheiden",
   "examples.ariaList": "Beispielanträge",
   "examples.open": "Öffnen",
-  "examples.applicantType": "Antragstyp:",
+  "examples.applicantType": "Antragstyp",
   "examples.expectedDecision": "Erwartete Entscheidung",
   "examples.openFull": "Vollständiges Live-Ergebnis öffnen",
   "examples.result.title": "Vollständiges Live-Ergebnis",
   "examples.result.loading": "Laden",
-  "examples.result.liveResult": "· Live-Ergebnis",
+  "examples.result.liveResult": "Live-Ergebnis",
   "examples.result.from": "vom Live-Backend …",
   "examples.result.choose":
     "Wählen Sie einen Beispielantrag aus, um die Entscheidung, zitierten Artikel und verfügbare Antwort zu prüfen.",
   "examples.result.tryAgain": "Erneut versuchen",
-  "examples.result.purpose": "Zweck:",
+  "examples.result.purpose": "Zweck",
 
   // ── TransparencyRegister ─────────────────────────────────────────────────────
   "register.title": "Transparenzregister",
   "register.intro":
     "Dieses öffentliche Register listet bis zu 100 der neuesten beschiedenen Anträge auf, neueste zuerst. Wir veröffentlichen ein Aktenzeichen, das Einreichungsdatum, den Organisationstyp, die Zweckkategorie, die Entscheidung und die relevanten EHDS-Artikel. Anträge, die auf Prüfung warten, sind ausgeschlossen.",
   "register.privacy":
-    "Wir lassen bewusst persönliche und Organisationsnamen, ursprüngliche Antragskennungen, Freitext-Zwecke und -Fragen sowie alle Patientendaten, Antworten und Kohortengrößen weg. Aktenzeichen identifizieren nur Registereinträge; Kategorien verwenden Standardbezeichnungen.",
+    "Wir lassen bewusst persönliche und Organisationsnamen, ursprüngliche Antragskennungen, Freitext-Zwecke und -Fragen sowie alle Patientendaten, Antworten und Kohortengrößen weg. Aktenzeichen identifizieren nur Registereinträge und Kategorien verwenden Standardbezeichnungen.",
   "register.filterLabel": "Nach Entscheidung filtern",
   "register.all": "Alle Entscheidungen",
   "register.rejected": "Abgelehnt",
@@ -468,7 +468,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "register.approvedSpe": "Genehmigt für sichere Verarbeitung",
   "register.loading": "Entscheidungen werden geladen …",
   "register.loadError":
-    "Das Register konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "Das Register konnte nicht geladen werden. Versuchen Sie es erneut.",
   "register.tryAgain": "Erneut versuchen",
   "register.count.singular": "Entscheidung angezeigt",
   "register.count.plural": "Entscheidungen angezeigt",
@@ -489,8 +489,8 @@ export const de: { [K in keyof EnDict]: string } = {
   "staff.signIn.password": "Passwort",
   "staff.signIn.submit": "Anmelden",
   "staff.signIn.submitting": "Wird angemeldet …",
-  "staff.signIn.error.default": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Zugangsdaten.",
-  "staff.signIn.error.forbidden": "Zugriff verweigert: Ihr Konto hat keine Personalrolle.",
+  "staff.signIn.error.default": "Anmeldung fehlgeschlagen. Überprüfen Sie Ihre Zugangsdaten.",
+  "staff.signIn.error.forbidden": "Zugriff verweigert, da Ihrem Konto die Personalrolle fehlt.",
   "staff.signedIn.badge": "Angemeldet als",
   "staff.signedIn.signOut": "Abmelden",
 
@@ -498,18 +498,18 @@ export const de: { [K in keyof EnDict]: string } = {
   "staff.pastRequests": "Bisherige Anträge",
   "staff.refreshHistory": "Verlauf aktualisieren",
   "staff.loading": "Verlauf wird geladen …",
-  "staff.loadError": "Verlauf konnte nicht geladen werden:",
+  "staff.loadError": "Verlauf konnte nicht geladen werden.",
   "staff.queue.heading": "Wartet auf Sie",
   "staff.queue.due": "Fällig am",
   "staff.template.label": "Begründungsvorlagen",
-  "staff.template.approve.label": "Genehmigen: zulässiger Zweck",
+  "staff.template.approve.label": "Zulässigen Zweck genehmigen",
   "staff.template.approve": "Der Zweck ist nach Artikel 53 zulässig und die angeforderten Daten sind verhältnismäßig.",
-  "staff.template.reject.label": "Ablehnen: verbotene Nutzung",
+  "staff.template.reject.label": "Verbotene Nutzung ablehnen",
   "staff.template.reject": "Der Zweck fällt unter eine verbotene Nutzung nach Artikel 54.",
   "staff.template.statistics.label": "Statistiken reichen aus",
   "staff.template.statistics": "Anonymisierte Statistiken reichen für den angegebenen Zweck aus (Datenminimierung, Artikel 66).",
   "staff.template.spe.label": "Sichere Umgebung nötig",
-  "staff.template.spe": "Eine Auswertung auf Einzelebene ist erforderlich; Zugang nur in der sicheren Verarbeitungsumgebung (Artikel 73).",
+  "staff.template.spe": "Eine Auswertung auf Einzelebene ist erforderlich, mit Zugang ausschließlich in der sicheren Verarbeitungsumgebung (Artikel 73).",
   "staff.queue.awaiting": "warten auf Prüfung",
   "staff.queue.empty": "Keine Anträge warten auf Prüfung.",
   "staff.queue.awaitingBadge": "Wartet auf Mitarbeiterprüfung",
@@ -533,14 +533,14 @@ export const de: { [K in keyof EnDict]: string } = {
   "staff.row.awaitingReview": "Wartet auf Mitarbeiterprüfung",
   "staff.row.reviewedBy": "Geprüft von",
   "staff.row.noReview": "Keine Prüfung erforderlich",
-  "staff.row.speInfo": "· Downloads gesperrt",
+  "staff.row.speInfo": "Downloads gesperrt",
   "staff.row.noSpe": "Keine sichere Verarbeitungsumgebung erfasst",
   "staff.row.viewResult": "Neuestes Ergebnis für",
-  "staff.detail.title": "Neuestes gespeichertes Ergebnis —",
+  "staff.detail.title": "Neuestes gespeichertes Ergebnis für",
   "staff.detail.note":
     "Bei mehrfach vorhandenen Antrags-IDs wird die neueste gespeicherte Antwort angezeigt.",
   "staff.detail.loading": "Gespeichertes Ergebnis wird geladen …",
-  "staff.detail.loadError": "Gespeichertes Ergebnis konnte nicht geladen werden:",
+  "staff.detail.loadError": "Gespeichertes Ergebnis konnte nicht geladen werden.",
   "staff.audit.heading": "Prüfungsprotokoll",
   "staff.audit.caption": "Prüfungsprotokoll (Personal)",
   "staff.audit.col.who": "Wer",
@@ -590,8 +590,8 @@ export const de: { [K in keyof EnDict]: string } = {
 
   "demo.proof.heading": "Nachweis",
   "demo.proof.text":
-    "Gemessen am 30. Okt. 2026 mit dem Live-Backend: 10/10 Beispielentscheidungen · 6/6 Zahlenwerte · 0 Datenlecks · einheitlich über 3 Durchläufe · 57 Jury-Anfragen, 0 falsche Entscheidungen, 0 Datenlecks, 15 abgelehnt, kein verbotener Zweck genehmigt",
-  "demo.proof.disclaimer": "Testanträge, keine realen Anträge.",
+    "Gemessen am 30. Okt. 2026 mit dem Live-Backend mit 10/10 Beispielentscheidungen, 6/6 Zahlenwerten, 0 Datenlecks, einheitlich über 3 Durchläufe, sowie 57 Jury-Anfragen mit 0 falschen Entscheidungen, 0 Datenlecks, 15 abgelehnt und keinem genehmigten verbotenen Zweck.",
+  "demo.proof.disclaimer": "Ausgewertet anhand synthetischer Testfälle.",
   "demo.heading": "Zwei-Minuten-Demo",
   "demo.intro":
     "In Präsentationsreihenfolge ausführen. Jeder Klick sendet den Originalantrag an das Live-Backend.",
@@ -601,12 +601,12 @@ export const de: { [K in keyof EnDict]: string } = {
   "demo.onBackend": "auf dem Backend …",
   "demo.result.heading": "Live-Ergebnis",
   "demo.pointAt.heading": "Worauf zeigen",
-  "demo.requested": "Angefordert:",
+  "demo.requested": "Angefordert",
   "demo.optouts.note":
-    "Art. 71: Berechtigte Patienten ist die Backend-Populationsanzahl. Quellseitige Ausschlüsse basieren auf Abfragen, die von eligible_patients vor Kohortenfiltern und Aggregation ausgehen; diese Zahl allein ist kein Widerspruchsprüfbericht. Die zitierten Entscheidungsartikel bleiben unten.",
+    "Nach Art. 71 ist berechtigte Patienten die Backend-Populationsanzahl. Abfragen beginnen bei eligible_patients vor Kohortenfiltern und Aggregation. Die zitierten Entscheidungsartikel stehen unten.",
   "demo.empty": "Wählen Sie ein Szenario aus, um die Live-Entscheidung und den Nachweis zu sehen.",
   "demo.disclaimer":
-    "Prototyp mit synthetischen Daten · regelbasierter Parser mit eingeschränkter Sprachunterstützung · Personalwechsel ohne Produktionsauthentifizierung.",
+    "Prototyp mit synthetischen Daten, regelbasiertem Parser und Demo-Personalzugang.",
   "demo.scenario.purpose": "Ablehnung nach Art. 54",
   "demo.scenario.statistics": "Statistik mit Zahlen",
   "demo.scenario.optOuts": "Patienten mit Widerspruch ausgeschlossen",

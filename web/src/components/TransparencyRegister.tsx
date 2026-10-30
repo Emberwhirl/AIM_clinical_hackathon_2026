@@ -140,7 +140,7 @@ export function TransparencyRegister() {
                           <DecisionBadge decision={entry.decision} />
                         </td>
                         <td className="px-4 py-4">
-                          {entry.articles.map((article) => `Art. ${article}`).join(", ") || "—"}
+                          {entry.articles.map((article) => `Art. ${article}`).join(", ") || "-"}
                         </td>
                       </tr>
                     ))}
