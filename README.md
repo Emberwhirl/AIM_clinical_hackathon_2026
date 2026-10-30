@@ -15,7 +15,7 @@ contrast and layouts at 360 px. Explore [/how-we-decide](https://health-data-acc
 [/examples](https://health-data-access-compass.lovable.app/examples) and the anonymised
 public [/register](https://health-data-access-compass.lovable.app/register).
 
-**Demo video (≤2 minutes):** [https://drive.google.com/file/d/1nWKs-Q70_ha_NQyYxKNz-50diManMaRy/view?usp=drivesdk](https://drive.google.com/file/d/1nWKs-Q70_ha_NQyYxKNz-50diManMaRy/view?usp=drivesdk)
+**Demo video (≤2 minutes): TODO — team to insert recording link.**
 The [recording script](docs/demo.md) covers what works and what does not.
 This repository holds everything: the backend (`supabase/`, `scripts/`) and the
 front end (`web/`). [ErmisCho/health-data-access-desk](https://github.com/ErmisCho/health-data-access-desk)
