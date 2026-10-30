@@ -447,8 +447,12 @@ when all five keys pass these checks.
 The deployed download function is named `spe-download`; there is no
 `/spe/{id}/download` route. For POST, provide `{ "id": "R05" }` as JSON, or use
 the query parameter (a nonempty query id takes precedence). Missing or invalid
-body ids become null. GET/POST attempts are logged to `public.spe_download_log`
-on a best-effort basis and blocked with HTTP 403:
+body ids become null. An optional `kind` of `rows`, `unsuppressed` or
+`aggregate` (query or JSON; a recognised query kind wins) selects the refusal
+text. Any other kind uses the default refusal. GET/POST attempts are logged to
+`public.spe_download_log` on a best-effort basis. A logging or database failure
+does not change the refusal. Every GET/POST is blocked with HTTP 403 and the
+body contains only `error` and `request_id`:
 
 ```json
 {
@@ -457,8 +461,9 @@ on a best-effort basis and blocked with HTTP 403:
 }
 ```
 
-The existing function returns 204 for OPTIONS and 405 for other methods. No
-method returns patient records. Its CORS allows origin `*` and headers
-`authorization, x-client-info, apikey, content-type`. This function must have a
-working service database configuration: its existing connection setup/cleanup
-errors are outside the best-effort logging catch.
+`kind=rows` names row-level data. `kind=unsuppressed` names unsuppressed values
+and says suppressed aggregates stay available. `kind=aggregate` refuses a file
+download and points back to the suppressed aggregate already in the decision.
+Posted records are ignored and never echoed. The function returns 204 for
+OPTIONS and 405 for other methods. No method returns patient records. Its CORS
+allows origin `*` and headers `authorization, x-client-info, apikey, content-type`.

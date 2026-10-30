@@ -33,7 +33,7 @@ it("staff see schema and the real download refusal; applicants see cohort and re
   const { rerender } = render(<DecisionDetails result={result} />);
   expect(screen.getByText("22")).toBeInTheDocument();
   expect(screen.getByText("Needs staff review")).toBeInTheDocument();
-  expect(screen.queryByRole("button", { name: "Download" })).not.toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Download row-level data" })).toBeInTheDocument();
   rerender(<DecisionDetails result={result} staff />);
   expect(screen.getByText(/Schema: spe_r05.*downloads blocked/)).toBeInTheDocument();
   vi.mocked(supabase.functions.invoke).mockResolvedValue({
@@ -46,12 +46,13 @@ it("staff see schema and the real download refusal; applicants see cohort and re
       ),
     },
   });
-  fireEvent.click(screen.getByRole("button", { name: "Download" }));
+  fireEvent.click(screen.getByRole("button", { name: "Download row-level data" }));
   await waitFor(() =>
     expect(screen.getByRole("alert")).toHaveTextContent(
       "Download is not permitted. This attempt has been logged.",
     ),
   );
+  expect(screen.getByText("22")).toBeInTheDocument();
 });
 it("rejections show the decision and reason without results", () => {
   render(

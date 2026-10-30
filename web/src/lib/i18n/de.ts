@@ -231,7 +231,19 @@ export const de: { [K in keyof EnDict]: string } = {
   "decision.notApplicable": "Nicht anwendbar",
   "decision.notRequired": "Nicht erforderlich",
   "decision.checking": "Wird geprüft …",
-  "decision.download": "Herunterladen",
+  "decision.download": "Einzeldaten herunterladen",
+  "decision.export.region": "Aggregat-Export und gesperrte Downloads",
+  "decision.export.heading": "Unterdrücktes Aggregat",
+  "decision.export.hint":
+    "Diese Ergebnisse bleiben auf der Seite. Die Datei enthält nur die bereits angezeigten Aggregatwerte, einschließlich unterdrückter Zellen.",
+  "decision.export.aggregate": "Unterdrücktes Aggregat exportieren",
+  "decision.export.unavailable": "Kein unterdrücktes Aggregat steht zum Export bereit.",
+  "decision.export.done": "Unterdrücktes Aggregat exportiert. Das Ergebnis auf dieser Seite bleibt unverändert.",
+  "decision.export.failed": "Das Aggregat konnte nicht exportiert werden.",
+  "decision.download.heading": "Einzeldaten und nicht unterdrückte Downloads",
+  "decision.download.hint": "Diese Downloads sind gesperrt. Das Aggregat oben bleibt sichtbar.",
+  "decision.download.unsuppressed": "Nicht unterdrückte Werte herunterladen",
+  "decision.download.failed": "Download gesperrt. Die sichere Verarbeitungsumgebung hat die Anfrage abgelehnt.",
 
   // ── DecisionBadge ────────────────────────────────────────────────────────────
   "badge.REJECT": "Abgelehnt",

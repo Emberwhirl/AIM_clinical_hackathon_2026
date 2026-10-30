@@ -241,7 +241,19 @@ export const en = {
   "decision.notApplicable": "Not applicable",
   "decision.notRequired": "Not required",
   "decision.checking": "Checking…",
-  "decision.download": "Download",
+  "decision.download": "Download row-level data",
+  "decision.export.region": "Aggregate export and blocked downloads",
+  "decision.export.heading": "Suppressed aggregate",
+  "decision.export.hint":
+    "These results stay on the page. The export file contains only the aggregate values already shown, including suppressed cells.",
+  "decision.export.aggregate": "Export suppressed aggregate",
+  "decision.export.unavailable": "No suppressed aggregate is available to export.",
+  "decision.export.done": "Suppressed aggregate exported. The result on this page is unchanged.",
+  "decision.export.failed": "The aggregate could not be exported.",
+  "decision.download.heading": "Row-level and unsuppressed downloads",
+  "decision.download.hint": "These downloads are blocked. The aggregate above stays visible.",
+  "decision.download.unsuppressed": "Download unsuppressed data",
+  "decision.download.failed": "Download blocked. The secure processing environment refused the request.",
 
   // ── DecisionBadge ────────────────────────────────────────────────────────────
   "badge.REJECT": "Rejected",

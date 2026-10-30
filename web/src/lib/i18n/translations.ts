@@ -144,6 +144,15 @@ const BACKEND_DE: Record<string, string> = {
   "weapons or illicit drugs":
     "Waffen oder illegale Drogen",
 
+  "Download blocked: data in a secure processing environment cannot be downloaded (EHDS Art. 73).":
+    "Download gesperrt: Daten in einer sicheren Verarbeitungsumgebung können nicht heruntergeladen werden (EHDS Art. 73).",
+
+  "Download blocked: row-level data in a secure processing environment cannot be downloaded (EHDS Art. 73).":
+    "Download gesperrt: Einzeldaten in einer sicheren Verarbeitungsumgebung können nicht heruntergeladen werden (EHDS Art. 73).",
+
+  "Download blocked: unsuppressed values cannot be downloaded from a secure processing environment (EHDS Art. 73). Suppressed aggregate results stay available.":
+    "Download gesperrt: Nicht unterdrückte Werte können nicht aus einer sicheren Verarbeitungsumgebung heruntergeladen werden (EHDS Art. 73). Unterdrückte Aggregate bleiben verfügbar.",
+
   // ── Applicant guidance (result.guidance, one sentence per line) ──────────
   // Lines with variable parts (definition number, quoted wording, rule label) stay English.
   "Your request was rejected because it names a prohibited use under Article 54(1).":

@@ -200,7 +200,7 @@ it("loads live history, saved results and refreshed blocked-download attempts", 
   expect(
     screen.getByText("No blocked-download attempts recorded."),
   ).toBeInTheDocument();
-  fireEvent.click(screen.getByRole("button", { name: "Download" }));
+  fireEvent.click(screen.getByRole("button", { name: "Download row-level data" }));
   expect(
     await screen.findByText("Download blocked by EHDS Art. 73."),
   ).toBeInTheDocument();
