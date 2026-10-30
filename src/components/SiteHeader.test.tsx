@@ -27,15 +27,17 @@ const configs = [
     display_language: "en",
     languages: ["de", "en"],
     branding: { primary: "#20364d", accent: "#27665f" },
+    extra_rules: [],
   },
   {
     code: "de",
     country: "Germany",
     name: "Germany body",
     contact: "de@example.org",
-    display_language: "en",
+    display_language: "de",
     languages: ["de", "en"],
     branding: { primary: "#283e58", accent: "#58418a" },
+    extra_rules: [{ id: "N-DE-01", label: "Genetic discrimination", article_ref: "54" }],
   },
 ];
 
@@ -192,6 +194,37 @@ it("keeps one fixed-height row and places the service note in the globe menu", a
   expect(screen.queryByText(en["nav.demoService"])).not.toBeInTheDocument();
   fireEvent.click(screen.getByRole("button", { name: "Language and access body" }));
   expect(screen.getByText(en["nav.demoService"])).toBeInTheDocument();
+});
+
+it("lists the selected body's extra national rules and keeps the language", async () => {
+  localStorage.setItem("ehds-setup-complete", "true");
+  await mount();
+  fireEvent.click(screen.getByRole("button", { name: "Language and access body" }));
+  const body = screen.getByRole("combobox", { name: "Access body" });
+  await waitFor(() => expect(body).toBeEnabled());
+  expect(screen.getByText(en["nav.extraRulesNone"])).toBeInTheDocument();
+  fireEvent.change(body, { target: { value: "de" } });
+  expect(screen.getByText(en["nav.extraRules"])).toBeInTheDocument();
+  expect(screen.getByRole("listitem")).toHaveTextContent(
+    "Genetic discrimination (N-DE-01, Art. 54)",
+  );
+  expect(screen.queryByText(en["nav.extraRulesNone"])).not.toBeInTheDocument();
+  // Germany's display_language is "de", but the language stays English.
+  expect(screen.getByRole("combobox", { name: "Language" })).toHaveValue("en");
+  expect(document.documentElement.lang).toBe("en");
+});
+
+it("shows no rule line when the backend does not send rule names", async () => {
+  vi.mocked(supabase.functions.invoke).mockResolvedValue({
+    data: { configs: configs.map(({ extra_rules: _rules, ...config }) => config) },
+    error: null,
+  });
+  localStorage.setItem("ehds-setup-complete", "true");
+  await mount();
+  fireEvent.click(screen.getByRole("button", { name: "Language and access body" }));
+  await waitFor(() => expect(screen.getByRole("combobox", { name: "Access body" })).toBeEnabled());
+  expect(screen.queryByText(en["nav.extraRulesNone"])).not.toBeInTheDocument();
+  expect(screen.queryByText(en["nav.extraRules"])).not.toBeInTheDocument();
 });
 
 it("opens the collapsed navigation with the keyboard", async () => {
