@@ -40,9 +40,9 @@ Skip 1:30–1:45 (the override). Never skip 0:08–0:25 or 1:12–1:30: they car
 | Eligible population | 19,161 of 20,000 synthetic patients (839 opted out, Art. 71) | track `data/README.md`; never shown by the app |
 | Tests | 10/10 decisions, 6/6 numbers, 0 leaks, 3 consistent runs; 57 jury requests, 0 wrong, 0 leaks | measured 30 Oct 2026, README |
 
-Do not quote an opt-out count from the screen (the app never shows one) and do not invent a latency figure; "under two seconds" is what was measured.
+Do not quote an opt-out count from the screen (the app never shows one) and do not invent a latency figure; "under three seconds" is what was measured with AI screening on.
 
 ## What works / what does not (if asked)
 
 Works: deterministic decisions with the rule id and version, verbatim legal quotes checked against EUR-Lex, opt-out filtering, small-cell and secondary suppression, secure-environment cohorts with blocked downloads, staff login with audit log, legal deadlines, EN/DE, public transparency register, per-access-body rules (AT, DE).
-Live AI: unclear definitions are reworded by Mistral Small 3.2 running on the hackathon's A5000 GPU (EU, token-checked proxy); the request is then always held for staff with the rewrite shown, so the AI can only make outcomes stricter. Does not, yet: the AI memo is off; staff accounts are created by script, not self-service; the secure environment is an isolated Postgres schema, not a full research workspace; synthetic data only.
+Live AI (Mistral Small 3.2 on the hackathon's A5000 GPU, EU, token-checked proxy), advisory only: rewords unclear definitions, second opinion on doubtful purposes, staff memo on held requests with verified quotes, free-text intake; everything it touches is held for a person. Does not, yet: staff accounts are created by script, not self-service; the secure environment is an isolated Postgres schema, not a full research workspace; synthetic data only.

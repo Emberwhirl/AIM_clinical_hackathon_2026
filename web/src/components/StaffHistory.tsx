@@ -9,6 +9,7 @@ import {
   type RequestSummary,
 } from "@/lib/ehds";
 import { DecisionDetails } from "./DecisionDetails";
+import { MemoBlock } from "./ExplanationPanel";
 import { DecisionBadge } from "./DecisionBadge";
 import { DataTable } from "./DataTable";
 import { EmptyState, ErrorState } from "./States";
@@ -411,12 +412,16 @@ export function StaffHistory() {
                   {t("staff.detail.loadError")} {detailError}
                 </ErrorState>
               ) : result && result.request_id === selectedId ? (
-                <DecisionDetails
-                  key={selectedId}
-                  result={result}
-                  staff
-                  onDownloadAttempt={() => setRefresh((n) => n + 1)}
-                />
+                <>
+                  <DecisionDetails
+                    key={selectedId}
+                    result={result}
+                    staff
+                    onDownloadAttempt={() => setRefresh((n) => n + 1)}
+                  />
+                  {/* DecisionDetails shows the memo inside the explanation; keep it visible when the explanation failed verification. */}
+                  {result.memo && !result.explanation && <MemoBlock memo={result.memo} />}
+                </>
               ) : (
                 <p role="status" className="mt-4">
                   {t("staff.detail.loading")}

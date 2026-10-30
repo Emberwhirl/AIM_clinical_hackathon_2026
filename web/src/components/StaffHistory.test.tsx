@@ -458,6 +458,34 @@ it("lists waiting requests oldest first with a due date", async () => {
   expect(within(queue).getAllByText(/^Due/)[0]).toHaveTextContent("29 January 2027");
 });
 
+it("shows the AI memo saved with a held request", async () => {
+  invoke.mockResolvedValueOnce({
+    data: { requests: [heldRow], downloads: [], staff_actions: [] },
+    error: null,
+  });
+  invoke.mockResolvedValue({
+    data: {
+      ...saved,
+      request_id: "R01",
+      decision: "APPROVE_STATISTICAL",
+      needs_review: true,
+      status: "staff_review",
+      answer: null,
+      memo: {
+        text: "Held: the purpose does not clearly match an allowed use.",
+        quotes: [{ text: "scientific research related to health", ref: "Art. 53(1)" }],
+        model: "test-model",
+      },
+    },
+    error: null,
+  });
+  await renderAndSignIn();
+  expect(
+    await screen.findByText("Held: the purpose does not clearly match an allowed use."),
+  ).toBeInTheDocument();
+  expect(screen.getByText("Verified regulation quotes (1)")).toBeInTheDocument();
+});
+
 it("a reason template sets the override and fills an editable reason", async () => {
   invoke.mockResolvedValueOnce({
     data: { requests: [heldRow], downloads: [], staff_actions: [] },

@@ -39,6 +39,8 @@ flowchart TD
   S --> E
   E --> UI
   API --> A[("History · lifecycle · staff actions · download log")]
+  API -. "request wording only, advisory" .-> L["LLM · Mistral Small 3.2 on an A5000 GPU, token-checked proxy<br/>rewrite unclear definitions · screen purposes · staff memo · free-text draft"]
+  L -. "can only hold for staff" .-> H
 ```
 
 The synchronous pipeline checks purpose **before querying patient data**:
@@ -77,7 +79,7 @@ endpoint: the hackathon's OpenRouter pool with Mistral Small 3.2 (an EU provider
 zero data retention). They are off unless `OPENROUTER_API_KEY` is set; optional
 `LLM_BASE_URL` (default `https://openrouter.ai/api/v1`) and `LLM_MODEL` (default
 `mistralai/mistral-small-3.2-24b-instruct`) point them elsewhere, for example at a
-self-hosted model server; the memo additionally needs `LLM_MEMO=on`. The live deployment runs the parser fallback against a self-hosted Mistral Small 3.2 on the hackathon's A5000 GPU (Vienna, token-checked proxy); the memo is off. AI-assisted plans are always held for staff review; a memo is
+self-hosted model server; the memo additionally needs `LLM_MEMO=on`. The live deployment runs a self-hosted Mistral Small 3.2 on the hackathon's A5000 GPU (Vienna, token-checked proxy). Four uses, all advisory: (1) **parser fallback** rewrites an unreadable definition into the supported wording, shown side by side; (2) **purpose screening** (`LLM_SCREEN=on`) gives a second opinion on whether a politely worded purpose could still be an Art. 54 use, run in parallel with the query; a suspect verdict can only hold the request for staff; (3) **staff memo** (`LLM_MEMO=on`) drafts a reasoning note for held requests, every quotation verified against the stored regulation text or the memo is dropped; (4) **free-text intake** (`POST /draft`) turns a plain description into the structured request, which the applicant reviews before the rules decide. Deterministic **applicant guidance** (`guidance`, no LLM) says what to change on every rejection or hold. AI-assisted plans are always held for staff review; a memo is
 returned for display only when every quotation verifies against stored legal
 text. Neither feature sends patient data or database answers to the model.
 Every pipeline response and saved decision carries `rule_id` and `rules_version`
@@ -99,7 +101,7 @@ Reproduce them using the [evaluation commands](docs/running.md#evaluation).
 | Numeric answers (including SPE cohort size) | **6/6** |
 | Privacy leaks detected | **0** |
 | Consistency | **10/10 across 3 runs** |
-| Slowest HTTP answer | **1.7 s** |
+| Slowest HTTP answer | **2.4 s** (AI purpose screening on; 1.7 s without) |
 | Jury simulation: 57 unseen requests (42 earlier + 15 fresh naturally worded) | **0 wrong decisions, 0 wrong number sets, 0 leaks; 15 prohibited purposes rejected, 38 answered, 4 honestly held for review** |
 | Federated vs central aggregates | **49/49 equal** |
 | Stored legal paragraphs vs EUR-Lex | **42/42 verbatim** |
