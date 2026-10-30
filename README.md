@@ -98,7 +98,7 @@ Reproduce them using the [evaluation commands](docs/running.md#evaluation).
 | Numeric answers (including SPE cohort size) | **6/6** |
 | Privacy leaks detected | **0** |
 | Consistency | **10/10 across 3 runs** |
-| Slowest HTTP answer | **3.8 s (R05, 3771 ms)** |
+| Slowest HTTP answer | **under 5 s** for the slowest request type; R05 measured 3.7-4.7 s over 6 live runs |
 | Jury simulation: 57 unseen requests (42 earlier + 15 fresh naturally worded) | **0 wrong decisions, 0 wrong number sets, 0 leaks; 15 prohibited purposes rejected, 38 answered, 4 honestly held for review** |
 | Federated vs central aggregates | **64/64 equal** |
 | Stored legal paragraphs vs EUR-Lex | Not reproduced. Live EUR-Lex did not return the regulation text, and no repository script compares the stored paragraphs with it. |
