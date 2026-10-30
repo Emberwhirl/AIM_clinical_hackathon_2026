@@ -15,7 +15,7 @@ contrast and layouts at 360 px. Explore [/how-we-decide](https://health-data-acc
 [/examples](https://health-data-access-compass.lovable.app/examples) and the anonymised
 public [/register](https://health-data-access-compass.lovable.app/register).
 
-**Demo video (≤2 minutes): TODO — team to insert recording link.**
+**Demo video (≤2 minutes):** [https://drive.google.com/file/d/1nWKs-Q70_ha_NQyYxKNz-50diManMaRy/view?usp=drivesdk](https://drive.google.com/file/d/1nWKs-Q70_ha_NQyYxKNz-50diManMaRy/view?usp=drivesdk)
 The [recording script](docs/demo.md) covers what works and what does not.
 This repository holds everything: the backend (`supabase/`, `scripts/`) and the
 front end (`web/`). [ErmisCho/health-data-access-desk](https://github.com/ErmisCho/health-data-access-desk)
@@ -98,7 +98,7 @@ Reproduce them using the [evaluation commands](docs/running.md#evaluation).
 | Numeric answers (including SPE cohort size) | **6/6** |
 | Privacy leaks detected | **0** |
 | Consistency | **10/10 across 3 runs** |
-| Slowest HTTP answer | **3.771 s (R05)** |
+| Slowest HTTP answer | **3.8 s (R05, 3771 ms)** |
 | Jury simulation: 57 unseen requests (42 earlier + 15 fresh naturally worded) | **0 wrong decisions, 0 wrong number sets, 0 leaks; 15 prohibited purposes rejected, 38 answered, 4 honestly held for review** |
 | Federated vs central aggregates | **64/64 equal** |
 | Stored legal paragraphs vs EUR-Lex | Not reproduced. Live EUR-Lex did not return the regulation text, and no repository script compares the stored paragraphs with it. |
@@ -113,7 +113,7 @@ Synthetic data only; no real HDAB integration. The parser is rule-based;
 unusual or unsupported wording is held for staff review. AI features are off
 without credentials. An isolated database schema is the prototype SPE, not a
 complete research workspace. The hosted frontend still shows the "Edit with
-Lovable" badge. The demo video link remains TODO.
+Lovable" badge.
 
 ## Run the backend
 
