@@ -42,8 +42,8 @@ export function DecisionDetails({
         </Button>
       </div>
       <LifecycleStepper
-        current={result.needs_review ? "Staff review" : "Decided"}
         needsReview={!!result.needs_review}
+        timeline={result.timeline}
       />
       {result.needs_review && (
         <p className="font-semibold" role="status">
