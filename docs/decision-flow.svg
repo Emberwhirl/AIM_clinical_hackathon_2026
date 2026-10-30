@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0b2341"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c8102e"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a869a"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="60" y="78" font-size="40" font-weight="700" fill="#0b2341">How a data request gets its yes or no</text>
+  <text x="60" y="118" font-size="22" fill="#44546a">Fixed legal rules decide. AI only helps read unclear wording. Every step is logged.</text>
+
+  <!-- Reject shortcut -->
+  <path d="M450,220 V185 H1440 V218" fill="none" stroke="#c8102e" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="945" y="175" font-size="17" font-weight="600" fill="#c8102e" text-anchor="middle">Prohibited purpose (EHDS Art. 54) → rejected immediately</text>
+
+  <!-- Main row boxes -->
+  <g fill="#f4f6f9" stroke="#c9d1dc" stroke-width="2">
+    <rect x="60" y="220" width="170" height="160" rx="12"/>
+    <rect x="272" y="220" width="220" height="160" rx="12"/>
+    <rect x="534" y="220" width="220" height="160" rx="12"/>
+    <rect x="796" y="220" width="240" height="160" rx="12"/>
+    <rect x="1078" y="220" width="220" height="160" rx="12"/>
+  </g>
+  <rect x="1340" y="220" width="200" height="160" rx="12" fill="#ffffff" stroke="#0b2341" stroke-width="2.5"/>
+
+  <!-- Step badges -->
+  <g fill="#0b2341">
+    <circle cx="382" cy="220" r="16"/><circle cx="644" cy="220" r="16"/>
+    <circle cx="916" cy="220" r="16"/><circle cx="1188" cy="220" r="16"/>
+  </g>
+  <g fill="#ffffff" font-size="17" font-weight="700" text-anchor="middle">
+    <text x="382" y="226">1</text><text x="644" y="226">2</text>
+    <text x="916" y="226">3</text><text x="1188" y="226">4</text>
+  </g>
+
+  <!-- Box text -->
+  <g text-anchor="middle" fill="#0b2341">
+    <g font-size="22" font-weight="700">
+      <text x="145" y="272">Applicant</text>
+      <text x="382" y="272">Check purpose</text>
+      <text x="644" y="272">Build safe query</text>
+      <text x="916" y="272">Run on data</text>
+      <text x="1188" y="272">Explain</text>
+      <text x="1440" y="260">Decision letter</text>
+    </g>
+    <g font-size="16" fill="#44546a">
+      <text x="145" y="306">asks in plain</text>
+      <text x="145" y="328">words</text>
+      <text x="145" y="350">EN or DE web form</text>
+
+      <text x="382" y="306">EHDS Art. 53 &amp; 54</text>
+      <text x="382" y="328">rules, versioned</text>
+      <text x="382" y="350" font-weight="700" fill="#0b2341">no AI in the decision</text>
+
+      <text x="644" y="306">words become a</text>
+      <text x="644" y="328">checked plan</text>
+      <text x="644" y="350">no free-form SQL</text>
+
+      <text x="916" y="306">only approved plans</text>
+      <text x="916" y="328">opt-out patients</text>
+      <text x="916" y="350">removed first</text>
+
+      <text x="1188" y="306">quotes the law</text>
+      <text x="1188" y="328">word for word</text>
+      <text x="1188" y="350">+ legal deadline</text>
+    </g>
+  </g>
+
+  <!-- Decision chips -->
+  <g font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <rect x="1355" y="278" width="170" height="26" rx="13" fill="#1b7f3b"/>
+    <text x="1440" y="296">YES · statistics</text>
+    <rect x="1355" y="310" width="170" height="26" rx="13" fill="#1f5fa8"/>
+    <text x="1440" y="328">YES · secure env.</text>
+    <rect x="1355" y="342" width="170" height="26" rx="13" fill="#c8102e"/>
+    <text x="1440" y="360">NO · with reason</text>
+  </g>
+
+  <!-- Main arrows -->
+  <g stroke="#0b2341" stroke-width="2.5" marker-end="url(#a)">
+    <line x1="230" y1="300" x2="270" y2="300"/>
+    <line x1="492" y1="300" x2="532" y2="300"/>
+    <line x1="754" y1="300" x2="794" y2="300"/>
+    <line x1="1036" y1="300" x2="1076" y2="300"/>
+    <line x1="1298" y1="300" x2="1338" y2="300"/>
+  </g>
+
+  <!-- AI assist -->
+  <rect x="60" y="450" width="202" height="110" rx="12" fill="#ffffff" stroke="#7a869a" stroke-width="2" stroke-dasharray="7 5"/>
+  <g text-anchor="middle">
+    <text x="161" y="478" font-size="18" font-weight="700" fill="#0b2341">AI assist</text>
+    <text x="161" y="499" font-size="14" fill="#7a869a">optional · Mistral (EU)</text>
+    <text x="161" y="522" font-size="14" fill="#44546a">rewords, flags, drafts memo</text>
+    <text x="161" y="544" font-size="15" font-weight="700" fill="#0b2341">never decides</text>
+  </g>
+  <path d="M230,450 V415 H310 V384" fill="none" stroke="#7a869a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ag)"/>
+
+  <!-- Staff review -->
+  <rect x="300" y="450" width="460" height="90" rx="12" fill="#fff8e6" stroke="#d9a400" stroke-width="2"/>
+  <g text-anchor="middle">
+    <text x="530" y="478" font-size="18" font-weight="700" fill="#0b2341">Staff review</text>
+    <text x="530" y="502" font-size="15" fill="#44546a">unclear requests are held for a human</text>
+    <text x="530" y="524" font-size="15" fill="#44546a">signed-in staff approve or override, name logged</text>
+  </g>
+  <g stroke="#0b2341" stroke-width="2.5" marker-end="url(#a)">
+    <line x1="400" y1="380" x2="400" y2="448"/>
+    <line x1="690" y1="450" x2="690" y2="382"/>
+  </g>
+  <text x="408" y="421" font-size="15" font-style="italic" fill="#44546a">unclear</text>
+  <text x="698" y="421" font-size="15" font-style="italic" fill="#44546a">approved</text>
+
+  <!-- Safe outputs -->
+  <rect x="796" y="450" width="236" height="90" rx="12" fill="#ffffff" stroke="#1b7f3b" stroke-width="2.5"/>
+  <rect x="1054" y="450" width="244" height="90" rx="12" fill="#ffffff" stroke="#1f5fa8" stroke-width="2.5"/>
+  <g text-anchor="middle">
+    <text x="914" y="477" font-size="17" font-weight="700" fill="#1b7f3b">Statistics</text>
+    <text x="914" y="500" font-size="15" fill="#44546a">counts only</text>
+    <text x="914" y="522" font-size="15" fill="#44546a">groups under 10 hidden</text>
+    <text x="1176" y="477" font-size="17" font-weight="700" fill="#1f5fa8">Secure environment</text>
+    <text x="1176" y="500" font-size="15" fill="#44546a">individual-level work</text>
+    <text x="1176" y="522" font-size="15" fill="#44546a">downloads blocked + logged</text>
+  </g>
+  <g fill="none" stroke="#0b2341" stroke-width="2.5" marker-end="url(#a)">
+    <line x1="916" y1="380" x2="916" y2="448"/>
+    <path d="M1010,380 V415 H1176 V448"/>
+  </g>
+
+  <!-- Foundations -->
+  <rect x="60" y="600" width="1480" height="112" rx="12" fill="#eef2f7"/>
+  <g stroke="#c9d1dc" stroke-width="2">
+    <line x1="553" y1="618" x2="553" y2="694"/>
+    <line x1="1046" y1="618" x2="1046" y2="694"/>
+  </g>
+  <g text-anchor="middle">
+    <g font-size="18" font-weight="700" fill="#0b2341">
+      <text x="306" y="638">Law as data</text>
+      <text x="800" y="638">Health data</text>
+      <text x="1293" y="638">Accountability</text>
+    </g>
+    <g font-size="15" fill="#44546a">
+      <text x="306" y="664">Regulation (EU) 2025/327, quoted verbatim</text>
+      <text x="306" y="686">versioned rules per access body (AT, DE)</text>
+      <text x="800" y="664">opt-outs removed before any count</text>
+      <text x="800" y="686">own secure schema per approved request</text>
+      <text x="1293" y="664">every step in the audit log</text>
+      <text x="1293" y="686">public transparency register</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="60" y="770" font-size="16" fill="#44546a">Web app: Lovable (React)  ·  Logic: Supabase Edge Functions (Deno, TypeScript)  ·  Data: Postgres, EU region  ·  AI: Mistral Small 3.2, self-hosted on an EU GPU, optional</text>
+  <text x="60" y="802" font-size="16" font-weight="700" fill="#0b2341">Tested: 10/10 official requests correct  ·  57 extra test requests, 0 wrong decisions  ·  0 data leaks</text>
+</svg>
