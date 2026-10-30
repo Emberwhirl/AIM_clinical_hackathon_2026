@@ -385,7 +385,7 @@ export const en = {
     'Negated phrases, such as "we will not use this for marketing", do not trigger a rule. Unclear purposes or unreadable definitions are held for staff review. Staff approve or override with a written reason recorded in an audit log. The same safeguards still apply.',
   "hwd.rules.title": "Versioned rules and legal text",
   "hwd.rules.text":
-    "The rules live in decision_rules.json, version 1.0.2, with 15 rules. Every decision records the rule id and rules version.",
+    "The rules live in decision_rules.json, version 1.0.3, with 15 rules. Every decision records the rule id and rules version.",
   "hwd.rules.quotes":
     "Legal quotes are verbatim from Regulation (EU) 2025/327. All 42 stored paragraphs were checked word for word against the official text.",
   "hwd.statistics.title": "Statistics and the small-cell rule",

@@ -130,7 +130,7 @@ const stats: JuryExpected = {
 const response = (answer: unknown): PipelineResponse => ({
   request_id: "test",
   rule_id: "A01",
-  rules_version: "1.0.2",
+  rules_version: "1.0.3",
   decision: "APPROVE_STATISTICAL",
   articles: ["53", "69"],
   reason: "Allowed research",

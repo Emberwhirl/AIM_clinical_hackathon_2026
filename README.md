@@ -81,7 +81,7 @@ self-hosted model server; the memo additionally needs `LLM_MEMO=on`. AI-assisted
 returned for display only when every quotation verifies against stored legal
 text. Neither feature sends patient data or database answers to the model.
 Every pipeline response and saved decision carries `rule_id` and `rules_version`
-from `decide()`. Rules version **1.0.2** includes P09 for credit scoring / loans
+from `decide()`. Rules version **1.0.3** includes P09 for credit scoring / loans and, since 1.0.3, wording for insurance tariffs, recruitment decisions and model-training justifications
 under Art. 54(1)(b). National rules per access body are configured in
 `supabase/functions/_shared/hdab/hdab_configs.json`: Austria is the default, with
 a Germany demo example for Art. 54(1)(e).
@@ -157,7 +157,7 @@ git subtree push --prefix=web https://github.com/ErmisCho/health-data-access-des
 |---|---|
 | `supabase/functions/requests/`, `supabase/functions/register/`, `supabase/functions/spe-download/` | Submission, review, public register and download block |
 | `supabase/functions/_shared/` | Decision, parser, plan validation, SQL, SPE and explanations |
-| `supabase/functions/_shared/rules/decision_rules.json` | Decision rules version 1.0.2 |
+| `supabase/functions/_shared/rules/decision_rules.json` | Decision rules version 1.0.3 |
 | `supabase/functions/_shared/hdab/hdab_configs.json` | Per-access-body configuration and national rule examples |
 | `supabase/functions/_shared/llm_fallback.ts`, `supabase/functions/_shared/memo.ts` | Optional LLM parser fallback and verified-quote memo |
 | `supabase/functions/_shared/regulation/reg_2025_327.json` | Stored legal paragraphs |
