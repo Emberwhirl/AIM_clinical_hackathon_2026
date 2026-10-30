@@ -13,6 +13,9 @@
  *   6. cache: second call for same key makes no additional fetch call
  */
 
+// The memo has its own switch on top of the key; tests exercise it switched on.
+Deno.env.set("LLM_MEMO", "on");
+
 import {
   _resetMemoCache,
   draftMemo,
