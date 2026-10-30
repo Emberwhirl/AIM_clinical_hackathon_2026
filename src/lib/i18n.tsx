@@ -3,22 +3,14 @@
  *
  * Provides:
  *   - LangProvider  – wraps the app; reads/writes sessionStorage; updates <html lang>
- *   - useLang()     – returns { lang, setLang }
+ *   - useLang()     – returns { lang, setLang }; English unless the user picks German
  *   - useT()        – returns the t() translator for the current language
  *
  * The two dictionaries (en / de) share the same key type so TypeScript will
  * fail at compile time if a key is present in one but not the other.
  */
 
-import {
-  createContext,
-  useCallback,
-  useRef,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { en } from "./i18n/en";
 import { de } from "./i18n/de";
 
@@ -51,31 +43,17 @@ function writeSession(lang: Lang) {
 interface LangCtx {
   lang: Lang;
   setLang: (l: Lang) => void;
-  setDefaultLang: (l: Lang) => void;
 }
 
 const LangContext = createContext<LangCtx>({
   lang: "en",
   setLang: () => {},
-  setDefaultLang: () => {},
 });
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(readSession);
 
-  const explicit = useRef(false);
-  const setDefaultLang = useCallback((l: Lang) => {
-    let saved = null;
-    try {
-      saved = sessionStorage.getItem(SESSION_KEY);
-    } catch {
-      /* unavailable */
-    }
-    if (!explicit.current && saved !== "de" && saved !== "en") setLangState(l);
-  }, []);
-
   function setLang(l: Lang) {
-    explicit.current = true;
     setLangState(l);
     writeSession(l);
   }
@@ -87,11 +65,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
   }, [lang]);
 
-  return (
-    <LangContext.Provider value={{ lang, setLang, setDefaultLang }}>
-      {children}
-    </LangContext.Provider>
-  );
+  return <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>;
 }
 
 export function useLang() {
