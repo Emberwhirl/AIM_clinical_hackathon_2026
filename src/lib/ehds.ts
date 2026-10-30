@@ -231,6 +231,8 @@ export interface PublicHdabConfig {
   languages: ("de" | "en")[];
   contact: string;
   branding: { primary: string; accent: string };
+  /** National rules added to the EHDS baseline; names only, never their phrases. */
+  extra_rules?: { id: string; label: string; article_ref: string }[];
 }
 
 export async function listHdabs(): Promise<PublicHdabConfig[]> {

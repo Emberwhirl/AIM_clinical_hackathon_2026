@@ -77,23 +77,31 @@ afterEach(() => {
   saveHdab("at");
 });
 
-it("loads all backend configs and applies language, branding, contact and session selection", async () => {
+it("loads all backend configs and applies branding, contact and session selection", async () => {
   mount();
   await screen.findByText("Austria body at@example.org en");
   fireEvent.click(screen.getByText("Germany"));
-  expect(screen.getByText("Germany body de@example.org de")).toBeInTheDocument();
+  expect(screen.getByText("Germany body de@example.org en")).toBeInTheDocument();
   expect(document.documentElement.style.getPropertyValue("--accent")).toBe("#58418a");
   expect(hdabHeaders()).toEqual({ "x-hdab": "de" });
   expect(sessionStorage.getItem("ehds-hdab")).toBe("de");
   cleanup();
   mount();
-  await screen.findByText("Germany body de@example.org de");
-  fireEvent.click(screen.getByText("English"));
+  await screen.findByText("Germany body de@example.org en");
+  fireEvent.click(screen.getByText("France"));
+  expect(hdabHeaders()).toEqual({ "x-hdab": "fr" });
+});
+
+it("never changes the language with the access body; English is the default", async () => {
+  // Germany's display_language is "de"; selecting it must not switch the UI.
+  saveHdab("de");
+  mount();
+  await screen.findByText("Germany body de@example.org en");
+  expect(document.documentElement.lang).toBe("en");
   fireEvent.click(screen.getByText("Austria"));
   fireEvent.click(screen.getByText("Germany"));
   expect(screen.getByText("Germany body de@example.org en")).toBeInTheDocument();
-  fireEvent.click(screen.getByText("France"));
-  expect(hdabHeaders()).toEqual({ "x-hdab": "fr" });
+  expect(sessionStorage.getItem("ehds-lang")).toBeNull();
 });
 
 it("preserves an explicit language from a previous mount", async () => {
