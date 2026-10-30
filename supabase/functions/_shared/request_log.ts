@@ -9,16 +9,142 @@ export interface RequestLogSql {
   ): PromiseLike<Record<string, unknown>[]>;
 }
 
+/** A single lifecycle status change with an ISO 8601 server timestamp. */
+export interface TimelineEvent {
+  status: "submitted" | "assessed" | "staff_review" | "decided" | "fulfilled";
+  at: string;
+}
+
+/**
+ * Compute the ordered list of lifecycle statuses for a freshly computed response.
+ * Mirrors the logic in recordEvents.
+ */
+export function submissionStatuses(
+  response: Pick<PipelineResponse, "needs_review" | "decision">,
+): TimelineEvent["status"][] {
+  const statuses: TimelineEvent["status"][] = ["submitted", "assessed"];
+  if (response.needs_review && response.decision !== "REJECT") {
+    statuses.push("staff_review");
+  } else if (response.decision !== "REJECT") {
+    statuses.push("decided", "fulfilled");
+  } else {
+    statuses.push("decided");
+  }
+  return statuses;
+}
+
+/**
+ * Compute the ordered list of lifecycle statuses after a staff review.
+ * Mirrors the logic in recordReviewEvents.
+ */
+export function reviewStatuses(
+  response: Pick<PipelineResponse, "needs_review" | "decision">,
+): TimelineEvent["status"][] {
+  if (!response.needs_review) {
+    return response.decision !== "REJECT"
+      ? ["decided", "fulfilled"]
+      : ["decided"];
+  }
+  return ["staff_review"];
+}
+
+/**
+ * Insert lifecycle events for a new submission and return them with real DB timestamps.
+ *
+ * Always: submitted + assessed.
+ * Then:
+ *   - held (needs_review true, decision != REJECT): staff_review
+ *   - not held + decision != REJECT: decided + fulfilled
+ *   - not held + decision == REJECT: decided (no fulfilled)
+ */
+export async function recordEvents(
+  sql: RequestLogSql,
+  logId: unknown,
+  requestId: string,
+  response: PipelineResponse,
+): Promise<TimelineEvent[]> {
+  const timeline: TimelineEvent[] = [];
+  for (const status of submissionStatuses(response)) {
+    const rows = await sql.unsafe(
+      `INSERT INTO public.request_event (request_log_id, request_id, status)
+       VALUES ($1, $2, $3)
+       RETURNING to_char(at AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS at`,
+      [String(logId), requestId, status],
+    );
+    timeline.push({
+      status,
+      at: String((rows[0] as Record<string, unknown>)?.at ?? ""),
+    });
+  }
+  return timeline;
+}
+
+/**
+ * Insert lifecycle events after a staff review and return them with real DB timestamps.
+ *
+ * - Still held (parse failure survived review): staff_review
+ * - Decided + not REJECT: decided + fulfilled
+ * - Decided + REJECT: decided only
+ */
+export async function recordReviewEvents(
+  sql: RequestLogSql,
+  logId: unknown,
+  requestId: string,
+  response: PipelineResponse,
+): Promise<TimelineEvent[]> {
+  const newEvents: TimelineEvent[] = [];
+  for (const status of reviewStatuses(response)) {
+    const rows = await sql.unsafe(
+      `INSERT INTO public.request_event (request_log_id, request_id, status)
+       VALUES ($1, $2, $3)
+       RETURNING to_char(at AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS at`,
+      [String(logId), requestId, status],
+    );
+    newEvents.push({
+      status,
+      at: String((rows[0] as Record<string, unknown>)?.at ?? ""),
+    });
+  }
+  return newEvents;
+}
+
+/**
+ * Load all existing events for a given log row, ordered chronologically.
+ */
+export async function loadEventsForLog(
+  sql: RequestLogSql,
+  logId: unknown,
+): Promise<TimelineEvent[]> {
+  const events = await sql.unsafe(
+    `SELECT status,
+            to_char(at AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS at
+     FROM public.request_event
+     WHERE request_log_id = $1
+     ORDER BY at ASC, id ASC`,
+    [String(logId)],
+  );
+  return events.map((row) => ({
+    status: row.status as TimelineEvent["status"],
+    at: String(row.at ?? ""),
+  }));
+}
+
 export async function saveRequest(
   sql: RequestLogSql,
   request: Record<string, unknown>,
   response: PipelineResponse,
-): Promise<void> {
+): Promise<{ logId: unknown }> {
   // postgres.js serializes sql.json values itself; never stringify them first.
   await sql`INSERT INTO public.request_log (request_id, request, response)
-    VALUES (${response.request_id}, ${sql.json(request)}, ${
-    sql.json(response)
-  })`;
+    VALUES (${response.request_id}, ${sql.json(request)}, ${sql.json(response)})`;
+  // Retrieve the id of the row just inserted (latest for this request_id).
+  const idRows = await sql.unsafe(
+    `SELECT id FROM public.request_log WHERE request_id = $1
+     ORDER BY submitted_at DESC, id DESC LIMIT 1`,
+    [response.request_id],
+  );
+  const logId = (idRows[0] as Record<string, unknown> | undefined)?.id ?? 0;
+  return { logId };
 }
 
 function responseObject(value: unknown): Record<string, unknown> {
@@ -35,11 +161,19 @@ export async function loadRequest(
   id: string,
 ): Promise<Record<string, unknown> | null> {
   const rows = await sql.unsafe(
-    `SELECT response FROM public.request_log WHERE request_id = $1
+    `SELECT id, response FROM public.request_log WHERE request_id = $1
      ORDER BY submitted_at DESC, id DESC LIMIT 1`,
     [id],
   );
-  return rows.length ? responseObject(rows[0].response) : null;
+  if (!rows.length) return null;
+  const logId = (rows[0] as Record<string, unknown>).id;
+  const response = responseObject(rows[0].response);
+  const timeline = await loadEventsForLog(sql, logId);
+  if (timeline.length > 0) {
+    response.timeline = timeline;
+    response.lifecycle_status = timeline[timeline.length - 1].status;
+  }
+  return response;
 }
 
 export function listStaffActions(sql: RequestLogSql) {
