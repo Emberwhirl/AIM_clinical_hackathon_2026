@@ -211,7 +211,8 @@ export async function draftMemo(
   articles: string[],
   articleRefs: Record<string, string> = {},
 ): Promise<DraftMemoOutcome | null> {
-  if (!isEnabled()) return null;
+  // The memo costs one extra LLM call per decided request; it needs its own switch.
+  if (!isEnabled() || Deno.env.get("LLM_MEMO") !== "on") return null;
 
   // Build regulation text map — only cited articles, from stored JSON
   const articleTexts = buildArticleTextMap(articles);
