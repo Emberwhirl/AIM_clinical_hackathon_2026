@@ -45,6 +45,8 @@ export interface PreviewResult {
   trigger_phrases: string[];
   plan_summary?: string;
   unreadable: PreviewUnreadable[];
+  /** "What to change" sentences, one per line; present on a rejection, hold or downgrade. */
+  guidance?: string;
 }
 export type AnswerValue = number | string;
 export type Answer = { [key: string]: AnswerValue | Answer };
@@ -96,6 +98,8 @@ export interface DecisionResult {
   deadline?: DecisionDeadline | null;
   /** AI-drafted reasoning memo (Issue #35). Present only when verified. */
   memo?: AiMemo;
+  /** "What to change" sentences, one per line; present on a rejection, hold or downgrade. */
+  guidance?: string;
 }
 export interface StaffAction {
   request_id: string;

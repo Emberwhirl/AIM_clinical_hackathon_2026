@@ -23,6 +23,7 @@ import { decide } from "../_shared/decision.ts";
 import { parseRequest } from "../_shared/parser.ts";
 import { attemptFallback, type AiAssist } from "../_shared/llm_fallback.ts";
 import { explain } from "../_shared/explain.ts";
+import { guidanceFor } from "../_shared/guidance.ts";
 
 export type RequestDatabase = SqlClient & RequestLogSql & {
   end(): Promise<void>;
@@ -155,6 +156,20 @@ export function createHandler(
       if (body) {
         stage = "answer_request";
         const response = await answerRequest(body, sql, undefined, hdab);
+        const definitions = Array.isArray(body.definitions)
+          ? (body.definitions as unknown[])
+          : [];
+        const guidance = guidanceFor({
+          ...response,
+          requested_as: typeof body.requested_as === "string"
+            ? body.requested_as
+            : undefined,
+          unreadable: response.parse_errors?.map((e) => ({
+            index: definitions.indexOf(e.definition),
+            ...e,
+          })),
+        });
+        if (guidance !== null) response.guidance = guidance;
         stage = "save_request";
         const { logId } = await saveRequest(sql, body, response);
         const timeline = await recordEvents(
@@ -327,6 +342,8 @@ export interface PreviewResponse {
   unreadable: { index: number; definition: string; reason: string }[];
   /** Present when the LLM fallback was used (Issue #15). */
   ai_assist?: AiAssist;
+  /** Applicant guidance ("What to change"), one sentence per line; absent when nothing needs to change. */
+  guidance?: string;
 }
 
 async function handlePreview(
@@ -419,5 +436,12 @@ async function handlePreview(
   };
   if (plan_summary !== undefined) response.plan_summary = plan_summary;
   if (ai_assist !== undefined) response.ai_assist = ai_assist;
+  const guidance = guidanceFor({
+    ...response,
+    requested_as: typeof body.requested_as === "string"
+      ? body.requested_as
+      : undefined,
+  });
+  if (guidance !== null) response.guidance = guidance;
   return json(response);
 }

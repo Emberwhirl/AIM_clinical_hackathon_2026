@@ -215,6 +215,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Um eine Überprüfung zu beantragen, wählen Sie einen zulässigen Zweck gemäß Artikel 53 und reichen Sie einen neuen Antrag ein.",
   "decision.next.held":
     "Mitarbeitende der Zugangsstelle entscheiden vor der gesetzlichen Frist{deadline}.",
+  "decision.whatToChange": "Was Sie ändern sollten",
   "decision.viewLetter": "Bescheid anzeigen",
   "decision.needsReview": "Mitarbeiterprüfung erforderlich",
   "decision.citedArticles": "Zitierte Artikel",
