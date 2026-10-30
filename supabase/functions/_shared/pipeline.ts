@@ -24,6 +24,7 @@ import {
 import { computeDeadline, type DecisionDeadline } from "./deadline.ts";
 import { parseRequest } from "./parser.ts";
 import { attemptFallback, type AiAssist } from "./llm_fallback.ts";
+import { screenPurpose, type ScreenResult } from "./llm_screen.ts";
 import { runPlan, type SqlClient as EngineSqlClient } from "./engine.ts";
 import { createSpe, type SqlClient as SpeSqlClient } from "./spe.ts";
 import { explain, verifyQuotes } from "./explain.ts";
@@ -58,6 +59,13 @@ export interface PipelineResponse {
    * The plan was AI-assisted; needs_review is always true in this case.
    */
   ai_assist?: AiAssist;
+  /**
+   * LLM second opinion on the purpose wording (Art. 54(1) prohibited uses).
+   * Present only when LLM_SCREEN=on and the screen ran.  When suspect is true
+   * the request is held (needs_review: true, status: staff_review); decision,
+   * articles and answer are never changed by the screen.
+   */
+  ai_screen?: ScreenResult;
   /** Explanation of the decision (omitted when verifyQuotes fails). */
   explanation?: {
     rule: string;
@@ -196,6 +204,10 @@ export async function answerRequest(
     return base;
   }
 
+  // Second opinion on the purpose wording; runs concurrently with the query,
+  // awaited before the response is assembled.  It can only hold, never approve.
+  const screening = screenPurpose(req.purpose ?? "", req.question ?? "");
+
   // Step 2 — parse (with optional LLM fallback on failure).
   let parsed = parseRequest(request);
   let ai_assist: AiAssist | undefined;
@@ -313,6 +325,7 @@ export async function answerRequest(
     explanation_error = String(e);
   }
 
+  const screen = await screening;
   const base: PipelineResponse = {
     request_id,
     rule_id,
@@ -320,11 +333,12 @@ export async function answerRequest(
     decision,
     articles,
     reason,
-    needs_review,
-    status: "decided",
+    needs_review: needs_review || screen?.suspect === true,
+    status: screen?.suspect ? "staff_review" : "decided",
     answer,
     population,
   };
+  if (screen) base.ai_screen = screen;
   if (spe_schema) base.spe_schema = spe_schema;
   if (explanationField) base.explanation = explanationField;
   if (explanation_error) base.explanation_error = explanation_error;
