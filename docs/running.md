@@ -79,7 +79,7 @@ variables or service secret stores, out of Git and recorded terminal output.
 
 ## Creating a staff user
 
-Use `scripts/create-staff-user.ts` to create or update a staff account.  The
+Use `scripts/create-staff-user.ts` to create or update a staff account (on Windows, `scriptseate-staff-user.ps1` fetches the key and asks for e-mail and password).  The
 script reads all credentials from environment variables and never accepts them
 from command-line arguments.
 
