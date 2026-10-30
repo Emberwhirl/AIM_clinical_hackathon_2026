@@ -149,6 +149,13 @@ export const en = {
   "form.uploadFile": "Upload file",
   "form.importMustBeObject": "Import must be a JSON object.",
   "form.couldNotParseJson": "Could not parse JSON. Please paste valid JSON.",
+  "form.freeText.label": "Or describe your request in your own words",
+  "form.freeText.placeholder":
+    "Example: We are a university hospital and want to know, per region, how many patients aged 65 or older had a diabetes diagnosis (ICD-10 E11) in 2025, as anonymised statistics for a public-health study.",
+  "form.freeText.draft": "Draft my request",
+  "form.freeText.drafting": "Drafting your request…",
+  "form.freeText.done": "Draft filled in below. Please review and edit the fields.",
+  "form.freeText.failed": "Could not draft a request.",
   "form.step1": "What you want to know",
   "form.step2": "Definitions",
   "form.step3": "About you & submit",
