@@ -410,7 +410,7 @@ Deno.test("R01–R10: exact Art. 53/54 ref matches expected point", () => {
     R01: "Art. 53(1)(a)",
     R02: "Art. 54(1)(b)",
     R03: "Art. 53(1)(b)",
-    R04: "Art. 54(1)(c)",
+    R04: "Art. 54(c)",
     R05: "Art. 53(1)(e)(ii)",
     R06: "Art. 54(1)(b)",
     R07: "Art. 53(1)(c)",

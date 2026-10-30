@@ -290,7 +290,7 @@ const PROHIBITED_MAPPINGS: ProhibitedMapping[] = [
       "taking decisions in relation to a natural person or a group of natural persons in relation to job offers, offering less favourable terms in the provision of goods or services, including exclusion of such persons or groups from the benefit of an insurance or credit contract, the modification of their contributions and insurance premiums or conditions of loans, or taking any other decisions in relation to a natural person or a group of natural persons which result in discriminating against them on the basis of the health data obtained",
   },
   {
-    // advertising or marketing → Art. 54(1)(c)
+    // advertising or marketing → Art. 54(c)
     patterns: [
       /\badvertis/i,
       /\bmarketing\b/i,
@@ -391,8 +391,13 @@ function prohibitedPurposePoint(requestText: string, ruleId?: string): {
   for (const m of PROHIBITED_MAPPINGS) {
     for (const p of m.patterns) {
       if (p.test(norm)) {
-        // Build ref: Art. 54(1) with optional sub-point
-        const ref = m.point ? `Art. 54(1)${m.point}` : "Art. 54(1)";
+        // Build ref: Art. 54(1) with optional sub-point.
+        // Point (c) is cited as Art. 54(c); other points keep the paragraph.
+        const ref = m.point === "(c)"
+          ? "Art. 54(c)"
+          : m.point
+          ? `Art. 54(1)${m.point}`
+          : "Art. 54(1)";
         return { point: m.point, applies: m.applies, ref };
       }
     }

@@ -83,7 +83,7 @@ it("explains the ordered legal checks and all measured safeguards and test resul
   }
   for (const fact of [
     "30 October 2026",
-    "Art. 54(1)(c)",
+    "Art. 54(c)",
     "Art. 54(1)(d)",
     "we will not use this for marketing",
     "unreadable definitions",
