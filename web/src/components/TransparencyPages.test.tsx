@@ -115,7 +115,7 @@ it("explains the ordered legal checks and all measured safeguards and test resul
     "0 wrong decisions",
     "15 rejected, no prohibited purpose approved",
     "synthetic data, not real applications",
-    "No AI decides today",
+    "No AI decides",
     "only make outcomes stricter",
     "never sees patient data",
   ]) {

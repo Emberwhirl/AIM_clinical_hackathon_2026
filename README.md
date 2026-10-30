@@ -77,7 +77,7 @@ endpoint: the hackathon's OpenRouter pool with Mistral Small 3.2 (an EU provider
 zero data retention). They are off unless `OPENROUTER_API_KEY` is set; optional
 `LLM_BASE_URL` (default `https://openrouter.ai/api/v1`) and `LLM_MODEL` (default
 `mistralai/mistral-small-3.2-24b-instruct`) point them elsewhere, for example at a
-self-hosted model server; the memo additionally needs `LLM_MEMO=on`. AI-assisted plans are always held for staff review; a memo is
+self-hosted model server; the memo additionally needs `LLM_MEMO=on`. The live deployment runs the parser fallback against a self-hosted Mistral Small 3.2 on the hackathon's A5000 GPU (Vienna, token-checked proxy); the memo is off. AI-assisted plans are always held for staff review; a memo is
 returned for display only when every quotation verifies against stored legal
 text. Neither feature sends patient data or database answers to the model.
 Every pipeline response and saved decision carries `rule_id` and `rules_version`
