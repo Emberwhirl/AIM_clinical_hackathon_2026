@@ -62,7 +62,7 @@ export function metricLabel(key: string, lang: Lang = "en"): string {
 }
 
 export function formatValue(value: string | number | undefined, percentage = false): string {
-  if (value === undefined) return "—";
+  if (value === undefined) return "-";
   const text = String(value).trim();
   if (percentage || /%\s*$/.test(text)) {
     const numeric = text.replace(/\s*%$/, "");

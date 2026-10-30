@@ -34,7 +34,7 @@ describe("Track 3 requests", () => {
     expect(SAMPLE_ENTRIES[0]!.request.applicant.name).toBe("Dr. Sophie Lechner");
     expect(
       SAMPLE_ENTRIES.every(
-        (s) => s.label.startsWith(`${s.id} — `) && s.request.definitions.length > 0,
+        (s) => s.label.startsWith(`${s.id} `) && s.request.definitions.length > 0,
       ),
     ).toBe(true);
   });

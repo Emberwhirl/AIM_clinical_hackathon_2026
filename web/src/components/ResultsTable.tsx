@@ -50,7 +50,7 @@ export function ResultsTable({ answer }: { answer: Answer | null }) {
             <tr key={JSON.stringify([r.groups, i])} className="border-b border-border">
               {Array.from({ length: depth }, (_, j) => (
                 <th scope="row" className="p-2 text-left font-normal" key={j}>
-                  {r.groups[j] ?? "—"}
+                  {r.groups[j] ?? "-"}
                 </th>
               ))}
               {columns.map((c) => (

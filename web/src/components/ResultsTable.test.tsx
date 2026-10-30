@@ -35,7 +35,7 @@ it("staff see schema and the real download refusal; applicants see cohort and re
   expect(screen.getByText("Needs staff review")).toBeInTheDocument();
   expect(screen.queryByRole("button", { name: "Download" })).not.toBeInTheDocument();
   rerender(<DecisionDetails result={result} staff />);
-  expect(screen.getByText(/Schema: spe_r05.*downloads blocked/)).toBeInTheDocument();
+  expect(screen.getByText(/Schema spe_r05, downloads blocked/)).toBeInTheDocument();
   vi.mocked(supabase.functions.invoke).mockResolvedValue({
     data: null,
     error: {
@@ -65,7 +65,7 @@ it("rejections show the decision and reason without results", () => {
       }}
     />,
   );
-  expect(screen.getByText("No — this request cannot be approved")).toBeInTheDocument();
+  expect(screen.getByText("This request cannot be approved")).toBeInTheDocument();
   expect(screen.getByText("Prohibited")).toBeInTheDocument();
   expect(screen.queryByRole("table")).not.toBeInTheDocument();
   expect(screen.queryByText(/Cohort size/)).not.toBeInTheDocument();

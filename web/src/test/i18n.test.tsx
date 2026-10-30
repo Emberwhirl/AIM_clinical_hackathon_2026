@@ -63,6 +63,15 @@ describe("dictionary completeness", () => {
       expect(typeof value, `de["${key}"] should be a string`).toBe("string");
     }
   });
+
+  it("no user-facing string in en.ts or de.ts contains em dashes, colons, semicolons, or middle dots", () => {
+    for (const [key, value] of Object.entries(en)) {
+      expect(value, `en["${key}"] has forbidden punctuation`).not.toMatch(/[\u2014:;·\u00B7]/);
+    }
+    for (const [key, value] of Object.entries(de)) {
+      expect(value, `de["${key}"] has forbidden punctuation`).not.toMatch(/[\u2014:;·\u00B7]/);
+    }
+  });
 });
 
 // ---------------------------------------------------------------------------

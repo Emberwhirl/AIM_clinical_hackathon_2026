@@ -379,7 +379,7 @@ export function StaffHistory() {
                     </td>
                     <td className="p-3">
                       {row.spe_schema
-                        ? `${row.spe_schema} ${t("staff.row.speInfo")}`
+                        ? `${row.spe_schema}, ${t("staff.row.speInfo")}`
                         : t("staff.row.noSpe")}
                     </td>
                     <td className="p-3">

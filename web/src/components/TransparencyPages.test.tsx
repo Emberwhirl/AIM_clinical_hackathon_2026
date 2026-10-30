@@ -66,7 +66,7 @@ it("explains the ordered legal checks and all measured safeguards and test resul
     "Statistics and the small-cell rule",
     "Opt-out handling",
     "Secure processing and blocked downloads",
-    "Testing: evaluation and jury simulation",
+    "Evaluation and jury simulation",
     "The role of AI",
   ]) {
     expect(within(main).getByRole("heading", { name: topic })).toBeVisible();
@@ -113,8 +113,8 @@ it("explains the ordered legal checks and all measured safeguards and test resul
     "3 runs",
     "57 jury test requests",
     "0 wrong decisions",
-    "15 rejected, no prohibited purpose approved",
-    "synthetic data, not real applications",
+    "15 rejected with no prohibited purpose approved",
+    "synthetic test cases",
     "No AI decides",
     "only make outcomes stricter",
     "never sees patient data",
@@ -154,7 +154,7 @@ it.each(SAMPLE_ENTRIES)("opens the full live result for $id via the data layer",
   invoke.mockResolvedValue({ data: { ...live, request_id: sample.id }, error: null });
   await show("/examples");
   fireEvent.click(screen.getByRole("button", { name: `Open ${sample.label}` }));
-  const result = screen.getByRole("region", { name: `${sample.id} · Live result` });
+  const result = screen.getByRole("region", { name: `${sample.id} Live result` });
   expect(await within(result).findByText("Current backend reason")).toBeVisible();
   expect(within(result).getByText("Art. 53")).toBeVisible();
   expect(within(result).getByText("4321")).toBeVisible();
@@ -166,7 +166,7 @@ it.each(SAMPLE_ENTRIES)("opens the full live result for $id via the data layer",
     headers: { "x-hdab": "at" },
     body: sample.request,
   });
-  expect(screen.getByRole("heading", { name: `${sample.id} · Live result` })).toHaveFocus();
+  expect(screen.getByRole("heading", { name: `${sample.id} Live result` })).toHaveFocus();
 });
 
 it("announces pending requests and allows retry after an error", async () => {
