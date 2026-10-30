@@ -24,6 +24,7 @@ import {
 import { computeDeadline, type DecisionDeadline } from "./deadline.ts";
 import { parseRequest } from "./parser.ts";
 import { attemptFallback, type AiAssist } from "./llm_fallback.ts";
+import { screenPurpose, type ScreenResult } from "./llm_screen.ts";
 import { runPlan, type SqlClient as EngineSqlClient } from "./engine.ts";
 import { createSpe, type SqlClient as SpeSqlClient } from "./spe.ts";
 import { explain, verifyQuotes } from "./explain.ts";
@@ -58,6 +59,13 @@ export interface PipelineResponse {
    * The plan was AI-assisted; needs_review is always true in this case.
    */
   ai_assist?: AiAssist;
+  /**
+   * LLM second opinion on the purpose wording (Art. 54(1) prohibited uses).
+   * Present only when LLM_SCREEN=on and the screen ran.  When suspect is true
+   * the request is held (needs_review: true, status: staff_review); decision,
+   * articles and answer are never changed by the screen.
+   */
+  ai_screen?: ScreenResult;
   /** Explanation of the decision (omitted when verifyQuotes fails). */
   explanation?: {
     rule: string;
@@ -76,7 +84,7 @@ export interface PipelineResponse {
   explanation_error?: string;
   /**
    * AI-drafted reasoning memo grounded in reg_2025_327.json (Issue #35).
-   * Present only when OPENROUTER_API_KEY is set AND all quotes verify.
+   * Drafted for held requests only; present only when LLM_MEMO is on AND all quotes verify.
    */
   memo?: {
     text: string;
@@ -174,8 +182,31 @@ export async function answerRequest(
     if (explanationField) base.explanation = explanationField;
     if (explanation_error) base.explanation_error = explanation_error;
     if (deadline != null) base.deadline = deadline;
+    if (needs_review) {
+      // Draft AI reasoning memo for staff (Issue #35) — best-effort, never changes decision
+      try {
+        const articleRefs: Record<string, string> = {};
+        for (const art of explanationField?.articles ?? []) {
+          articleRefs[art.number] = art.ref;
+        }
+        const outcome = await draftMemo(
+          req.purpose ?? "",
+          req.question ?? "",
+          decision,
+          articles,
+          articleRefs,
+        );
+        if (outcome?.memo_status === "ok" && outcome.memo) base.memo = outcome.memo;
+      } catch {
+        // Memo is best-effort; any failure is silent
+      }
+    }
     return base;
   }
+
+  // Second opinion on the purpose wording; runs concurrently with the query,
+  // awaited before the response is assembled.  It can only hold, never approve.
+  const screening = screenPurpose(req.purpose ?? "", req.question ?? "");
 
   // Step 2 — parse (with optional LLM fallback on failure).
   let parsed = parseRequest(request);
@@ -294,29 +325,7 @@ export async function answerRequest(
     explanation_error = String(e);
   }
 
-  // Draft AI reasoning memo (Issue #35) — best-effort, never changes decision
-  let memoField: PipelineResponse["memo"] | undefined;
-  try {
-    const articleRefs: Record<string, string> = {};
-    if (explanationField) {
-      for (const art of explanationField.articles) {
-        articleRefs[art.number] = art.ref;
-      }
-    }
-    const outcome = await draftMemo(
-      req.purpose ?? "",
-      req.question ?? "",
-      decision,
-      articles,
-      articleRefs,
-    );
-    if (outcome?.memo_status === "ok" && outcome.memo) {
-      memoField = outcome.memo;
-    }
-  } catch {
-    // Memo is best-effort; any failure is silent
-  }
-
+  const screen = await screening;
   const base: PipelineResponse = {
     request_id,
     rule_id,
@@ -324,15 +333,15 @@ export async function answerRequest(
     decision,
     articles,
     reason,
-    needs_review,
-    status: "decided",
+    needs_review: needs_review || screen?.suspect === true,
+    status: screen?.suspect ? "staff_review" : "decided",
     answer,
     population,
   };
+  if (screen) base.ai_screen = screen;
   if (spe_schema) base.spe_schema = spe_schema;
   if (explanationField) base.explanation = explanationField;
   if (explanation_error) base.explanation_error = explanation_error;
-  if (memoField) base.memo = memoField;
   if (deadline != null) base.deadline = deadline;
   return base;
 }
