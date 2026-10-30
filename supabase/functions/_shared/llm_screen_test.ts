@@ -214,5 +214,22 @@ Deno.test("screen: suspect purpose holds the request in the pipeline", async () 
     JSON.stringify(held.articles) === JSON.stringify(plain.articles),
     "articles must be unchanged",
   );
-  assert(JSON.stringify(held.answer) === JSON.stringify(plain.answer), "answer must be unchanged");
+  assert(held.answer === null, "a flagged request withholds its numbers until a person decides");
+  assert(plain.answer !== null, "the unflagged baseline keeps its numbers");
+
+  // A staff review overrides the second opinion: no screening call, numbers returned.
+  let reviewFetches = 0;
+  const approved = await withScreenEnabled(() =>
+    withFakeFetch(
+      () => {
+        reviewFetches++;
+        return fakeGeneration(SUSPECT_REPLY);
+      },
+      () => answerRequest(req, sql, { reason: "Purpose is permitted under Article 53." }),
+    )
+  );
+  assert(reviewFetches === 0, "screening must not run on a reviewed request");
+  assert(approved.status === "decided", `reviewed request must be decided, got ${approved.status}`);
+  assert(approved.ai_screen === undefined, "no ai_screen on a reviewed request");
+  assert(JSON.stringify(approved.answer) === JSON.stringify(plain.answer), "reviewed request returns the numbers");
 });

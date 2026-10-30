@@ -210,8 +210,11 @@ export async function answerRequest(
   }
 
   // Second opinion on the purpose wording; runs concurrently with the query,
-  // awaited before the response is assembled.  It can only hold, never approve.
-  const screening = screenPurpose(req.purpose ?? "", req.question ?? "");
+  // awaited before the response is assembled.  It can only hold, never approve,
+  // and it does not run once a person has reviewed the request.
+  const screening = review
+    ? Promise.resolve<ScreenResult | null>(null)
+    : screenPurpose(req.purpose ?? "", req.question ?? "");
 
   // Step 2 — parse (with optional LLM fallback on failure).
   let parsed = parseRequest(request);
@@ -340,11 +343,12 @@ export async function answerRequest(
     reason,
     needs_review: needs_review || screen?.suspect === true,
     status: screen?.suspect ? "staff_review" : "decided",
-    answer,
-    population,
+    // A flagged request waits like any other hold: no numbers until a person decides.
+    answer: screen?.suspect ? null : answer,
+    population: screen?.suspect ? undefined : population,
   };
   if (screen) base.ai_screen = screen;
-  if (spe_schema) base.spe_schema = spe_schema;
+  if (spe_schema && !screen?.suspect) base.spe_schema = spe_schema;
   if (explanationField) base.explanation = explanationField;
   if (explanation_error) base.explanation_error = explanation_error;
   if (deadline != null) base.deadline = deadline;
