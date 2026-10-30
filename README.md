@@ -101,7 +101,7 @@ Reproduce them using the [evaluation commands](docs/running.md#evaluation).
 | Numeric answers (including SPE cohort size) | **6/6** |
 | Privacy leaks detected | **0** |
 | Consistency | **10/10 across 3 runs** |
-| Slowest HTTP answer | **1.7 s** |
+| Slowest HTTP answer | **2.4 s** (AI purpose screening on; 1.7 s without) |
 | Jury simulation: 57 unseen requests (42 earlier + 15 fresh naturally worded) | **0 wrong decisions, 0 wrong number sets, 0 leaks; 15 prohibited purposes rejected, 38 answered, 4 honestly held for review** |
 | Federated vs central aggregates | **49/49 equal** |
 | Stored legal paragraphs vs EUR-Lex | **42/42 verbatim** |

@@ -40,7 +40,7 @@ Skip 1:30–1:45 (the override). Never skip 0:08–0:25 or 1:12–1:30: they car
 | Eligible population | 19,161 of 20,000 synthetic patients (839 opted out, Art. 71) | track `data/README.md`; never shown by the app |
 | Tests | 10/10 decisions, 6/6 numbers, 0 leaks, 3 consistent runs; 57 jury requests, 0 wrong, 0 leaks | measured 30 Oct 2026, README |
 
-Do not quote an opt-out count from the screen (the app never shows one) and do not invent a latency figure; "under two seconds" is what was measured.
+Do not quote an opt-out count from the screen (the app never shows one) and do not invent a latency figure; "under three seconds" is what was measured with AI screening on.
 
 ## What works / what does not (if asked)
 
