@@ -409,7 +409,7 @@ export const en = {
     "These are test requests on synthetic data, not real applications. The measurements describe these tests and do not guarantee outcomes for future requests.",
   "hwd.ai.title": "The role of AI",
   "hwd.ai.text":
-    "No AI decides. An optional AI step only rewords unclear definitions; such requests are always held for staff, and the AI never sees patient data.",
+    "No AI decides. An optional AI step only rewords unclear definitions; such requests are always held for staff, so it can only make outcomes stricter, and the AI never sees patient data.",
   "hwd.explore": "Explore the 10 sample requests",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────

@@ -422,7 +422,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Dies sind Testanträge mit synthetischen Daten, keine realen Anträge. Die Messungen beschreiben diese Tests und garantieren keine Ergebnisse für zukünftige Anträge.",
   "hwd.ai.title": "Die Rolle von KI",
   "hwd.ai.text":
-    "Keine KI entscheidet. Ein optionaler KI-Schritt formuliert nur unklare Definitionen um; solche Anträge werden immer von Mitarbeitenden geprüft, und die KI sieht keine Patientendaten.",
+    "Keine KI entscheidet. Ein optionaler KI-Schritt formuliert nur unklare Definitionen um; solche Anträge werden immer von Mitarbeitenden geprüft, sie kann Ergebnisse also nur strenger machen, und die KI sieht keine Patientendaten.",
   "hwd.explore": "Die 10 Beispielanträge erkunden",
 
   // ── ExamplesGallery ──────────────────────────────────────────────────────────
