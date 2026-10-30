@@ -5,7 +5,7 @@
       "id": "P01",
       "kind": "prohibited",
       "article_ref": "54",
-      "label": "insurance premiums / insurance decisions (Art. 54(1)(b))",
+      "label": "insurance premiums / insurance decisions (Art. 54(b))",
       "phrases": [
         "insurance premium",
         "align.*premium",
@@ -62,7 +62,7 @@
       "id": "P03",
       "kind": "prohibited",
       "article_ref": "54",
-      "label": "job offers / discriminatory decisions (Art. 54(1)(b))",
+      "label": "job offers / discriminatory decisions (Art. 54(b))",
       "phrases": [
         "\\bemployee\\b",
         "match.*employee",
@@ -194,7 +194,7 @@
       "id": "P09",
       "kind": "prohibited",
       "article_ref": "54",
-      "label": "credit scoring / loan eligibility and conditions (Art. 54(1)(b))",
+      "label": "credit scoring / loan eligibility and conditions (Art. 54(b))",
       "phrases": [
         "\\bcredit\\s+(?:scor\\w*|decisions?|eligibility)\\b",
         "\\bcreditworthiness\\b",

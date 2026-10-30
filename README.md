@@ -82,7 +82,7 @@ returned for display only when every quotation verifies against stored legal
 text. Neither feature sends patient data or database answers to the model.
 Every pipeline response and saved decision carries `rule_id` and `rules_version`
 from `decide()`. Rules version **1.0.3** includes P09 for credit scoring / loans and, since 1.0.3, wording for insurance tariffs, recruitment decisions and model-training justifications
-under Art. 54(1)(b). National rules per access body are configured in
+under Art. 54(b). National rules per access body are configured in
 `supabase/functions/_shared/hdab/hdab_configs.json`: Austria is the default, with
 a Germany demo example for Art. 54(1)(e).
 Federated comparison (#37) and in-SPE FHIR R4 conversion

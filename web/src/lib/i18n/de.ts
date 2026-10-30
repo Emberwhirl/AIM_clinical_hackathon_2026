@@ -392,7 +392,7 @@ export const de: { [K in keyof EnDict]: string } = {
   "hwd.order.title": "Entscheidungsreihenfolge",
   "hwd.order.item1.title": "Verbotene Zwecke zuerst ablehnen",
   "hwd.order.item1.text":
-    "Artikel 54 hat Vorrang. Versicherungsprämien und Beschäftigungsentscheidungen sind nach Art. 54 Abs. 1 Buchst. b verboten; Werbung und Marketing nach Art. 54 Abs. 1 Buchst. c; schädliche Produkte wie Tabak und Nikotin nach Art. 54 Abs. 1 Buchst. d. Das Ergebnis ist ABGELEHNT.",
+    "Artikel 54 hat Vorrang. Versicherungsprämien und Beschäftigungsentscheidungen sind nach Art. 54 Buchst. b verboten; Werbung und Marketing nach Art. 54 Buchst. c; schädliche Produkte wie Tabak und Nikotin nach Art. 54 Buchst. d. Das Ergebnis ist ABGELEHNT.",
   "hwd.order.item2.title":
     "Ein Datenantrag erhält anonymisierte Statistiken",
   "hwd.order.item2.text":

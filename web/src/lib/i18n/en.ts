@@ -382,7 +382,7 @@ export const en = {
   "hwd.order.title": "Decision order",
   "hwd.order.item1.title": "Reject prohibited purposes first",
   "hwd.order.item1.text":
-    "Article 54 takes priority. Insurance premiums and job decisions are prohibited under Art. 54(1)(b); advertising and marketing under Art. 54(c); harmful products such as tobacco and nicotine under Art. 54(1)(d). The outcome is REJECT.",
+    "Article 54 takes priority. Insurance premiums and job decisions are prohibited under Art. 54(b); advertising and marketing under Art. 54(c); harmful products such as tobacco and nicotine under Art. 54(d). The outcome is REJECT.",
   "hwd.order.item2.title": "A health data request receives anonymised statistics",
   "hwd.order.item2.text":
     "For a permitted purpose, a health data request follows the statistics route under Art. 53 and 69.",

@@ -74,7 +74,7 @@ it("explains the ordered legal checks and all measured safeguards and test resul
   const order = within(main).getAllByRole("listitem");
   expect(order).toHaveLength(4);
   for (const [index, text] of [
-    "Art. 54(1)(b)",
+    "Art. 54(b)",
     "Art. 53 and 69",
     "Art. 53, 66, 68 and 73",
     "Art. 53, 66(2) and 69",
@@ -84,7 +84,7 @@ it("explains the ordered legal checks and all measured safeguards and test resul
   for (const fact of [
     "30 October 2026",
     "Art. 54(c)",
-    "Art. 54(1)(d)",
+    "Art. 54(d)",
     "we will not use this for marketing",
     "unreadable definitions",
     "written reason recorded in an audit log",
