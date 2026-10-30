@@ -76,7 +76,7 @@ export interface PipelineResponse {
   explanation_error?: string;
   /**
    * AI-drafted reasoning memo grounded in reg_2025_327.json (Issue #35).
-   * Present only when OPENROUTER_API_KEY is set AND all quotes verify.
+   * Drafted for held requests only; present only when LLM_MEMO is on AND all quotes verify.
    */
   memo?: {
     text: string;
@@ -174,6 +174,25 @@ export async function answerRequest(
     if (explanationField) base.explanation = explanationField;
     if (explanation_error) base.explanation_error = explanation_error;
     if (deadline != null) base.deadline = deadline;
+    if (needs_review) {
+      // Draft AI reasoning memo for staff (Issue #35) — best-effort, never changes decision
+      try {
+        const articleRefs: Record<string, string> = {};
+        for (const art of explanationField?.articles ?? []) {
+          articleRefs[art.number] = art.ref;
+        }
+        const outcome = await draftMemo(
+          req.purpose ?? "",
+          req.question ?? "",
+          decision,
+          articles,
+          articleRefs,
+        );
+        if (outcome?.memo_status === "ok" && outcome.memo) base.memo = outcome.memo;
+      } catch {
+        // Memo is best-effort; any failure is silent
+      }
+    }
     return base;
   }
 
@@ -294,29 +313,6 @@ export async function answerRequest(
     explanation_error = String(e);
   }
 
-  // Draft AI reasoning memo (Issue #35) — best-effort, never changes decision
-  let memoField: PipelineResponse["memo"] | undefined;
-  try {
-    const articleRefs: Record<string, string> = {};
-    if (explanationField) {
-      for (const art of explanationField.articles) {
-        articleRefs[art.number] = art.ref;
-      }
-    }
-    const outcome = await draftMemo(
-      req.purpose ?? "",
-      req.question ?? "",
-      decision,
-      articles,
-      articleRefs,
-    );
-    if (outcome?.memo_status === "ok" && outcome.memo) {
-      memoField = outcome.memo;
-    }
-  } catch {
-    // Memo is best-effort; any failure is silent
-  }
-
   const base: PipelineResponse = {
     request_id,
     rule_id,
@@ -332,7 +328,6 @@ export async function answerRequest(
   if (spe_schema) base.spe_schema = spe_schema;
   if (explanationField) base.explanation = explanationField;
   if (explanation_error) base.explanation_error = explanation_error;
-  if (memoField) base.memo = memoField;
   if (deadline != null) base.deadline = deadline;
   return base;
 }
