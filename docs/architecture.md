@@ -105,7 +105,7 @@ Supabase Edge Functions
 ## Privacy invariants
 
 1. **Opted-out patients** never appear in any query result (Decision C, `eligible_patients` view).
-2. **Statistical answers** never contain a count below 10 without suppression (Decision B).
+2. **Statistical answers** never contain a count below 10 without suppression (Decision B), and no suppressed value can be derived exactly from the other values in the same answer (secondary suppression).
 3. **SPE data** is never returned through the API. The download endpoint always returns 403 (Decision E).
 4. **SQL is only generated** inside the engine module (Decision A); the parser and decision modules never produce SQL.
 5. **External services** (watsonx fallback) receive only request text — never patient data (Decision L).

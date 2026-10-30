@@ -122,8 +122,10 @@ Example statistical result (values illustrative):
 ```
 
 Statistical answers contain aggregate numbers only. Counts below 10 (including
-zero) are `"<10"`; unsafe means/percentages are `"suppressed"`. Empty groups are
-included. SPE responses contain only the cohort size and schema name, never
+zero) are `"<10"`; unsafe means/percentages are `"suppressed"`. A value of 10 or
+more is also `"suppressed"` when it would let a hidden cell be recomputed from
+the rest of the answer (secondary suppression, see `docs/query-plan.md`). Empty
+groups are included. SPE responses contain only the cohort size and schema name, never
 patient records. Rejection is an HTTP 200 result with `decision: "REJECT"` and
 `answer: null`.
 

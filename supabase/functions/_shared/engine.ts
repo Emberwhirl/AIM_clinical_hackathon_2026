@@ -1,4 +1,5 @@
 import { type CohortFilter, type QueryPlan, validatePlan } from "./plan.ts";
+import { type Leaf, secondarySuppression } from "./secondary_suppression.ts";
 
 export interface Query {
   text: string;
@@ -273,14 +274,10 @@ export async function runPlan(
       ])),
     );
   }
-  const answer: Answer = Object.create(null);
-  const fill = (keys: string[], target: Answer): void => {
+  const leaves: Leaf[] = [];
+  const collect = (keys: string[]): void => {
     if (keys.length < dimensions.length) {
-      for (const key of universes[keys.length]) {
-        const child: Answer = Object.create(null);
-        target[key] = child;
-        fill([...keys, key], child);
-      }
+      for (const key of universes[keys.length]) collect([...keys, key]);
       return;
     }
     const key = JSON.stringify(keys);
@@ -288,26 +285,42 @@ export async function runPlan(
       String(
         rows[plan.metrics.findIndex((m) => m.label === label)].get(key)?.n ?? 0,
       );
-    for (let i = 0; i < plan.metrics.length; i++) {
-      const m = plan.metrics[i];
-      const row = rows[i].get(key);
-      const n = String(row?.n ?? 0);
-      target[m.label] = m.type === "count"
-        ? applySmallCell({ type: "count", n })
-        : m.type === "percentage"
-        ? applySmallCell({
-          type: "percentage",
-          n: m.numerator_label === undefined ? n : count(m.numerator_label),
-          denominator: count(m.denominator_label),
-        })
-        : applySmallCell({
-          type: "mean_observation",
-          n,
-          total: row?.total == null ? null : String(row.total),
-        });
-    }
+    leaves.push({
+      keys,
+      stats: plan.metrics.map((m, i): Statistic => {
+        const row = rows[i].get(key);
+        const n = String(row?.n ?? 0);
+        return m.type === "count"
+          ? { type: "count", n }
+          : m.type === "percentage"
+          ? {
+            type: "percentage",
+            n: m.numerator_label === undefined ? n : count(m.numerator_label),
+            denominator: count(m.denominator_label),
+          }
+          : {
+            type: "mean_observation",
+            n,
+            total: row?.total == null ? null : String(row.total),
+          };
+      }),
+    });
   };
-  fill([], answer);
+  collect([]);
+  // Hide further values wherever a hidden cell could be rebuilt from the rest.
+  const secondary = secondarySuppression(plan, leaves);
+  const answer: Answer = Object.create(null);
+  leaves.forEach((leaf, l) => {
+    let target = answer;
+    for (const key of leaf.keys) {
+      target = (target[key] ??= Object.create(null)) as Answer;
+    }
+    plan.metrics.forEach((m, i) => {
+      target[m.label] = secondary.has(`${l}:${i}`)
+        ? "suppressed"
+        : applySmallCell(leaf.stats[i]);
+    });
+  });
   // R07's published answer predates metric-labelled output; preserve that contract.
   if (
     plan.request_id === "R07" && dimensions.length === 1 &&
