@@ -198,6 +198,11 @@ function matchContext(text: string, pattern: RegExp, ctx = 60): string | null {
   return snippet;
 }
 
+// Shown when the purpose matches neither an allowed nor a prohibited rule.
+// Do not claim Art. 53 permission in that case; staff review releases no data.
+const UNRECOGNISED_PURPOSE_REASON =
+  "Your purpose does not match a recognised allowed or prohibited use, so the request is held for staff review. No data is released until staff decide.";
+
 // ---------------------------------------------------------------------------
 // Main decision function
 // ---------------------------------------------------------------------------
@@ -294,8 +299,9 @@ export function decide(
     return {
       decision: "APPROVE_STATISTICAL",
       articles: ["53", "69"],
-      reason:
-        "Your purpose is an allowed use of health data (Art. 53). Anonymised statistics are sufficient to answer the question (Art. 69).",
+      reason: needs_review
+        ? UNRECOGNISED_PURPOSE_REASON
+        : "Your purpose is an allowed use of health data (Art. 53). Anonymised statistics are sufficient to answer the question (Art. 69).",
       needs_review,
       rule_id: allowedRuleId || "A01",
       rules_version: rulesVersion,
@@ -324,8 +330,9 @@ export function decide(
     return {
       decision: "APPROVE_SPE",
       articles: ["53", "66", "68", "73"],
-      reason:
-        "Your purpose is an allowed use of health data (Art. 53). You have explained why anonymised statistics are not sufficient; pseudonymised patient-level data is justified (Art. 66). Access is granted inside a secure processing environment under a data permit (Art. 68, 73).",
+      reason: needs_review
+        ? UNRECOGNISED_PURPOSE_REASON
+        : "Your purpose is an allowed use of health data (Art. 53). You have explained why anonymised statistics are not sufficient; pseudonymised patient-level data is justified (Art. 66). Access is granted inside a secure processing environment under a data permit (Art. 68, 73).",
       needs_review,
       rule_id: speRuleId,
       rules_version: rulesVersion,
@@ -338,8 +345,9 @@ export function decide(
   return {
     decision: "APPROVE_STATISTICAL",
     articles: ["53", "66", "69"],
-    reason:
-      "Your purpose is an allowed use of health data (Art. 53). Anonymised statistics are sufficient to answer the question; pseudonymised records are not justified under Art. 66. Your request is approved as statistics (Art. 69).",
+    reason: needs_review
+      ? UNRECOGNISED_PURPOSE_REASON
+      : "Your purpose is an allowed use of health data (Art. 53). Anonymised statistics are sufficient to answer the question; pseudonymised records are not justified under Art. 66. Your request is approved as statistics (Art. 69).",
     needs_review,
     rule_id: allowedRuleId || "A01",
     rules_version: rulesVersion,

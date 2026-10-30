@@ -40,6 +40,11 @@ Deno.test("flagged statistical and SPE requests hold all data until staff review
     assertRuleMetadata(response, request);
     assert(response.needs_review);
     assert(response.status === "staff_review");
+    assert(
+      !/allowed use/i.test(response.reason),
+      `Held purpose must not be described as allowed: ${response.reason}`,
+    );
+    assert(/staff review/i.test(response.reason), response.reason);
     assert(response.answer === null);
     assert(!("population" in response));
     assert(!("spe_schema" in response));

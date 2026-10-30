@@ -97,6 +97,34 @@ Deno.test("ambiguous purpose sets needs_review = true", () => {
     result.needs_review === true,
     "Expected needs_review = true for ambiguous purpose",
   );
+  assert(
+    result.decision === "APPROVE_STATISTICAL",
+    `Expected the statistical path to stay proposed, got ${result.decision}`,
+  );
+  assert(
+    !/allowed use/i.test(result.reason),
+    `Unrecognised purpose must not be described as allowed: ${result.reason}`,
+  );
+  assert(
+    /staff review/i.test(result.reason),
+    `Expected a staff-review reason, got: ${result.reason}`,
+  );
+});
+
+Deno.test("recognised research purpose still states that it is an allowed use", () => {
+  const result = decide({
+    requested_as: "health data request",
+    purpose: "Public health research on diabetes outcomes.",
+  });
+  assert(result.needs_review === false, "A research purpose should not be held");
+  assert(
+    result.decision === "APPROVE_STATISTICAL",
+    `Expected APPROVE_STATISTICAL, got ${result.decision}`,
+  );
+  assert(
+    /allowed use/i.test(result.reason),
+    `Expected the allowed-use reason, got: ${result.reason}`,
+  );
 });
 
 // ---------------------------------------------------------------------------
@@ -361,6 +389,10 @@ Deno.test("negated allowed purpose: 'not for research' does not count as allowed
     result.needs_review === true,
     `'not for research' should set needs_review=true, got needs_review=${result.needs_review}`,
   );
+  assert(
+    !/allowed use/i.test(result.reason),
+    `Negated research must not be described as allowed: ${result.reason}`,
+  );
 });
 
 Deno.test("negated allowed purpose: 'not a clinical study' does not count as allowed", () => {
@@ -372,6 +404,10 @@ Deno.test("negated allowed purpose: 'not a clinical study' does not count as all
   assert(
     result.needs_review === true,
     `'not a clinical study' should set needs_review=true`,
+  );
+  assert(
+    !/allowed use/i.test(result.reason),
+    `Negated clinical study must not be described as allowed: ${result.reason}`,
   );
 });
 
