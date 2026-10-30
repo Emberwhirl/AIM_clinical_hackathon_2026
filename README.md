@@ -76,6 +76,13 @@ DATABASE_URL='postgresql://postgres:YOUR_PASSWORD@YOUR_DB_HOST:5432/postgres' \
   deno run -A scripts/federated-check.ts
 ```
 
+To map a secure processing environment to HL7 FHIR R4 (issue #38; see
+`docs/fhir-mapping.md`), stored inside that environment as `fhir_resources`:
+
+```sh
+deno run -A scripts/export-fhir.ts R05
+```
+
 Set `EHDS_TRACK_DIR` to override the track repository root (relative paths use the working directory); requests and `expected.json` are read from its `requests/` directory.
 CI runs tests and type checks on every push and pull request; deployed eval runs when repository secret `EVAL_BASE_URL` is set, using `EVAL_KEY` for the publishable/anon key, and is skipped otherwise. Require the `test` and `eval` checks in branch protection to block merging on failures.
 
