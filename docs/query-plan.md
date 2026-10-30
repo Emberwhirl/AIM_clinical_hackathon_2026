@@ -338,6 +338,41 @@ Applied by the engine to every output row:
 - All requested groups appear in the output, even empty ones.
 - Round to one decimal; halves round up.
 
+### Secondary suppression
+
+A hidden value must not be recomputable from the other values in the same
+answer. `secondary_suppression.ts` models every released count, inline
+percentage numerator and mean as a sum over the finest groups the plan can
+tell apart: age intervals, sex, region, encounter type/year/primary diagnosis
+and "has at least one" record categories for condition, medication and
+observation codes. A hidden value is derivable when its row is a linear
+combination of the visible rows (exact rational arithmetic). While that holds,
+the smallest visible value that the derivation needs is also shown as
+`"suppressed"`. That covers, for example:
+
+- overlapping age bands (`65+` next to `65-74` and `75+`);
+- complementary filters (all = with + without a medication, female + male,
+  inpatient + outpatient + emergency);
+- inclusion–exclusion over code prefixes (`E10 or E11` = `E10` + `E11` − both);
+- a percentage that rebuilds its numerator from a visible denominator.
+
+A percentage is also suppressed when its numerator or denominator count is
+hidden. Region and data-holder groups never share people, so each is checked
+separately. The Track 3 plans R01–R10 and the jury plans have no such
+relations, so their answers are unchanged.
+
+Residual risk, accepted for the prototype:
+
+- Only exact linear derivations are blocked. Bounds such as "`<10` means
+  0–9" combined with non-negativity can still narrow a hidden value to a range.
+- Visible percentages are treated as revealing their exact numerator; visible
+  means as revealing their sum. This over-protects rather than under-protects.
+- Unknown category domains (years, regions not used as a dimension) are treated
+  as closed, which can only add relations, so it may hide more than needed.
+- Values from different answers (differencing two requests) are not compared.
+- A family too large to model (more than 65,536 atoms or 16 record
+  categories) is hidden completely when it contains any small cell.
+
 ---
 
 ## Unknown-field rejection
