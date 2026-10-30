@@ -26,6 +26,10 @@ The quoted lines are the spoken script. Expected values are from the official `e
 | 1:45–1:53 | History → the R05 row → **Download**. | Message "Download blocked … (EHDS Art. 73)" with **403**; the attempt appears in the blocked-download log. | "Data in the secure environment cannot leave it. The attempt itself is logged." **Proves:** download block and traceability. |
 | 1:53–2:00 | Landing page, **Tested before the next request** tile. | 10/10 · 6/6 · 0 leaks · 57 jury requests, 0 wrong. | "Ten of ten official requests correct, zero leaks, fifty-seven unseen requests without a wrong decision. Rules decide; people stay responsible." |
 
+## Still frames for the cut
+
+Two 1920×1080 frames in this folder: `decision-gates-1080p.png` (the five gates) and `decision-flow-1080p.png` (the process view). Suggested use: show `decision-gates-1080p.png` full-frame for 5 s at the hand-over from the applicant half to the staff half (around 1:00) with the line "Five gates: rules decide, AI only advises, a person has the final say." The deck slide 4 uses the same picture.
+
 ## If a slot runs long
 
 Skip 1:30–1:45 (the override). Never skip 0:08–0:25 or 1:12–1:30: they carry the two scoring points "can an applicant understand the decision" and "would an access body use it".
