@@ -398,7 +398,7 @@ export const de: { [K in keyof EnDict]: string } = {
     "Verneinte Formulierungen wie \u201EWir werden dies nicht für Werbung verwenden\u201C lösen keine Regel aus. Unklare Zwecke oder unleserliche Definitionen werden zur Mitarbeiterprüfung zurückgehalten. Das Personal genehmigt oder überschreibt mit einem schriftlichen Grund, der im Prüfungsprotokoll festgehalten wird. Dieselben Schutzmaßnahmen gelten weiterhin.",
   "hwd.rules.title": "Versionierte Regeln und Rechtstexte",
   "hwd.rules.text":
-    "Die Regeln sind in decision_rules.json, Version 1.0.2, mit 15 Regeln enthalten. Jede Entscheidung erfasst die Regel-ID und die Regelversion.",
+    "Die Regeln sind in decision_rules.json, Version 1.0.3, mit 15 Regeln enthalten. Jede Entscheidung erfasst die Regel-ID und die Regelversion.",
   "hwd.rules.quotes":
     "Rechtszitate sind Originaltext aus der Verordnung (EU) 2025/327. Alle 42 gespeicherten Absätze wurden Wort für Wort mit dem offiziellen Text abgeglichen.",
   "hwd.statistics.title": "Statistiken und die Unterdrückungsregel",

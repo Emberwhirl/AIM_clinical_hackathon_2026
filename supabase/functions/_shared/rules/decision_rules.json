@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "rules": [
     {
       "id": "P01",
@@ -13,12 +13,16 @@
         "exclud.*insurance",
         "insurance.*contract",
         "\\bunderwriting\\b",
-        "\\binsurance\\b.*\\b(?:risk scor|coverage|eligibility)"
+        "\\binsurance\\b.*\\b(?:risk scor|coverage|eligibility)",
+        "\\btariffs?\\b.*\\binsurance\\b",
+        "\\binsurance\\b.*\\btariffs?\\b",
+        "calibrat\\w*\\s+(?:the\\s+)?(?:premiums?|tariffs?)"
       ],
       "examples": [
         "We want to align private health insurance premiums for customers with their actual risk.",
         "We build an underwriting score to decide who may buy a policy.",
-        "We will use the data to evaluate insurance risk scoring for coverage eligibility."
+        "We will use the data to evaluate insurance risk scoring for coverage eligibility.",
+        "To keep our products fair, we would like to calibrate the tariffs of our supplementary health insurance using regional diabetes rates."
       ],
       "counter_examples": [
         "We will not use the data for insurance premiums; our purpose is clinical research.",
@@ -66,13 +70,16 @@
         "renew.*contract",
         "sick\\s+leave",
         "\\bjob\\s+applicants?\\b.*\\b(?:rank|screen|hiring)\\b",
-        "\\b(?:rank|screen)\\b.*\\b(?:workers?|staff|job\\s+applicants?)\\b"
+        "\\b(?:rank|screen)\\b.*\\b(?:workers?|staff|job\\s+applicants?)\\b",
+        "\\b(?:recruitment|hiring|employment)\\s+(?:and\\s+(?:recruitment|hiring|employment)\\s+)?decisions?\\b",
+        "\\bwhom\\s+to\\s+(?:hire|employ)\\b"
       ],
       "examples": [
         "We will match the records with our employee list to see who has been diagnosed with depression.",
         "We want to reduce sick leave by screening workers for mental illness.",
         "Rank job applicants for hiring based on predicted future illness.",
-        "Screen workers for promotion using health data."
+        "Screen workers for promotion using health data.",
+        "We want to take health risks into account in our recruitment and employment decisions."
       ],
       "counter_examples": [
         "We will not use this data for any employee decisions or sick-leave analysis.",
@@ -224,12 +231,14 @@
       "article_ref": "53",
       "label": "scientific research",
       "phrases": [
-        "\\bresearch\\b"
+        "\\bresearch\\b",
+        "\\bscientific\\b"
       ],
       "examples": [
         "We study cardiovascular disease risk factors for clinical research.",
         "This is a research project on diabetes prevention.",
-        "Epidemiological research into treatment outcomes."
+        "Epidemiological research into treatment outcomes.",
+        "A scientific study of hospital capacity planning."
       ],
       "counter_examples": [
         "This is not for research; it is an internal business analysis.",
@@ -323,17 +332,21 @@
       "phrases": [
         "aggregates?\\s+are\\s+not\\s+enough",
         "statistics?\\s+are\\s+not\\s+enough",
-        "(?:aggregates?|statistics?)\\s+(?:are|is)\\s+insufficient\\s+because\\b"
+        "(?:aggregates?|statistics?)\\s+(?:are|is)\\s+insufficient\\s+because\\b",
+        "(?:^|[;.]\\s*)(?:aggregated\\s+)?(?:aggregates?|statistics?)\\s+(?:cannot|can\\s*not|do\\s+not)\\s+(?:capture|provide|reflect)\\b",
+        "\\b(?:individual|patient|record)-level\\s+\\w+\\s+(?:is|are)\\s+(?:required|needed|necessary)\\b"
       ],
       "examples": [
         "Training needs individual-level histories; aggregates are not enough.",
         "Statistics are not enough because we need linked longitudinal trajectories.",
-        "Aggregates are insufficient because we need per-patient time-series."
+        "Aggregates are insufficient because we need per-patient time-series.",
+        "Model training needs individual-level histories; aggregated statistics cannot capture individual trajectories."
       ],
       "counter_examples": [
         "We would prefer individual-level records.",
         "Patient-level data would be convenient.",
-        "Row-level histories are our preferred format."
+        "Row-level histories are our preferred format.",
+        "We would prefer individual-level records but give no reason that aggregates cannot answer our comparison."
       ]
     }
   ]
